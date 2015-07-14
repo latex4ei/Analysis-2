@@ -24,6 +24,8 @@
 \usepackage{accents}			% Für eigene Ableitungspunkte benötigt
 \usepackage{scrtime}
 \usepackage{supertabular}		% Für lange Tabellen mit Umbruch
+\usepackage{pdfpages} 
+\usepackage{trfsigns}			% Laplace und Fourier
 
 % Seitenlayout und Ränder:
 \usepackage{geometry}
@@ -32,7 +34,7 @@
 
 
 % Dokumentbeschreibung
-\title{Formelsammlung Höhere Mathematik 2 für EI}
+\title{Formelsammlung Analysis 2 für EI}
 \author{Emanuel Regnath}
 
 
@@ -41,11 +43,11 @@
 \usepackage{fancyhdr}
 \pagestyle{fancy}
 \fancyhf{}
-   \fancyfoot[C]{von Emanuel Regnath (Emanuel.Regnath@tum.de), Martin Zellner (martin.zellner@mytum.de) und Alexander Preißner (alexander.preissner@tum.de) - \copyright 2011 - 2012}
+   \fancyfoot[C]{\textbf{Analysis 1} von Lukas Kompatscher (lukas.kompatscher@tum.de) - \copyright 2015}
    \renewcommand{\headrulewidth}{0.0pt} %obere Linie ausblenden
    \renewcommand{\footrulewidth}{0.1pt} %obere Linie ausblenden
 
-   \fancyfoot[R]{Stand: \todayV \ um \thistime \ Uhr \qquad \thepage}
+   \fancyfoot[R]{Stand: \todayV}
    \fancyfoot[L]{Homepage: www.latex4ei.de -  Fehler bitte \emph{sofort} melden.}
 % ----------------------------------------------------------------------
 
@@ -69,10 +71,11 @@
 
 \newcommand{\iset}[2]{\ensuremath{\bigl\{ \bigl. #1 \, \bigr| \, #2 \bigr\}}}					% intensional set
 \newcommand{\eset}[1]{\ensuremath{\bigl\{#1\bigr\}}}											% extensional set
-\newcommand{\enbrace}[1]{\ensuremath{\bigl\(#1\bigr\)}}											% extensional set
+%\newcommand{\enbrace}[1]{\ensuremath{\bigl\(#1\bigr\)}}											% extensional set
+\newcommand{\enbrace}[1]{\ensuremath{\left(#1\right)}}
 \newcommand{\norm}[1]{\ensuremath{\|#1\|}}														% Norm
 \newcommand{\mat}[1]{\ensuremath{\begin{bmatrix} #1 \end{bmatrix}}}								% Matrix
-\newcommand{\ma}[1]{\ensuremath{\utilde{\boldsymbol {#1}}}}										% Matrixsymbol
+\newcommand{\ma}[1]{\ensuremath{\boldsymbol {#1}}}												% Matrixsymbol
 \newcommand{\vect}[1]{\ensuremath{\begin{pmatrix} #1 \end{pmatrix}}}							% Vektor
 \newcommand{\mvect}[1]{\ensuremath{\left. \begin{matrix} #1 \end{matrix}  \right]}} 			% Matrixvektornotation
 \newcommand{\gk}[1]{\ensuremath{\left\lfloor#1\right\rfloor}} 									% Gaußklammer
@@ -83,7 +86,7 @@
 
 
 % Überschreibungen
-\renewcommand{\vec}[1]{\ensuremath{\underline{\boldsymbol {#1}}}}								% Vektor fett und unterstrichen
+\renewcommand{\vec}[1]{\ensuremath{\boldsymbol {#1}}}											% Vektor fett und unterstrichen
 \renewcommand{\emph}[1]{\textbf{#1}}															% Hervorhebungen fett
 \renewcommand*{\dot}[1]{\accentset{\mbox{\textrm{\large\bfseries .}} }{#1}}						% Dicker Ableitungspunkt
 \renewcommand*{\ddot}[1]{\accentset{\mbox{\textrm{\large\bfseries .\hspace{-0.25ex}.}}}{#1}}	% Dicker Doppelableitungspunkt
@@ -106,6 +109,8 @@
 	\newcommand{\C}{\ensuremath{\mathbb C}}
 
 
+%Custom functions
+\DeclareMathOperator{\arccot}{arccot}
 
 
 % Dokumentbeginn
@@ -119,7 +124,7 @@
 		\includegraphics[height=1.5cm]{./img/Logo.pdf}
 	}
 	\parbox{4cm}{
-		\emph{\Large{Höhere Mathematik 2}}
+		\emph{\Large{Analysis 2}}
 	}
 \vspace{-2mm} % Man muss optimieren wos nur geht ;)
 % -------------------------------------------
@@ -168,42 +173,49 @@ x & 0 & \pi / 6 & \pi / 4 & \pi / 3 & \pi / 2 & \pi & \frac{3}{2}\pi & 2 \pi \\ 
 \subsection{log \quad $\log(1) = 0$}
 $a^x = e^{x \ln a} \qquad \quad \log_a x = \frac{\ln x}{\ln a} \qquad \quad \ln x \le x -1$
 
+\subsection{Quadratische Gleichung}
+$x_1,_2 = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}$
+
+\subsection{Ableitungsregeln:}
+Linearität: $(\lambda f + \mu g)' (x) = \lambda f'(x) + \mu g'(x)$ \quad $\forall \lambda, \mu \in \mathbb R$ \\
+Produktregel: $(f \cdot g)' = f' g + f g'$\\
+Quotientenregel $\enbrace{\frac{f}{g}}' = \frac{f'g - fg'}{g^2}$\\
+Kettenregel: $\left( f(g(x)) \right)' = f'(g(x)) g'(x)$\\
+Potenzreihe: $f: ] \underbrace{-R+a, a+R}_{\subseteq D}	 [ \rightarrow \mathbb R, f(x) = \sum_{n=0}^{\infty} a_n (x -a)^n$ \quad $\Rightarrow$ \quad $f'(x) = \sum_{n=0}^{\infty} n a_{n} (x-a)^{n-1}$\\
+\textbf{Tangentengleichung:} $y=f(x_0)+f'(x_0)(x-x_0)$
+
 \subsection{Integrale:}
 \begin{itemize}\itemsep-1pt
 \item Partielle Integration: $\int uv'=uv-\int u'v$
 \item Substitution: $\int f(\underbrace {g(x)}_{t}) \underbrace {g'(x)\,\mathrm dx}_{\mathrm dt}=\int f(t)\, \mathrm dt$
 \end{itemize}
 
+$\int_a^b f(x) \mathrm dx = F(b) - F(a)$\\
+$\int\lambda f(x)+\mu g(x) \, \mathrm dx=\lambda\int f(x) \, \mathrm dx + \mu\int g(x) \, \mathrm dx$
+
 \everymath{\displaystyle}	% Formeln ab hier groß Schreiben
-\begin{displaymath}\renewcommand{\arraystretch}{1.6}
-\begin{array}{c|c|c}
-F(x) & f(x) & f'(x) \\ \hline
-\frac{1}{q+1}x^{q+1} & x^q & qx^{q-1} \\
-\frac{2\sqrt{x^3}}{3} & \sqrt{x} & \frac{1}{2\sqrt{x}} \\
-x\ln(x) -x & \ln(x) & \textstyle \frac{1}{x} \\
-e^x & e^x & e^x \\
-\frac{a^x}{\ln(a)} & a^x & a^x \ln(a) \\
--\cos(x) & \sin(x) & \cos(x) \\
--\ln |\cos(x)| & \tan(x) & \frac{1}{\cos^2(x)} \\
-\ln |\sin(x)| & \cot(x) & \frac{-1}{\sin^2(x)} \\
-x\arcsin (x)+\sqrt{1-x^2} & \arcsin(x) & \frac{1}{\sqrt{1-x^2}} \\
-x\arccos (x)-\sqrt{1-x^2} & \arccos(x) & -\frac{1}{\sqrt{1-x^2}} \\
-x\arctan (x)-\frac{1}{2} \ln \left| 1+ x^2 \right| & \arctan(x) & \frac{1}{1+x^2} \\
-e^{(x)} (x-1) & x \cdot e^{(x)} & e^x(x+1) \\
-\frac{1}{2} \Bigl(\sqrt{x^2 + 1} x + \sinh^{-1} (x)\Bigr) & \sqrt{1+x^2} & \frac{x}{\sqrt{x^2+1}}
-\end{array}
-\end{displaymath}
+\begin{math}\renewcommand{\arraystretch}{1.8}
+	\begin{array}{c|c|c}
+		F(x) & f(x) & f'(x) \\ \hline 
+		\frac{f'(x)}{f(x)}&ln|f(x)|&\frac{1}{f(x)}\cdot f'(x)\\
+		\frac{1}{q+1}x^{q+1} & x^q & qx^{q-1} \\
+		\frac{2\sqrt{x^3}}{3} & \sqrt{x} & \frac{1}{2\sqrt{x}}\\
+		x\ln(x) -x & \ln(x) & \textstyle \frac{1}{x}\\
+		e^x & e^x & e^x \\
+		\frac{a^x}{\ln(a)} & a^x & a^x \ln(a) \\
+		-\cos(x) & \sin(x) & \cos(x)\\
+		\sin(x) & \cos(x) & -\sin(x)\\
+		-\ln |\cos(x)| & \tan(x) & \frac{1}{\cos^2(x)} \\
+		\ln |\sin(x)| & \cot(x) & \frac{-1}{\sin^2(x)} \\
+		x\arcsin (x)+\sqrt{1-x^2} & \arcsin(x) & \frac{1}{\sqrt{1-x^2}}\\
+		x\arccos (x)-\sqrt{1-x^2} & \arccos(x) & -\frac{1}{\sqrt{1-x^2}}\\
+		x\arctan (x)-\frac{1}{2} \ln \left| 1+ x^2 \right| & \arctan (x) & \frac{1}{1+x^2} \\
+		x\arctan (x)+\frac{1}{2} \ln \left| 1+ x^2 \right| & \arccot (x) & -\frac{1}{1+x^2} \\
+		\sinh(x) & \cosh(x) & \sinh (x) \\
+		\cosh(x) & \sinh(x) & \cosh (x)\\
+	\end{array}
+\end{math}
 \everymath{\textstyle}
-
-% Bitte keine Leichen im Quellcode stehen lassen...
-%\begin{tabular}{c | c} 
-% &  \\ \midrule
-%\end{tabular}
-\subsection{Determinante von $A\in \mathbb K^{n\times n}$: $\det(A)=|A|$}
-
- $\det\begin{pmatrix}A&0\\C&D\end{pmatrix}=\det\begin{pmatrix}A&B\\0&D\end{pmatrix}=\det(A)\cdot\det(D)$ \\
-Hat $\ma A$ 2 linear abhäng. Zeilen/Spalten $\Rightarrow |A|=0$ \\
-Entwicklung. n. $i$ter Zeile: $|A|=\sum\limits_{i=1}^n (-1)^{i+j} \cdot a_{ij} \cdot |A_{ij}|$ \qquad 
 
 
 \subsection{Reihen}
@@ -211,132 +223,7 @@ Entwicklung. n. $i$ter Zeile: $|A|=\sum\limits_{i=1}^n (-1)^{i+j} \cdot a_{ij} \
 $\underset{\text{Harmonische Reihe}}{\sum\limits_{n=1}^\infty \frac{1}{n} \ra \infty} \qquad   \underset{\text{Geometrische Reihe}}{\sum\limits_{n=0}^\infty q^n \stackrel{|q|<1}= \frac{1}{1-q}}  \qquad \underset{\text{Exponentialreihe}}{\sum\limits_{n = 0}^{\infty} \frac{z^n}{n!} = e^z}$
 
 
-\section{Normen}
-%===========================================================================================================================================================
-Ist $V$ ein $\mathbb R$-VR, so ist $\| .\|: V \rightarrow \mathbb R, v \mapsto \|v\|$ eine Norm, falls
-\begin{itemize}\itemsep0pt
-	\item Definitheit: $\norm v \ge 0$ und $\norm v = 0 \Leftrightarrow v = 0$
-	\item Homogenität: $\norm{\lambda v} = | \lambda | \cdot \norm v \quad \forall v \in V, \forall \lambda \in \mathbb R$
-	\item Dreiecks-Ungleichung: $\norm{ v + w } \le \norm v + \norm w$	
-\end{itemize}
-%Falls eine Vektornorm $\norm{.}_V$ existiert, ist $(V, \norm{.})$ ein normierter Raum.
 
-	\subsection{$l^p$-Normen für $v \in \mathbb K^n$}
-	\begin{description}\itemsep-1pt
-		\item[$p=1$ Betragsnorm:]  $\|v\|_1 = |v_1| + |v_2| + \ldots + |v_n|$
-		\item[$p=2$ Euklidische Norm:] $\|v\|_2 = \sqrt{ v_1^2 + v_2^2 + \ldots + v_n^2}$
-		\item[$p\rightarrow \infty$ Maximumsnorm:] $\|v\|_\infty = \max \iset{|v_i|}{i \in \{1,\ldots,n\}}$
-	\end{description}
-	
-	\subsection{Matrixnormen für $A \in \mathbb K^{n\times n}$}
-	Man nennt eine Matrixnorm $\norm{.}$ des $\mathbb K^{n \times n}$
-	\begin{itemize} \itemsep0pt
-		\item \textbf{submultiplikativ}, falls $\norm{AB} \le \norm{A} \cdot \norm{B} \quad \forall A,B \in \mathbb K^{n\times n}$
-		\item \textbf{verträglich} mit einer Vektornorm $\norm{.}_V$ des $\mathbb K^n$, falls 
-			\begin{equation*}
-					\norm{A v}_V \le \norm A \cdot \norm {v}_V \quad \forall v \in \mathbb K^n, \forall A \in \mathbb K^{n \times n} 
-			\end{equation*}
-		\item \textbf{natürlich} bzw. \textbf{induziert} durch eine Vektornorm $\norm{.}_V$ des $\mathbb K^n$, falls
-			\begin{equation*}
-				\norm{A} := \sup \frac{\norm{Av}_V}{\norm{v}_V} \qquad V \in \mathbb K^n \setminus \{0\} \qquad \norm{E_n}=1
-			\end{equation*}
-	\end{itemize}
-	
-	\begin{description}\itemsep-1pt
-		\item[Frobeniusnorm:] $\norm{A}_F = \sqrt{\sum_{j=1}^{n} \sum_{i=1}^{n} a_{ij}^2}$
-		\item[Zeilensummennorm] $\norm{A}_{(\infty)} = \underset{i}{\max} \sum\limits_{j=1}^n |a_{ij}|$
-		\item[Spaltensummennorm:] $\norm{A}_{(1)} = \underset{j}{\max} \sum\limits_{i=1}^n |a_{ij}| $	
-		\item[Spektralnorm:] $\norm{A}_{(2)} = \sqrt{\lambda_{max} (A^\top \cdot A)}$
-	\end{description}
-
-
-
-
-
-
-		
-
-\section{Taylor-Entwicklung}
-%===========================================================================================================================================================
-Man approximiert eine $m$-mal diffbare Funktion $f:I=[a,b] \rightarrow \mathbb R$ \\ in $x_0 \in I$ mit dem $m$-ten Taylorpolynom:\\
-\boxed{ \ T_{m,f,x_0}(x)= \sum_{i=0}^{m} \frac{f^{(i)}(x_0)}{i!}(x-x_0)^i \ }\\
-%\boxed{ T_{m,f,x_0}(x)=f(x_0)+\frac{f'(x_0)}{1!}(x-x_0)+\frac{f''(x_0)}{2!}(x-x_0)^2+\dotsc +\frac{f^{(m)}(x_0)}{m!}(x-x_0)^m }\\
-Taylor-Entw. von Polynomen/Potenzreihen sind die Funktionen selbst.\\
-Für $m \ra \infty$: Taylorreihe. \\
-Konvergenzradius: $R = \underset{n\rightarrow \infty}{\lim} \abs{\frac{a_n}{a_{n+1}}}=\lim\limits_{n\rightarrow \infty}\frac{1}{\sqrt[n]{\abs{a_n}}}$
-
-	\subsection{Das Restglied - die Taylorformel}
-	Für $(m+1)$-mal stetig diffbare Funktionen gilt $\forall x \in I:$\\
-	\boxed{ R_{m+1}(x) := f(x)- T_{m,f,x_0}(x) } $=$ \\
-	$= \frac{1}{m!} \int_{x_0}^{x}(x-t)^m f^{(m+1)}(t)\mathrm dt$ \ \  (Integraldarst.)\\
-	$= \frac{f^{(m+1)}(\xi)}{(m+1)!}(x-x_0)^{m+1}$ \quad
-	$\xi \in [x, x_0]$ (Lagrange ) zur Berechnung der Genauigkeit\\
-	
-	\subsection{Landau-Notation}
-	\begin{itemize}\itemsep-1pt
-		\item $f(x) = o(g(x))$ für $x \rightarrow a \Leftrightarrow \lim\limits_{x \rightarrow a} \frac{f(x)}{g(x)} = 0$
-		\item $f(x) = O(g(x))$ für $x \rightarrow a \Leftrightarrow |f(x)| \leq C|g(x)|$ für $x \in (a - \epsilon, a + \epsilon)$ u. $C > 0$\\ oder $0 \leq \limsup\limits_{x \rightarrow a} \abs{\frac{f(x)}{g(x)}} < \infty$
-	\end{itemize}
-	Bei \emph{Taylor-Entwicklung}:
-	\begin{itemize}\itemsep-1pt
-		\item $R_{m+1,f,x_0}(h) = f(x_0 + h) - T_{m,f,x_0}(h) = o(h^m)$\\ f muss m-mal differenzierbar sein
-		\item $R_{m+1,f,x_0}(h) = f(x_0 + h) - T_{m,f,x_0}(h) = O(h^{m+1})$\\ f muss $(m+1)$-mal differenzierbar sein
-	\end{itemize}
-	\subsubsection{Rechenregeln}
-	\begin{itemize}\itemsep-1pt
-		\item $f = O(f)$
-		\item $f = o(g) \quad\Rightarrow\quad f = O(g)$
-		\item $f_1 = o(g)$ u. $f_2 = o(g) \quad\Rightarrow\quad f_1 + f_2 = o(g)$
-		\item $f_1 = O(g)$ u. $f_2 = O(g) \quad\Rightarrow\quad f_1 + f_2 = O(g)$
-		\item $f_1 = O(g)$ u. $f_2 = O(g) \quad\Rightarrow\quad f_1 \cdot f_2 = O(g_1 \cdot g_2)$
-		\item $f_1 = O(g)$ u. $f_2 = o(g) \quad\Rightarrow\quad f_1 \cdot f_2 = o(g_1 \cdot g_2)$
-	\end{itemize}
-	\subsubsection{Elementarfunktionen}
-	\begin{itemize}\itemsep-1pt
-		\item Exponentialfunktion\\
-		$e^x = \sum\limits_{k = 0}^m\frac{x^k}{k!} + O(x^{m + 1})$
-		\item Trigonometrische Funktionen\\
-		$\sin{x} = \sum\limits_{k = 0}^m(-1)^k\frac{x^{2k + 1}}{(2k + 1)!} + O(x^{2m + 3})$\\
-		$\cos{x} = \sum\limits_{k = 0}^m(-1)^k\frac{x^{2k}}{(2k)!} + O(x^{2m + 2})$
-		\item Logarithmusfunktion\\
-		$\ln{(1 + x)} = \sum\limits_{k = 1}^m\frac{(-1)^{k + 1}}{k}x^k + O(x^{m + 1})$
-	\end{itemize}
-	
-
-%=======================================================%
-%									Iterationsverfahren										%
-%=======================================================%
-\section{Iterationsverfahren}
-Mit Iterationsverfahren werden Nullstellen bestimmt.
-\subsection{Fixpunktiteration}
-\begin{enumerate}
-	\item $f(x) = 0$ auf Form $g(x) = x$ bringen
-	\item Konvergenz zeigen (Banach'scher Fixpunktsatz)
-	\begin{itemize}\itemsep-1pt
-		\item $g : I = [a;b] \mapsto I$ ist differenzierbar
-		\item $\abs{g'(x)} \leq L \quad\forall x \in I$ mit $ 0 \leq L < 1$
-	\end{itemize}
-	\item Nullstelle mit Folge $x_{n+1} = g(x_n)$ und Startwert $x_0$ annähern
-\end{enumerate}
-\underline{Abschätzungen:} (Nullstelle x*)
-\begin{itemize}\itemsep-1pt
-	\item $\abs{x_n - x^*} \leq L^n\abs{x_0 - x^*}$ 'a priori'
-	\item $\abs{x_n - x^*} \leq \frac{L}{1 - L}\abs{x_n - x_{n-1}}$ 'a posteriori'
-	\item $\abs{x_n - x^*} \leq L\abs{x_{n-1} - x^*} \ra$ Lineare Konvergenz
-\end{itemize}
-\subsection{Newton-Verfahren}
-Quadratische Konvergenz: $\abs{x_n - x^*} \leq C\abs{x_{n-1} - x^*}^2$ mit $C > 0$\\
-Formel: $\boxed{x_{n+1} = x_n - \frac{f(x_n)}{f'(x_n)}}$ mit Startwert $x_0$\\
-\underline{Voraussetzungen:}
-\begin{itemize}\itemsep-1pt
-	\item $f:[a,b] \mapsto \R$ ist \textbf{2-mal} stetig differenzierbar
-	\item $m := \min\limits_{a \leq x \leq b}{\abs{f'(x)}} > 0$ u. $M := \max\limits_{a \leq x \leq b}{\abs{f''(x)}}$
-	\item Wenn $\abs{x_0 - x^*} \leq \frac{2m}{M} \Rightarrow$ Konvergenz gegen x*
-\end{itemize}
-\underline{Abschätzungen:}
-\begin{itemize}\itemsep-1pt
-	\item $\abs{x^* - x_n} \leq \frac{M}{2m}\abs{x^* - x_{n-1}}^2; n = 1, 2, \ldots$
-\end{itemize}
 
 
 
@@ -449,6 +336,7 @@ Kettenregel\textbf{n:}\\
 	$\boxed{ \nabla h(x) = g'\big( f(x) \big) \cdot \nabla f(x)}$  &  $\boxed{h'(x)=\nabla f\big( g(x) \big)^T \cdot \dot g(t)}$
 \end{tabular}
 
+
 \subsection{Differentialoperatoren \qquad $\div(\rot(f)) = 0$}
 \begin{tabular}{l|l}
 	Operator & Definition \\ \midrule
@@ -472,13 +360,23 @@ Hessematrix: $H_f (x) = \nabla^2 f(x) = \begin{bmatrix} \partial_{11} f(x)\ ...\
 Die Hessematrix ist symmetrisch, falls $f \in \mathcal C^2(D)$\\
 \\ 
 \begin{tabular}{ll}
-	$T_{2,f, \vec x_0} (\vec x) =$ $f(\vec x_0) +$ & (un inder rasant\footnote{Auch bekannt als der langsame Inder})\\
+	$T_{2,f, \vec x_0} (\vec x) =$ $f(\vec x_0) +$ \\
 	\qquad $+ \nabla f(\vec x_0)^\top (\vec x-\vec x_0) +$ & (Tangentialebene)\\
 	\qquad $+ \frac{1}{2}(\vec x-\vec x_0)^\top \ma H_f(x_0)(\vec x- \vec x_0)$ & (Schmiegequadrik)\\
 	%\qquad $+ \qquad \svdots$ & (räumliche Matrix)\\
 \end{tabular}
 
 $T_{3,f,\vec a}(\vec x) = f(\vec a) + \sum \partial_i f(\vec a)(x_i - a_i) + \frac{1}{2} \sum \partial_i \partial_j f(\vec a)(x_i - a_i)(x_j - a_j) + \frac{1}{6} \sum \partial_i \partial_j \partial_k f(\vec a)(x_i - a_i)(x_j - a_j)(x_k - a_k)$
+
+\subsection{Jacobimatrix = Fundamentalmatrix}
+$\ma J_f (x) = \begin{bmatrix} \frac{\partial f_1}{\partial x_1} & ... & \frac{\partial f_1}{\partial x_n} \\ \svdots & & \svdots \\ \frac{\partial f_m}{\partial x_1} & ... & \frac{\partial f_m}{\partial x_n} \end{bmatrix} = \begin{pmatrix} \nabla f_1^\top \\ \svdots \\ \nabla f_m^\top \end{pmatrix}  \quad \in \mathbb R^{m \times n}$\\ \\
+Rechenregeln für die Jacobimatrix:\\
+$f,g: D \subseteq \mathbb R^n \rightarrow \mathbb R^m$ part. diffbar:\\
+Linearität: $\ma J_{\alpha f + \beta g} = \alpha J_f + \beta J_g$\\
+Produkt: $\ma J_{f^\top g} = g^\top J_f + f^\top J_g$ \quad $(\nabla f^\top g = J_f^\top g + J_g^\top f)$\\
+Komposition: $\ma J_{g \circ f}(x) = \ma J_g\Bigl(f(x)\Bigr) \cdot \ma J_f(x)$\\
+Umkehrfunktion: $\ma J_{f^-1} (f(x)) = \ma J_f (x)^{-1}$
+
 
 \subsection{Lineare Abbildungen}
 %-----------------------------------------------------------------------
@@ -495,72 +393,80 @@ Bild von $f$: $\mathrm{Bild}(f) = \iset{f(v)}{v \in V}$ ist UVR von $W$\\
 \emph{Injektiv} (aus $f(x) = f(y) \ra x = y)$), falls $\ker(f) = \eset{0}$ \\
 \emph{Surjektiv} Alle Werte im Zielraum werden angenommen.
 
-\subsubsection{Dimensionen}
-\boxed{ \begin{array}{cc} \dim(V) = \dim \bigl(\ker(f) \bigr) + \dim \bigl(\mathrm{Bild}(f) \bigr) \\
-\mathrm{rg}(f)=\dim\bigl( \mathrm{Bild}(f) \bigr) \end{array} }\\
-Falls $\dim(V) = \dim(W)$, so gilt: \\
-$f$ ist surjektiv $ \Leftrightarrow$ $f$ ist  injektiv $\Leftrightarrow$ $f$ ist  bijektiv. \\
-
-\subsubsection{Die Darstellungsmatrix}
-...beschreibt eine lineare Abbildung zwischem zwei endlichdimensionalen Vektorräumen.\\
-\\
-Sonderfälle: \\
-$\ma{_{E_n} M(f)_{E_n}} = \ma{A}$ \quad $\|$ \quad
-$\ma{_{E_n} M(id)_{B'}} = \ma B'$ \\ 
-Koordinatenvektor $_B v$ von $v = \lambda_1 \vec b_1 + ... + \lambda_n \vec b_n $ bezüglich $\ma B$: \\
-$_B v := \begin{pmatrix} \lambda_1 \\ \overset{:}: \\ \lambda_n \end{pmatrix} \in \mathbb K^n$\\
 
 
-Darstellungsmatrix von $f$ bzgl.  der Basen $B$ in $C$ \\
-$_C M(f)_B  = \begin{pmatrix}_C f(b_1)& _C f(b_2) &\ldots &_C	 f(b_n)\end{pmatrix} \in K^{m \times n}$
-\\ \\
-Darstellungsmatrizen bei Verkettungen von linearen Abbildungen
-	$\underbrace{_D M (g \circ f)_B}_{r \times n} = \underbrace{_D M(g)_C}_{r \times m} \cdot \underbrace{_C M(f)_B}_{m \times n}$
-	
-\subsubsection{Die Bassistentransfomationsformel}
-
-$f: \ma V \ra \ma W, \ma B, \ma B' \text{Basen von } \ma V \text{ in } \ma C, \ma C' \text{ Basen von } \ma W \text{ alle endlich }$
-\boxed{	_{C'} M(f)_{B'} = _{C'} M(id)_C \cdot _C M(f)_B \cdot_B M(id)_{B'}}
-\\
-Bestimmung von $_{C'}M(id)_C$: LGS: $\bigl(C' | C\bigr) \overset{EZF}{\longrightarrow} \bigl( E_n | _{C'}M(id)_C \bigr)$
-\\ \\
-für $\ma V = \ma W = \ma K^n$ und $\ma C = \ma B = \ma E_n$ \\ \\
-$f: \ma K^n \ra \ma K^n , f(v) = \ma A \vec v$
-\\ \\
-$ \ma{_{B'} M(f)_{B'}} = \ma{_{B'} M(id)_{E_n}} \cdot \ma{_{E_n} M(f)_{E_n}} \cdot \ma{_{E_n} M(id)_{B'}} =\\ \ma B'^{-1} \cdot \ma A \cdot \ma B' $
 
 
-\subsection{Jacobimatrix = Fundamentalmatrix}
-$\ma J_f (x) = \begin{bmatrix} \frac{\partial f_1}{\partial x_1} & ... & \frac{\partial f_1}{\partial x_n} \\ \svdots & & \svdots \\ \frac{\partial f_m}{\partial x_1} & ... & \frac{\partial f_m}{\partial x_n} \end{bmatrix} = \begin{pmatrix} \nabla f_1^\top \\ \svdots \\ \nabla f_m^\top \end{pmatrix}  \quad \in \mathbb R^{m \times n}$\\ \\
-Rechenregeln für die Jacobimatrix:\\
-$f,g: D \subseteq \mathbb R^n \rightarrow \mathbb R^m$ part. diffbar:\\
-Linearität: $\ma J_{\alpha f + \beta g} = \alpha J_f + \beta J_g$\\
-Produkt: $\ma J_{f^\top g} = g^\top J_f + f^\top J_g$ \quad $(\nabla f^\top g = J_f^\top g + J_g^\top f)$\\
-Komposition: $\ma J_{g \circ f}(x) = \ma J_g\Bigl(f(x)\Bigr) \cdot \ma J_f(x)$\\
-Umkehrfunktion: $\ma J_{f^-1} (f(x)) = \ma J_f (x)^{-1}$
+
+
+\section{Taylorpolynom für Skalarfelder}
+%===========================================================================================================================================================
+Ist $f:D\subset \mathbb R^n \rightarrow \mathbb R$ ein ($m+1$)-mal stetig partiell differenzierbar Skalarfeld, D offen und konvex, so gilt für alle $\vec a \in D$ und $\vec h \in \mathbb R^n$ mit $\vec a + \vec h \in D$ die Approximation durch das Taylorpolynom : 
+\boxed{ \ T_m(\vec a; \vec a + \vec h) = g(0) + g'(0) + \frac{1}{2} g''(0) + \dots + \frac{1}{m!}g^{m}(0)} \\
+(Teilen durch $n!$ nicht vergessen!) \\ \\
+$g:[0,1] \rightarrow \mathbb R$ ist definiert als $g(t) = f(a+th)$ \\
+Die Ableitungen von $g$ an der Stelle $0$ können wie folgt bestimmt werden:
+ 
+\begin{itemize}
+	\item $g(0) = f(\vec a)$
+	\item $g'(0) = \nabla f(\vec a)^\top \vec h = \sum_{i=1}^{n}\partial _{x_i} f(\vec a)h_i$
+	\item $g''(0) = h^\top H_f(\vec a) \vec h = \sum_{i,j=1}^{n} \partial_{x_j}\partial_{x_i}f(\vec a)h_i h_j$
+	\item $g'''(0) = \sum_{i,j,k=1}^{n} \partial_{x_i}\partial_{x_j}\partial_{x_k}f(\vec a)h_i h_j h_k$
+	\item \dots
+\end{itemize}
+
+\subsection{Das Restglied - die Taylorformel}
+\begin{equation*}
+\begin{split}
+	R_{m+1}(a; a+h) &= f(x)- T_m(a,a+h) \\
+	&= \frac{1}{m!} \int_{0}^{1}(1-t)^m g^{(m+1)}(t)\mathrm dt
+\end{split}
+\end{equation*}
+
+Es gibt eine Zwischenstelle $\xi \in (0,1)$ mit: \\
+\begin{equation*}
+	R_{m+1}(a; a+h) = \frac{1}{m!} g^{(m+1)}(\xi)
+\end{equation*}
 
 
 
 
 \section{Koordinatensysteme}
 %===========================================================================================================================================================
-Um einen Vektor in anderen Koordinaten darzustellen:\\ \\
+Transformationsvektoren. (Um einen Vektor in anderen Koordinaten darzustellen)\\ \\
 \begin{tabular}{c | c  l} 
 &$\vect{ x & y & z}^\top$ &  \\ \midrule
 Zylinder & $\begin{pmatrix} r \cdot \cos (\varphi) \\ r \cdot \sin (\varphi) \\ z \end{pmatrix}$ & $0 \le \varphi < 2 \pi$ \\ 
-Kugel & $\begin{pmatrix} r \cdot \cos(\varphi) \sin(\theta) \\ r \cdot \sin(\varphi) \sin(\theta) \\ r \cdot \cos(\theta) \end{pmatrix}$ &$\begin{matrix}0 \le \theta \le \pi \\ 0 \le \varphi < 2 \pi\end{matrix}$
+Kugel & $\begin{pmatrix} r \cdot \cos(\varphi) \sin(\theta) \\ r \cdot \sin(\varphi) \sin(\theta) \\ r \cdot \cos(\theta) \end{pmatrix}$ &$\begin{matrix}0 \le \varphi < 2 \pi \\ 0 \le \theta \le \pi \end{matrix}$
 \end{tabular} \\ \\
  \\ 
+ 
 % evtl. nochmal anschauen
-\begin{tabular}{c | c} 
-Zur Basistransformation: Transformationsmatrix $\ma S$ &  $f_{\text{kath}} =$ \\ \midrule
-$\mat{ \cos(\varphi) &  -\sin(\varphi) & 0\\ \sin(\varphi) & \cos(\varphi) & 0 \\ 0 & 0 & 1 }$ &  $ \ma S_Z \cdot f_{\text{zyl}}$ \\
-$\mat{ \cos(\varphi) \sin(\theta) & - \sin(\varphi) & \cos(\varphi)\cos(\theta) \\ \sin(\varphi)\sin(\theta) & \cos(\varphi) & \sin(\varphi)\cos(\theta) \\ \cos(\theta) & 0 & - \sin(\theta) }$ & $\ma S_k \cdot f_{\text{kugel}}$
-\end{tabular}
-\\ \\
-Die Spalten entsprechen den orthonormalen Basisvektoren im jeweiligen Koordinatensystem. \\ $\Ra$ Trafo-Matrizen orthogonal: $\ma S^{-1} = \ma S^\top$\\
+Transformationsmatrix $\ma S_z$ \\
+$\mat{ \vec e_r & \vec e_\varphi & \vec e_z} = \mat{ \cos(\varphi) &  -\sin(\varphi) & 0\\ \sin(\varphi) & \cos(\varphi) & 0 \\ 0 & 0 & 1 }$
+\begin{center}
+	\boxed{f_{\text{kart}} = \ma S_z \cdot f_{\text{zyl}} \qquad \qquad f_{\text{zyl}} = \ma S_z^{-1} \cdot f_{\text{kart}}} \\
+\end{center}
+\qquad \\ \\
+Transformationsmatrix $\ma S_k$ \\
+$\mat{ \vec e_r & \vec e_\varphi & \vec e_\theta} = \mat{ \cos(\varphi) \sin(\theta) & - \sin(\varphi) & \cos(\varphi)\cos(\theta) \\ \sin(\varphi)\sin(\theta) & \cos(\varphi) & \sin(\varphi)\cos(\theta) \\ \cos(\theta) & 0 & - \sin(\theta) }$
+\\
+\begin{center}
+	\boxed{f_{\text{kart}} = \ma S_k \cdot f_{\text{kug}} \qquad \qquad f_{\text{kug}} = \ma S_k^{-1} \cdot f_{\text{kart}}} \\
+\end{center}
+Die Spalten entsprechen den orthonormalen Basisvektoren im jeweiligen Koordinatensystem. \\ $\Ra$ Trafo-Matrizen orthogonal: $\ma S^{-1} = \ma S^\top$
+
+\subsection{Transformation eines Skalarfeldes $f(x,y,z)$}
+$\tilde{f}(r,\varphi,z)$ bzw.  $\tilde{f}(r,\varphi,\theta)$ erhält man durch ersetzen von $x$, $y$ und $z$ durch die entsprechenden Einträge des Transformationsvektors.
 
 
+\subsection{Transformation eines Vektorfeldes $\vec f(x,y,z)$ }
+$\tilde{\vec f}(r,\varphi,z)$ bzw. $\tilde{\vec f}(r,\varphi,\theta)$ durch ersetzen von $x$, $y$ und $z$ durch die entsprechenden Einträge des Transformationsvektors. \\ \\
+$ \hat{\vec f}(r,\varphi,z)$ bzw. $\hat{\vec f}(r,\varphi,\theta)$ bezüglich krummlinige Koordinaten: \\
+ $\hat{\vec f} = \ma S_{z/k}^{-1} \cdot \tilde{\vec f}$
+
+\subsection{Operatoren in anderen Koordinaten}
+(Detailliert auf der letzten Seite der FS) \\ \\
 \begin{tabular}{c|l} 
  & Zylinderkoordinaten \\ \midrule
  $\nabla$ & $(\partial_r,\ \frac{1}{r}\partial_\varphi,\ \partial_z)^\top$ \\ \midrule
@@ -584,7 +490,7 @@ $\iset{(x,y) \in \mathbb R^2 }{f(x,y) = 0}$ mit $y=g(x) \in \mathbb R$
 \subsection{Satz über implizite Funktionen:}
 Es gelte: $f: D \in \mathbb R^2 \ra \mathbb R$ \quad
 $\ra $ implizite Gleichung $f(x,y) = 0$ \\
-Bedinungen:
+Bedinungen für die Existenz von $y = g(x)$:
 \begin{itemize} \itemsep0pt
 	\item $D$ ist offen
 	\item $f \in C^1 (D)$
@@ -594,7 +500,7 @@ Bedinungen:
 \emph{$\Ra$} $ \exists I \subseteq \mathbb D: I = (x_0 - \epsilon, x_0 + \epsilon) , J \subseteq \mathbb R: J = (y_0 - \delta, y_0 + \delta)$ mit:
 \begin{itemize}\itemsep0pt
 	\item $I \times J \subseteq D$ in $f_y (x,y) \not = 0 \forall (x,y) \in I \times y$
-	\item $\exists_1$ Funktion $g(x)$ mit $f(x,y) = 0$ ("$g$ wird implizit defniert")
+	\item $\exists_1$ Funktion $g(x)$ mit $f(x,g(x)) = 0$ ("$g$ wird implizit defniert")
 	\item $g'(x) = \frac{-f_x(x, g(x))}{f_y (x, g(x))} = \frac{-f_x(x, y)}{f_y (x, y)} \quad \forall x \in I$ 
 \end{itemize}
 
@@ -616,36 +522,15 @@ Dann: $\exists U$ Umgebung von $x_0$ mit $f |_U : U \ra f(U)$ ist bijektiv. \\
 Die Umkehrfunktion $(f|_u)^{-1}$ ist stetig diffbar und es gilt: \\
 $J(f|_U)^{-1} (f(x)) = (J_f (x))^{-1} \forall x \in U$
 
-
-\subsection{Diagonalmatrix}
-
-\underline{Bedingungen für Diagonalisierbarkeit:}
-\begin{itemize} \itemsep0pt
-	\item Das charakteristische Polynom $\chi_{A}$ zerfällt in Linearfaktoren\\
-				$\chi_{A}(t) = (\lambda_1 - t)^{k_1}(\lambda_2 - t)^{k_2}\ldots(\lambda_r - t)^{k_r}$
-	\item Die algebraischen Vielfachheiten der Eigenwerte stimmen mit den geometrischen überein\\
-				$k_i = \dim V_{\lambda_i}$
-	\item Jede \textbf{symmetrische} Matrix $A \in \R^{n \times n}$ ist diagonalisierbar
-\end{itemize}
-
-$\ma D = \begin{pmatrix} \lambda_1 & 0 & 0 \\ 0 & \lambda_2 & 0 \\ 0 & 0 & \lambda_3 \end{pmatrix}$ \qquad $\begin{array}{l} \ma D = \ma B^{-1} \ma A \ma B \\[0.5em] \ma B = \mat{\vec{EV}_1, \vec{EV}_2, ...} \end{array}$\\
-$_B M(f)_B = _B M (id)_{E3} \cdot _{E3} M(f)_{E3} \cdot _{E3} M(id)_B$ \\
-$B = ( _{E3} b_1 , _{E3} b_2 ,_{E3} b_3 ) = (v_1, v_2, v_3)$
+\section{Matrizen}
 
 
-\subsection{Definitheit}
-Eine sym. Matrix $A = A^\top \in \mathbb R^{n\times n}$ heißt\\[0.3em]
-$_{\text{\normalsize neg.}}^{\text{\normalsize pos.}}$ definit 
-$ \Leftrightarrow$
-$\forall v \in \mathbb R^n \setminus \eset{0} : \vec v^\top \ma A \vec v \gtrless 0$
-$ \Leftrightarrow  $  Alle EW $\lambda \gtrless 0$\\
-$_{\text{\normalsize neg.}}^{\text{\normalsize pos.}}$ semi definit $\ \Leftrightarrow\ $ $\forall v \in \mathbb R^n : \vec v^\top \ma A \vec v \gtreqless 0$ $\ \Leftrightarrow \ $  Alle EW $\lambda \gtreqless 0$\\
-indefinit $\Leftrightarrow$
-$\exists v,w \in \mathbb R^n: \vec v^\top
-\ma A \vec v < 0 \ \land \ \vec w^\top \ma A \vec w > 0$ 
-$\ \Leftrightarrow \ $  $\exists \lambda_1 > 0 \land \lambda_2 < 0$\\
-Alle EW von $\ma A = \ma A^\top$ sind reel. $\lambda \in \mathbb R$ selbst wenn EV $v \in \mathbb C$!\\
-Überprüfung mit $\det \ma A = \prod \lambda_i$ \qquad $\mathrm{Sp} \ma A = \sum \lambda_i$\\
+\subsection{Determinante von $A\in \mathbb K^{n\times n}$: $\det(A)=|A|$}
+
+$\det\begin{pmatrix}A&0\\C&D\end{pmatrix}=\det\begin{pmatrix}A&B\\0&D\end{pmatrix}=\det(A)\cdot\det(D)$ \\
+Hat $\ma A$ 2 linear abhäng. Zeilen/Spalten $\Rightarrow |A|=0$ \\
+Entwicklung. n. $i$ter Zeile: $|A|=\sum\limits_{i=1}^n (-1)^{i+j} \cdot a_{ij} \cdot |A_{ij}|$ \qquad 
+
 
 \subsection{Eigenwerte, Eigenvektoren}
 \emph{Eigenwerte:} $\det(\ma A - \lambda \ma 1) = 0$, Det-Entwickl., Polynom-Div. \\
@@ -660,52 +545,93 @@ $\ra \dim(\mathrm{Eig}_A (\lambda_i)) = \mathrm{geo}(\lambda_i)$ \quad $\forall 
 	\item Es gilt: $\det A = \det B$
 \end{itemize}
 
-\subsection{Schnurzerlegung}
-$\ma R = \ma U^T \ma A \ma U$\quad geht für jede quadratische Matrix $\ma A$, deren charakatristische Polynom in Linearfaktoren zerfällt.\\
-$\ma U$ ist orthogonal $\ma U^\top = \ma U^{-1}$ \quad $\ma R$ ist obere Dreiecksmatrix
+\subsection{Diagonalmatrix}
 
-\begin{enumerate} \itemsep0pt
-\item Finde 1 EW $\lambda_1$ und bestimme EV $\vec v_1$ zu $\lambda_1$ mit $\norm{\vec v_1} = 1$
-\item Ergänze $\vec v_1$ zu einer ONB:\\ $\ma B_1 = (\vec v_1, \vec w_2, ..., \vec w_n,) \in \mathbb R^{n \times n} \qquad (\ma B^\top_1 = \ma B^{-1}_1)$\\
-\item Berechne $_{B_1} \ma M(f)_{B_1} = \ma B^\top_1 \ma A \ma B_1 = \mat{\lambda_1 & * & * \\ 0 & \ma A_1 &  \\ 0 &  &  }$  \\ 
-		Das liefert $\ma A_1 \in \mathbb R^{(n-1)\times(n-1)}$\\
-\item Wiederhole 1. bis 4. mit $\ma A_1$ anstelle von $\ma A$, bis
-\end{enumerate}
-%\item $\tilde{\ma A_1} = _{B2} M(f)_B2 = \ma B_2^\top \ma A_1 \ma B_2 $
-Abbruchbedingung: $\ma B_i$ ist $(2 \times 2)$-Matrix, dann berechne\\
-$\ma U = \ma B_1 \cdot \mat{1  & 0 \\ 0 & \ma B_2 \\} \cdot \mat{1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & \ma B_3 \\} \cdot \ldots $\\
-Und schließlich: $\ma R = \ma U^\top \ma A \ma U$ \quad $\Ra \ma R$ ist obere Dreiecksmatrix: Party!
-
-
-
-\subsection{Singulärwertzerlegung \quad $\bs A=\bs U \bs\Sigma \bs V^\top$}
-\begin{itemize}\itemsep0pt
-\item Bestimme die Eigenwerte $\lambda_1, . . . , \lambda_n$ von $\ma A^\top \cdot \ma A$(sym.) aus $\R^{n \times n}$
-und sortiere: \\
-$\lambda_1 \ge \lambda_2 \ge \ldots \ge \lambda_n \ge 0$ \\
-\item Bestimme dann eine ONB $\ma V = (v_1, . . . , v_n)$ aus EV
-von $\ma A^\top \cdot \ma A $
-\item  $\underset{m \times n}{\ma \Sigma} = \text{diag}(\sigma_1, \ldots, \sigma_2) $ mit $\boxed{\sigma_i = \sqrt{\lambda_i}}$ (Singulärwerte) \\
-			(Ergänze mit Nullspalten/ Zeilen, dass $\dim \Sigma = \dim A$)
-\item $\underset{m \times n}{\ma \Sigma}  = \underset{m \times m}{\ma U^\top} \cdot \underset{m \times n}{\ma A} \cdot \underset{n \times n}{\ma V}$ \quad ($\ma U, \ma V$ sind orthogonal)\\  % \text{ mit } \ma A \in \mathbb R^{m \times n}
-\item Bestimme $\ma U=(\vec u_1, \vec u_2, \ldots \vec u_k)$ mit $k = \min \eset{m, n}$ \\
-$\boxed{\vec u_i =\frac{1}{\sigma_i}\ma A \vec v_i}$ \\
-Falls $n \le m$, ergänze die Vektoren $\vec u_i$ zu ONB $\ma U$ des $\R^n$.
+\underline{Bedingungen für Diagonalisierbarkeit:}
+\begin{itemize} \itemsep0pt
+	\item Das charakteristische Polynom $\chi_{A}$ zerfällt in Linearfaktoren\\
+	$\chi_{A}(t) = (\lambda_1 - t)^{k_1}(\lambda_2 - t)^{k_2}\ldots(\lambda_r - t)^{k_r}$
+	\item Die algebraischen Vielfachheiten der Eigenwerte stimmen mit den geometrischen überein\\
+	$k_i = \dim V_{\lambda_i}$
+	\item Jede \textbf{symmetrische} Matrix $A \in \R^{n \times n}$ ist diagonalisierbar
 \end{itemize}
 
+$\ma D = \begin{pmatrix} \lambda_1 & 0 & 0 \\ 0 & \lambda_2 & 0 \\ 0 & 0 & \lambda_3 \end{pmatrix}$ \qquad $\begin{array}{l} \ma D = \ma B^{-1} \ma A \ma B \\[0.5em] \ma B = \mat{\vec{EV}_1, \vec{EV}_2, ...} \end{array}$\\
+$_B M(f)_B = _B M (id)_{E3} \cdot _{E3} M(f)_{E3} \cdot _{E3} M(id)_B$ \\
+$B = ( _{E3} b_1 , _{E3} b_2 ,_{E3} b_3 ) = (v_1, v_2, v_3)$
+
+\subsection{Definitheit}
+Eine sym. Matrix $A = A^\top \in \mathbb R^{n\times n}$ heißt\\[0.3em]
+$_{\text{\normalsize neg.}}^{\text{\normalsize pos.}}$ definit 
+$ \Leftrightarrow$
+$\forall v \in \mathbb R^n \setminus \eset{0} : \vec v^\top \ma A \vec v \gtrless 0$
+$ \Leftrightarrow  $  Alle EW $\lambda \gtrless 0$\\
+$_{\text{\normalsize neg.}}^{\text{\normalsize pos.}}$ semi definit $\ \Leftrightarrow\ $ $\forall v \in \mathbb R^n : \vec v^\top \ma A \vec v \gtreqless 0$ $\ \Leftrightarrow \ $  Alle EW $\lambda \gtreqless 0$\\
+indefinit $\Leftrightarrow$
+$\exists v,w \in \mathbb R^n: \vec v^\top
+\ma A \vec v < 0 \ \land \ \vec w^\top \ma A \vec w > 0$ 
+$\ \Leftrightarrow \ $  $\exists \lambda_1 > 0 \land \lambda_2 < 0$\\
+Alle EW von $\ma A = \ma A^\top$ sind reel. $\lambda \in \mathbb R$ selbst wenn EV $v \in \mathbb C$!\\
+Überprüfung mit $\det \ma A = \prod \lambda_i$ \qquad $\mathrm{Sp} \ma A = \sum \lambda_i$\\ \\
+
+Nur für $2\times 2$-Matrix: $\ma A = \begin{pmatrix}a & b \\ c & d\end{pmatrix}$ \\
+\setlength{\tabcolsep}{0.5em} % for the horizontal padding
+\begin{tabular}{|l|l|l|l|} 
+	\hline \textbf{Definitheit} & \textbf{Eigenwerte} & $\det \ma A = ad - bc$ & $\mathrm{Sp} \ma A = a+d$ \\ 
+	\hline indefinit & pos. und neg. & $\det \ma A < 0$ & \\ 
+	\hline pos. semidef. & $\lambda \ge 0 $ & $\det \ma A = 0$  & $\mathrm{Sp} \ma A \ge 0$\\ 
+	\hline neg. semidef. & $\lambda \le 0 $ & $\det \ma A = 0$  & $\mathrm{Sp} \ma A \le 0$\\ 
+	\hline pos. definit & $\lambda > 0 $ & $\det \ma A > 0$  & $\mathrm{Sp} \ma A < 0$\\ 
+	\hline neg. definit & $\lambda < 0 $ & $\det \ma A > 0$  & $\mathrm{Sp} \ma A < 0$\\ 
+	\hline 
+\end{tabular} 
+
+\setlength{\tabcolsep}{1em} % for the horizontal padding
 
 
-\subsection{Extremwerte von Skalarfeldern $f(\vec x)$}
-\subsubsection{Extremewerte ohne NB} % (fold)
+\section{Extremwerte von Skalarfeldern $f(\vec x)$}
+\subsection{Extremewerte ohne NB} % (fold)
 \begin{itemize} \itemsep0pt
 	\item Suche Kandidaten (stationäre Punkte): $\eset{\vec x_0}:{\nabla f(\vec x_0) = 0}$
 	\item Falls $H_f(\vec x_0) \begin{cases} \text{neg. definit} & \Rightarrow \vec x_0 = \text{lok. Max.} \\ \text{pos. definit} & \Rightarrow \vec x_0 = \text{lok. Min.} \\ \text{indefinit} & \Rightarrow \vec x_0 = \text{Sattelpunkt} \\ \text{semidefinit} & \Rightarrow \vec x_0 = \text{keine Aussage} \end{cases}$\\
 	\item globale Extreme $\ra $ prüfe Rand
 \end{itemize}
 
+\subsection{Extremwerte von $f(\vec x)$ mit Nebenbedingung}
+Es seien $f,g:\Omega \subset \R^n \mapsto \R$
+\begin{itemize} \itemsep0pt
+	\item NB $g(x) = 0$ ist nach einer Variable auflösbar. \\
+	$\ra$ Setze $x_i$ in $f(x)$ ein $\ra$ Bestimme EW
+	\item Lagrange-Funktion \\
+	Nebenbedingung $g(x) = 0$\\
+	$\boxed{L(x, \lambda) = f(x) + \lambda g(x)}$
+	\begin{itemize} \itemsep0pt
+		\item Regularitätsbedingung: \\
+		$\nabla{g(x)} \neq 0 \quad \forall x \in \Omega$
+		\item Kandidaten: \\
+		$\nabla{L(x, \lambda)} = 0 \Ra \begin{cases}
+		\begin{array}{r}
+		\nabla{f(x)} + \lambda\nabla{g(x)} = 0 \\
+		g(x) = 0
+		\end{array}
+		\end{cases}$
+		\item Vergleiche die Funktionswerte der Kandidaten \\
+		\ra Entscheidung über Extrema (auch Rand betrachten)
+		%\item Kandidaten 1. Art \\
+		%$\nabla g(x) = 0 $ \\
+		%$g(x) = 0$ muss auch erfüllt sein
+		%\item Kandidaten 2. Art: \\
+		%$\nabla L (x, \lambda) = 0$
+		%\item Vergleich der Funktionswerte der Kandidaten $ \ra$ Entscheide über Max/ Min bzw. betrachte Rand
+	\end{itemize}
+\end{itemize}
+PS: Lagrange bestiehlt kleine Kinder!!!!
+
+
+
 % subsection subsection name (end)
 
-\subsubsection{Lineare Ausgleichsrechnung}
+\subsection{Lineare Ausgleichsrechnung (Polynom)}
 Man betrachtet eine Funktion $b = f(t) = x_0 + x_1t + \ldots + x_nt^n$ mit unbekannten Koeffizienten $x_0, x_1, \ldots x_n$. Es sind m Paare $(b_i, t_i)$ gegeben und sucht
 den Vektor $\vec x = (x_0, x_1, \ldots, x_n)^T$, für den $r_i(x) = b_i - x_0 - x_1t - \ldots - x_nt^n$ minimal sind. \\ \\
 \underline{Aufgabe:} Minimiere $\sum\limits_{i = 1}^m (b_i - x_0 - x_1t - \ldots - x_nt^n)^2$ \\
@@ -719,41 +645,23 @@ $\ma A = \mat{
 Man erhält Minimum durch Lösen der Normalengleichung \\
 $\boxed{\ma A^T \ma A \vec x = \ma A^T \vec b}$
 
-\subsubsection{Extremwerte von $f(\vec x)$ mit Nebenbedingung}
-Es seien $f,g:\Omega \subset \R^n \mapsto \R$
-\begin{itemize} \itemsep0pt
-	\item NB $g(x) = 0$ ist nach einer Variable auflösbar. \\
-	$\ra$ Setze $x_i$ in $f(x)$ ein $\ra$ Bestimme EW
-	\item Lagrange-Funktion \\
-	Nebenbedingung $g(x) = 0$\\
-	$\boxed{L(x, \lambda) = f(x) + \lambda g(x)}$
-	\begin{itemize} \itemsep0pt
-		\item Regularitätsbedingung: \\
-			$\nabla{g(x)} \neq 0 \quad \forall x \in \Omega$
-		\item Kandidaten: \\
-			$\nabla{L(x, \lambda)} = 0 \Ra \begin{cases}
-				\begin{array}{r}
-					\nabla{f(x)} + \lambda\nabla{g(x)} = 0 \\
-					g(x) = 0
-				\end{array}
-			\end{cases}$
-		\item Vergleiche die Funktionswerte der Kandidaten \\
-			\ra Entscheidung über Extrema (auch Rand betrachten)
-	%\item Kandidaten 1. Art \\
-	%$\nabla g(x) = 0 $ \\
-	%$g(x) = 0$ muss auch erfüllt sein
-	%\item Kandidaten 2. Art: \\
-	%$\nabla L (x, \lambda) = 0$
-	%\item Vergleich der Funktionswerte der Kandidaten $ \ra$ Entscheide über Max/ Min bzw. betrachte Rand
-	\end{itemize}
-\end{itemize}
-	PS: Lagrange bestiehlt kleine Kinder!!!!
+\subsection{Lineare Ausgleichsrechnung (aus HM)}
+Gegeben: $n$ Stützstellen $(t_1,y_1),\dots,(t_n,t_y)$. \\
+Gesucht: Ausgleichsfunktion $f=f(x)=\lambda_1 f_1 +\cdots+\lambda_r f_r$ zu gegebenen $f_1,\dots,f_r$
+\begin{enumerate}
+	\item $b = (y_1,\dots,y_n)^\top$ \qquad $A=\begin{pmatrix}
+	f_1(t_1) & \dots & f_r(t_1) \\
+	\vdots & & \vdots \\
+	f_1(t_n) & \dots & f_r(t_n) \\
+	\end{pmatrix}$
+	\item Löse $A^\top Ax=A^\top b \qquad x=(\lambda_1,\dots,\lambda_r)^\top$
+	\item $f=f(x)=\lambda_1 f_1 +\cdots+\lambda_r f_r$
+\end{enumerate}
 
 
 
 
-
-\subsection{Sonstiges}
+\section{Kurvenintegral}
 
 
 
@@ -790,17 +698,484 @@ $\Leftrightarrow \boxed{J_f(x) = J_f(x)^T}$ bzw. $\partial_{x_i}f_j(x) = \partia
 	\item $n = 3$: $\rot v = 0 \Ra $ Integrabilitätsbedinung ist erfüllt.
 \end{itemize}
 
+\textbf{Potential}
 
-\parbox{2.0cm}{
-\includegraphics[height=0.8cm]{./img/cat.jpg}
-}
-\parbox{4.0cm}{
-	Auch wichtig: Schrödingers Katze
-}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%	  					  Mathe 3						    %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+% ==============================================================================================================
+\section{Integralarten (HM3)}
+% ==============================================================================================================
+%Satz von Fubini: Falls die Integralgrenzen von den Integranden unabhängig sind, gilt: $\int\limits^d_c \int\limits^b_a ... \diff x \diff y$ = $\int\limits^b_a \int\limits^d_c ... \diff y \diff x$\\
+
+\subsubsection{Regulärer Bereich}
+$B \subseteq \R^n$ heißt \emph{regulärer Bereich}, wenn
+\begin{itemize}
+	\item $B$ abgeschlossen und einfach zusammenhängend
+	\item $B$ lässt sich in endlich viele Normalbereiche zerlegen\\
+\end{itemize}				
+
+\subsubsection{Volumen und Oberfläche von Rotationskörpern um $x$-Achse}
+$V = \pi \int_a^b f(x)^2 \mathrm dx$ \qquad \quad $O = 2 \pi \int_a^b f(x) \sqrt{1 + f'(x)^2} \mathrm dx$
+
+\subsection{Skalares Kurvenintegral}
+\boxed{ \int\limits_\gamma f \ \mathrm ds := \int\limits^b_a f\bigl(\vec \gamma(t)\bigr) \cdot \norm{\vec{\dot \gamma}(t)} \mathrm dt } \quad 
+\pbox{4.0cm}{ SF $f(\vec x)$; $\vec x, \vec \gamma \in \mathbb R^n$\\ $L(\vec \gamma) = \int_\gamma 1 \diff s$}\\
+Gesamtmasse $M = \int\limits_\gamma f \ \mathrm ds = \int\limits^b_a \varrho \bigl(\vec \gamma(t)\bigr) \cdot \norm{\vec{\dot \gamma}(t)} \mathrm dt$\\
+Schwerpunkt $\vec S$: \quad $S_i = \frac{1}{M(\vec \gamma)} \cdot \int\limits_\gamma x_i \varrho \ \mathrm ds$
+
+\subsection{vektorielles Kurvenintegral}
+\boxed{ \int \vec v \bs \cdot \mathrm d\vec s := \int\limits^b_a \vec v \bigl(\vec \gamma(t)\bigr)^\top \bs \cdot \vec{\dot \gamma}(t) \ \mathrm dt } \quad VF $\vec v(\vec x)$; $\vec x, \vec v, \vec \gamma \in \mathbb R^n$
+
+\subsubsection{Fluss durch Kurve}
+Fluss von $\vec{v}$ von (in Durchlaufrichtung gesehen) links nach rechts.\\
+\boxed{\int_{\omega}{\vec{v} \diff \vec{n}} = \int_{\omega}{\vec{v} \cdot \begin{pmatrix}
+			0 & 1 \\
+			-1 & 0 \\
+		\end{pmatrix} \vec{T}(\vec{x}) \diff \vec{s}}}\\\\
+
+
+\subsection{Gebietsintegrale über Normalbereiche}
+$f:B \subseteq \R^2 \ra \R$ stetig
+
+\subsubsection{Flächenintegrale im $\R^2$}
+\emph{Typ I} $B_{\text{I}}$ regulärer Bereich\\
+$B_{\text{I}} = \left\{\vec{x} \in \R^2 | a \leq x_1 \leq b; g(x_1) \leq x_2 \leq h(x_1)\right\}$\\
+\boxed{\iint_B{f \diff F} = \int_{x_1=a}^b{\int_{x_2=g(x_1)}^{h(x_1)}{f(x_1,x_2) \diff x_2}\diff x_1}}
+\\ \\ \\
+\emph{Typ II} $B_{\text{II}}$ regulärer Bereich\\
+$B_{\text{II}} = \left\{\vec{x} \in \R^2 | c \leq x_2 \leq d; l(x_2) \leq x_1 \leq r(x_2)\right\}$\\
+\boxed{\iint_B{f \diff F} = \int_{x_2=c}^d{\int_{x_1=l(x_2)}^{r(x_2)}{f(x_1,x_2) \diff x_1} \diff x_2}}
+
+\subsubsection{Volumenintegrale im $\R^3$}
+$V$ regulärer Bereich\\
+$V = \{\vec{x} \in \R^3 \vert a \le x_1 \le b, u(x_1) \le x_2 \le o(x_1), u'(x_1,x_2) \le x_3 < o'(x_1,x_2)\}$\\
+\boxed{ \iiint_V f \diff V = \int\limits_a^{b} \int\limits_{u(x_1)}^{o(x_1)} \int\limits_{u'(x_1,x_2)}^{o'(x_1,x_2)} f(x_1,x_2,x_3) \diff x_3 \diff x_2 \diff x_1}
+
+\subsection{Koordinatentransformationen}
+$D, B \subseteq \R^2$ reguläre Bereiche\\
+$\vec{x}:D \ra B$ mit $\vec{x} = \vec{x}(u_1,u_2) \quad \vec{u} \in D$\\
+$\Ra \iint_B{f(x_1,x_2) \diff F(\vec{x})} = \iint_D{f(\vec{x}(u_1,u_2))\abs{\det J_{\vec{x}}(\vec{u})} \diff F(\vec{u})}$\\
+$J_{\vec{x}} \neq 0$ bis auf Nullmengen
+
+$D, B \subseteq \R^3$ reguläre Bereiche\\
+$\vec{x}:D \ra B$ mit $\vec{x} = \vec{x}(u_1,u_2,u_3) \quad \vec{u} \in D$\\
+$\Ra \iiint_B{f(\vec{x}) \diff V(\vec{x})} = \iiint_D{f(\vec{x}(\vec{u}))\abs{\det J_{\vec{x}}(\vec{u})} \diff V(\vec{u})}$\\
+$J_{\vec{x}} \neq 0$ bis auf Nullmengen
+
+\subsubsection{Koordinatenwechsel}
+$\vec{x}:\vec{u} \in D \ra \vec{x}(\vec{u}) \in B$ orthogonale Transformation\\
+$D, B \subseteq \R^3$\\
+
+$B(\vec{u}) = \begin{pmatrix}
+\vec{e}_{u_1} & \vec{e}_{u_2} & \vec{e}_{u_3}\\
+\end{pmatrix} \quad \vec{e}_{u_i} = \frac{\vec{x}_{u_i}}{\norm{\vec{x}_{u_i}}}$\\
+\boxed{\vec{v}(\vec{x}(\vec{u})) = B(\vec{u}) \vec{V}(\vec{u})}
+
+\emph{Kurvenintegrale}\\
+$\omega(t) \in D$: Kurve im $\vec{u}$-Raum\\
+$\tilde{\vec{\omega}}(t) = \vec{x}(\vec{\omega}(t))$: Zugehörige Kurve im $x$-Raum\\
+
+$\vec{v}(\vec{x}) \cdot \diff \vec{x} = \vec{V}(\vec{u}) \cdot \vect{h_1 \diff u_1 \\ h_2 \diff u_2 \\ h_3 \diff u_3\\} = \vect{h_1 V_1(\vec{u}) \\ h_2 V_2(\vec{u}) \\ h_3 V_3(\vec{u})\\} \cdot \diff \vec{u}$\\
+$\diff \vec{x} = h_1 \vec{e}_{u_1} \diff u_1 + h_2 \vec{e}_{u_2} \diff u_2 + h_3 \vec{e}_{u_3} \diff u_3$\\
+$\diff s(\vec{x}) = \sqrt{h_1^2 \dot{\omega_1}(t)^2 + h_2^2 \dot{\omega_2}(t)^2 + h_3^2 \dot{\omega_3}(t)^2} \diff t$
+
+\emph{Oberflächenintegrale}\\
+$T \subset D$: Fläche im $u$-Bereich\\
+$S \subset B$: Entsprechende Fläche im $x$-Bereich\\
+$S = \vec{x}(T)$; Parametrisierung in D: $(u,w) \in M \mapsto \vec{\phi}(u,w)$
+\begin{gather*}
+\iint_S{\vec{v} \cdot \diff\vec{O}} = \iint_M\left(V_1 h_2 h_3 \frac{\partial(\phi_2,\phi_3)}{\partial(u,w)}\right.\\ \left.+ V_2 h_3 h_1 \frac{\partial(\phi_3,\phi_1)}{\partial(u,w)} + V_3 h_1 h_2 \frac{\partial(\phi_1,\phi_2)}{\partial(u,w)}\right) \diff s \diff t
+\end{gather*}
+\begin{gather*}
+\diff\vec{O}(\vec{x}) = \left[h_2 h_3 \frac{\partial(\phi_2,\phi_3)}{\partial(u,w)}\vec{e}_{u_1}\right.\\ \left. + h_3 h_1 \frac{\partial(\phi_3,\phi_1)}{\partial(u,w)}\vec{e}_{u_2} + h_1 h_2 \frac{\partial(\phi_1,\phi_2)}{\partial(u,w)}\vec{e}_{u_3}\right] \diff s \diff t
+\end{gather*}
+
+\subsection{Integration über Flächen in $\R^3$}
+
+\subsubsection{Parametrisierung}
+Fläche im Zweidimensionalen wird zuerst parametrisiert:\\
+$(u,w) \in M \mapsto \vec{\phi}(u,w) = \vec{x} \in \R^3$
+
+Kreis mit Radius $r$:\\
+$\phi = x^2 + y^2 \le r^2$ \qquad $\partial \phi = \vect{r \cos(t)\\ r \sin(t)}$ \quad $\vec n = \vect{r \cos(t)\\ r \sin(t)}$\\[0.5em]
+Ellipse mit den Halbachsen $a$ und $b$:\\
+$\phi = \frac{x^2}{a^2} + \frac{y^2}{b^2} \le 1$ \qquad $\partial \phi = \vect{ a \cos(t) \\  b \sin(t)}$ \quad $\vec n = \vect{ a \cos(t) \\ b \sin(t)}$
+
+\emph{Eigenschaften der Parametrisierung $\vec{\phi}(u,w)$}
+\begin{itemize}
+	\item $x$ flächentreu: $\norm{\vec{\phi}_u \times \vec{\phi}_w} = 1$
+	\item $x$ winkeltreu: $\vec{\phi}_u \perp \vec{\phi}_w$ \& $\norm{\vec{\phi}_u} = \norm{\vec{\phi}_w}$
+	\item $x$ längentreu: $\vec{\phi}_u \perp \vec{\phi}_w$ \& $\norm{\vec{\phi}_u} = \norm{\vec{\phi}_w} = 1$
+\end{itemize}
+% Torrus mit:\\
+%	
+%	\begin{tabular}{l|l|l|l}
+%		Form & Fläche & Rand & Normalvektor\\ \midrule
+%		\pbox{4cm}{ Kreis mit \\ Radius $r$} & $x^2 + y^2 \le r$ & $\bigl( r \cos(t), r \sin(t) \bigr)$ & $ \% $ \\ \midrule
+%		\pbox{4cm}{ Ellipse mit den \\ Halbachsen $a$ und $b$} & $\frac{x^2}{a^2} + \frac{y^2}{b^2} \le 1$ & $\bigl( a \cos(t), b \sin(t) \bigr)$ & $\vect{ b \cos(t) \\ a \sin(t) }$ \\ \midrule
+%		\pbox{4cm}{ Torus mit \\ Radius $R$ und } & \\
+%	\end{tabular}
+%
+%		Umrechnung Karth. in Polar falls orthogonal:\\
+%		$\int\limits_x \int\limits_y f(x,y) \diff y \diff x \ra \int\limits_\phi \int\limits_r f(r \cos (\phi), r \sin(\phi)) \boldsymbol r \diff r \diff \phi$\\
+%		Sonst: $\int\limits_x \int\limits_y f(\vec x) \diff x \diff y \ra \int\limits_\varphi \int\limits_r f(\vec x(r, \varphi)) \det \ma J_{\vec x}(r,\varphi) \diff r \diff \varphi$\\		
+
+\subsubsection{Skalares Oberflächenintegral}
+Fläche $\vec \phi: B \subseteq \R^2 \ra \R^3, (u,w) \mapsto \vec \phi(u,w)$ und SF $f$\\
+\boxed{ \iint_{\vec \phi} f \diff O := \iint_B f\bigl(\vec \phi(u,w)\bigr) \cdot \norm{ \vec \phi_u \times \vec \phi_w } \diff u \diff w }
+
+\subsubsection{Vektorielles Oberflächenintegral (Fluss)}
+VF $\vec v:D\subseteq \R^3 \ra \R^3, \vec x \mapsto \vec v(x,y,z)$ und Fläche $\vec \phi(u,w)$ \\
+\boxed{ \iint_{\vec \phi} \vec v \bdot \diff \vec O := \iint_B \vec v\Bigl(\vec \phi(u,w)\Bigr)^\top \bdot \Bigl( \vec \phi_u \times \vec \phi_w \Bigr) \diff u \diff w }
+% Falls eine Stammfunktion zu $\vec v$ existiert, dann ist der Fluss wegunabhängig
+
+
+
+
+% ==============================================================================================================		
+\section{Integralsätze}
+% ==============================================================================================================
+
+Ist $B \subseteq \R^2$ Gebiet mit geschlossenem Rand $\partial B = \sum \vec \gamma_i$ mit $\vec \gamma_i \in \mathcal C^1$ 
+und pos. param. (gegen Uhrzeigersinn), dann  gilt $\forall \mathcal C^1$ VF $\vec v$:
+
+\subsection{Divergenzsatz von Grauß für einfache $\partial V = \sum \phi_i$}
+\boxed{ \iiint_V \div \vec v \diff x \diff y \diff z = \oiint_{\partial V} \vec v \bdot \diff \vec O = \sum \iint_{\vec \phi_i} \vec v \bdot \diff \vec O}\\
+$\vec \phi_i$ muss pos. param. sein! ($\vec n = \phi_{iu} \times \phi_{iy}$ nach außen)\\
+\\
+Für Fläche $A$: \boxed{ \iint_A \div \vec v \diff A = \oint_{\partial A} \vec v \Bigl( \vec \gamma(t) \Bigr)^\top \vec n \diff s  }\\
+$\diff s = \norm{ \dot{\vec \gamma}(t) } \diff t$ \qquad $\vec n = \norm{\vec{ \dot \gamma}}^{-1} (\gamma_2, -\gamma_1)^\top$
+
+\subsubsection{Sektorformel zur Flächenberechnung}
+$\omega(t) = \partial B$\\
+\boxed{F(B) = \frac{1}{2} \int_a^b{\omega_1 \dot{\omega_2} - \omega_2 \dot{\omega_1} \diff t}}
+
+\subsection{Satz von Stokes für doppelpunktfreien $\partial \phi = \sum \gamma_i$}
+\boxed{ \iint_{\vec \phi} \rot \vec v \diff \vec O = \oint_{\partial \vec \phi} \vec v \diff \vec s } \qquad
+\pbox{4.0cm}{Rechte Hand Regel:\\ Flächennormale = Daumen \\ Umlaufrichtung = Finger }\\  %Stetige Deformation		
+
+\subsubsection{Satz von Green}
+\boxed{ \iint_B \frac{\partial v_2}{\partial x} - \frac{\partial v_1}{\partial y} \diff x \diff y = \oint_{\partial B} \vec v \bdot \diff \vec s = \sum\limits_{i=1}^k \int_{\vec \gamma_i} \vec v \bdot \diff s }\\  
+\\
+%Fläche von $B$: $F(B) = \frac12 \oint_{\partial B} \vect{ 0 \\ \gamma_1 } \norm{\dot{\vec \gamma}(t)} \diff t$ \quad $\partial B = \sum \vec \gamma_i$
+
+\subsubsection{Satz von Stokes für ebene Felder}
+$\vec{v}:B \subseteq \R^2 \ra \R^2$ und $\vec{e_3} = \vect{0 \\ 0 \\ 1 \\}$\\
+\boxed{\iint_B{\rot{\vect{\vec{v} \\ 0 \\}} \vec{e_3} \diff F} = \oint_{\partial B}{\vec{v} \diff \vec{x}}}\\\\
+Sind $f,g$ zwei SF, so: $\iiint_B f \Delta g + \nabla f \nabla g \diff V = \iint_{\partial B} f \nabla g \diff \vec O$\\
+für $f=1$: $\iiint_B \Delta g \diff V = \iint_{\partial B} \nabla g \diff \vec O$\\
+
+\subsection{Gradientenfeld}
+$D \subset \R^n$ offen und \emph{einfach zusammenhängend} und $\vec{v}(\vec{x})$ mit $\vec{v}:D \ra \R^n$ $C^1$-Vektorfeld. Wenn
+\begin{itemize}
+	\item $\rot \vec{v} = 0$ \emph{oder}
+	\item $J_{\vec{v}}(\vec{x}) = J_{\vec{v}}^T(\vec{x}) \quad \forall \vec{x} \in D$
+\end{itemize}
+Dann
+\begin{itemize}
+	\item $\vec{v}$ ist Gradientenfeld mit $\vec{v} = \grad{\phi}$
+	\item $\int_{\omega}{\vec{v} \cdot \diff \vec{s}} = \int_a^b \vec v(\vec \gamma(t)) \dot{\vec \gamma} \diff t = \Phi\left(\vec{\gamma}(b)\right) - \Phi\left(\vec{\gamma}(a)\right)$ (wegunabhängig)
+	\item $\oint_{\omega}{\vec{v} \cdot \diff \vec{s}} = 0 \quad \forall C^1$-Kurven in $D$
+	\item $\vec{v}$ konservativ auf $D$ $\Ra$ auch auf jeder Teilmenge von $D$
+	\item \emph{Stammfunktion:} Es gilt $\partial_i \Phi = v_i \ra \Phi = \int{v_i \diff x_i} + c(\vec{x_k}) \quad k \neq i$
+\end{itemize}
+
+
+
+
+
+
+% ==============================================================================================================	
+\section{Differentialgleichungen DGL}
+% ==============================================================================================================	
+
+
+
+Anfangswertproblem AWP = DGL + Anfangsbedingung:\\
+%Lineare DGL 2. Ordnung.
+$a f''(t) + b f'(t) + c f(t) = s(t)$ \quad $f(0) = d, f'(0) = e$ \\
+$\ra$ falls DGL höherer Ordnung $\ra$ Vogel-Strauß-Algorithmus
+
+\subsection{DGL LaPlace-Transformierbar}
+Falls gilt $f(t) \laplace F(s)$ und $s(t) \laplace S(s)$: \\
+Laplacetrafo: $a\bigl(s^2 F(s) - sf(0) - f'(0)\bigr) + b\bigl( s F(s) - f(0) \bigr) + c F(s) = S(s)$\\
+$F(s) = \frac{a(sd + e) + bd}{as^2 + bs +c} + S(s) \frac{1}{as^2 + bs +c}$ \\
+Rücktransformation von $F(s)$ liefert die Lösung $f(t)$
+
+
+\subsection{DGL-Systeme + Anfangsbedingung}
+$\dot{ \vec f } = \ma A \vec f + \vec s(t)$\\ 
+1. Ordnung + 2 Gleichungen und $x(0) = x_0$;$y(0) = y_0$ \\
+$\dot x(t) = a x(t) + b y(t) + s_1(t)$\\
+$\dot y(t) = c x(t) + d y(t) + s_2(t)$\\
+Falls alle Funktionen LaPlace transformierbar\\
+$\mat{ s-a & -b \\ -c & s-d} \cdot \vect{X(s) \\ Y(s)} = \vect{S_1(s) \\ S_2(s)} + \vect{x(0) \\ y(0)}$
+
+
+\subsection{Integralgleichungen vom Volterra-Typ}
+$a \cdot f(t) + \int_0^t k(t-x) f(x) \diff x = s(t)$\\
+Falls alle Fkt. Ltrafobar: $a F(s) + K(s) \cdot F(s) = S(s)$
+
+
+\subsection{seperierbare DGL}
+Form: $y' = f(x) \cdot g(y)$; Lösung: $\int \frac{1}{g(y)} \diff y = \int f(x) \diff x$
+
+
+
+\subsection{lineare DGL mit konstanten Koeffizienten}
+
+\subsubsection{homogene DGL mit konstanten Koeffizienten}
+$a_n y^{(n)} + a_{n-1} y^{n-1} + \ldots + a_0 y = 0$
+\begin{itemize}\itemsep0pt \leftmargin8pt
+	\item Stelle die charakteristische Gleichung $p(\lambda) = \sum^n_{k=0} a_k \lambda^k = 0$ auf
+	\item Bestimme alle Lösungen von $p(\lambda)$
+	\item Gib $n$ linear unabhängige Lösungen der DGL an:
+	\begin{itemize}\itemsep0pt \leftmargin0pt
+		\item 	Ist $ \lambda$ eine $m$-fache reelle NST, dann wähle $y_1 = e^{\tilde \lambda x}$, \quad $y_i = x^i e^{ \lambda x}$\\
+		\item Ist $ \lambda$ eine $m$-fache konjugiert komplexe NST $\lambda = a + \i b$, dann streiche $\overline \lambda_i$ und wähle $y_1 = e^{ax} \cos (bx),\; y_2 = e^{ax} \sin (bx)$ bzw. $y_i = x^i e^{ax} \sin (bx)$ und $y_{i+1} =  x^i e^{ax} \cos (bx)$
+		%$Reele Polynome haben immer konjugiert komplexe NST: $\Re$ und $\Im$ sind zwei lin. unabhängie Lösungen der DGL%
+	\end{itemize}
+	\item $y(x) = c_1 y_1 (x) + \ldots + c_n y_n (x)$ mit $c_1, \ldots c_n \in \R$ ist Lösung der DGL
+\end{itemize}
+
+\subsubsection{inhomogene DGL mit konstanten Koeffizienten}
+$a_n y^{(n)} + a_{n-1} y^{n-1} + \ldots + a_0 y = s(t)$
+
+\begin{itemize}\itemsep0pt \leftmargin8pt
+	\item Löse homogene DGL $(s = 0)$, liefert $y_h$
+	\item Partikuläre Lösung $y_p$ durch \emph{Variation der Konstanten}
+	\begin{itemize}\itemsep0pt \leftmargin8pt
+		\item Stelle ein $y_p (x)$ mit variablen Konstanten $c(x)$ auf
+		\item Löse das System: \\
+		$c_1' y_1 + c_2' y_2 = 0$ \\
+		$c_1' y_1' + c_2' y_2' = \frac{1}{a_n} s(x)$ \\
+		Beachte dabei auch die Ableitung nach der Produktregel
+		\item Erhalte $c(x)$ durch unbestimmte Integration aus $c'(x)$
+		\item $y_p = c_1 (x) y_1 + c_2 (x) y_2$ ist die partikuläre Lösung
+	\end{itemize}
+	\item Partikuläre Lsg. $y_p$ durch Ansatz vom komischen Typ auf der rechten Seite
+	\begin{itemize}\itemsep0pt \leftmargin8pt
+		\item Idee: $y_p$ hat die Form von $s(x)$\\
+		Falls $s(x) = (b_0 + b_1 x + \ldots + b_m x^m) e^{ax}  \Big\{ {}^{\textstyle \cos(bx)} _{\textstyle \sin(bx)}$, dann\\
+		$y_p = x^r \cdot \big[ (A_0 + A_1 x + \ldots + A_m x^m) \cos(bx) + (B_0 + B_1 x + \ldots + B_m x^m) \sin(bx) \big] e^{ax}$ \\
+		mit $a+b\i$ ist $r$-fache Nullstelle(Resonanz) vom char. Poly. von $y_h$ \\
+		Tipp: Bei Summen im Störglied entkoppelt, d.h. $y_p$ getrennt berechnen und addieren.
+	\end{itemize}
+	\item Die Lösung der DGL ist $y = y_p + y_h$
+\end{itemize}	
+
+\subsection{Die exakte DGL}
+DGL der Form: $\boxed{f(x,y) + g(x,y) \cdot y' = 0}$ \\   
+bzw. $f(x,y) \diff x + g(x,y) \diff y = 0$\\ \\
+Bedingung für Exaktheit: $\partial_y f = \partial_x g$\\
+Gradientenfeld $v(x,y) = \vect{f(x,y) \\ g(x,y)}$ hat Stammfkt. $F(x,y(x)) = C$
+\begin{itemize}\itemsep-4pt 
+	\item Bestimme die Stammfunktion $F(x,y)$ von $v$ durch sukzessive Integration:
+	\begin{itemize}
+		\item $(*)$ $F(x,y) = \int f dx + G(y)$
+		\item Bestimme $G'(y)$ aus $F_y = \frac{\partial}{\partial y} F(x,y) = g$
+		\item Bestimme $G(y)$ aus $G'(y)$ durch Integration
+		\item Erhalte $F(x,y)$ aus Schritt $(*)$
+	\end{itemize}
+	\item Löse $F(x,y) = c$ nach $y = y(x)$ auf, falls möglich
+	\item Die von $c$ abhängige Lsg. ist die allg. Lsg. der DGL
+\end{itemize}
+\subsection{Integrierende Faktoren -- der Eulen-Multiplikator}
+Multipliziere nicht exakte DGL mit integrierenden Faktor $\mu(x,y)$ und erhalte eine exakte DGL mit gleichen Lösungen.\\
+$\partial_y (\mu f) = \partial_x (\mu g) \quad \Ra \quad$ \boxed{ \mu_y f + \mu f_y = y_x g + \mu g_x }\\
+Ist $\frac{\partial_y f - \partial_x g}{g} = u(x)$ so ist $\mu = \exp(\int u(x) \diff x)$\\
+Ist $\frac{\partial_x g - \partial_y f}{f} = u(y)$ so ist $\mu = \exp(\int u(y) \diff y)$\\
+% Bemerkung: eine Umwandlung der DGL in Polarkoordinaten kann hilfreich sein.
+% Die partiellen Ableitungen können auch getauscht werden: (fx - gy)/g = u(x)
+
+\subsection{Die euler-homogene DGL}
+Form $y' = \phi \left( \frac{y}{x} \right)$ \qquad $\Ra$ Substitution: $z = \frac{y}{x}$\\
+\boxed{y' = z + xz' = \phi(z)} \quad Löse $z' = (\phi(z) - z) \cdot \frac{1}{x}$ \quad $\Ra$ \quad $y = xz$
+
+
+\subsection{eulersche DGL}
+DGL in der Form  $\sum\limits_{i=0}^n a_i x^i \cdot y^{(i)}(x) = s(x)$\\
+Lösungsmenge $\underset{\text{alg. Lös.}}{L_a} = \underset{\text{part. Lös.}}{y_p} + \underset{\text{hom. Lös.}}{L_n}$ durch V.d.K.\\
+Löse char. Pol.: $a_n \alpha (\alpha - 1)...(\alpha - (n-1)) + ... + a_1 \alpha_1 + a_0 = 0$\\ \\
+Wähle Basisvektoren des Lösungsraumes:
+\begin{itemize}
+	\itemsep-5pt
+	\item 	$m$-fache Nullstelle $\in \mathbb R$:  \\
+	$x^{\alpha} , \ldots , 	x^{\alpha} (\ln x)^{m-1}$ \\
+	\item $m$-fache Nullstelle $\in \mathbb C$ (streiche $\overline{\alpha_i})$:   \\ 
+	$x^a \sin(b \ln x), \ldots , x^a \sin(b \ln x) (\ln x)^{m-1}$ \\ 
+	$x^a \cos(b \ln x), \ldots , x^a \sin(b \ln x) (\ln x)^{m-1}$
+\end{itemize}
+Lösung: (z.B. für 2 Nullstellen $\in \mathbb R$): $ y(x) = C_1 x^{\alpha} + C_2 x^{\alpha} \ln (x)$	
+
+
+% Allgemeines Geschafel klingt nicht nur unnötig -> es ist es auch. (so schlimm ist es auch nicht ;)
+
+%	\subsection{Allgemeines Geschwafel}
+%	6 Typen: seperierbare, lin 1. Ordnung, lin. mit konst. koef., exakte DGL, euler-hom. DGL, eulersche DGL\\ 
+%	Linienelement des Richtungsfelds: "kurzer" Strich an der Stelle $(x,y)$\\
+%	Eulersche Polygonzugverfahren: Durch das Richtungsfeld hangeln.\\
+%	Existenz und Eindeutigkeitssatz: \\
+%	explizite DGL mit AW: $y^{(n)} = f(x,y,...y^{(n-1)})$, $y(x_0) = y_0, y^{(n-1)}(x_0) = y_{n-1}$\\ 
+%	$\exists$ eine Umgebung $G \subseteq \R^{n+1}$ von $(x_0,y_0,...,y_{n-1})^\top$ mit\\
+%	$f$ ist stetig auf $G$ \qquad $f$ ist nach jeder Komponente stetig partiell diffbar\\
+%	$\Ra \exists_1$ Lsg in $\R$\\
+
+
+\subsection{Potenzreihenansatz}
+Geg. DGL $y^{(n)} + a_{n-1}(x)y^{(n-1)} + ... + a_1(x)y' + a_0(x)y = s(x)$\\
+Falls $a_i(x) \approx \sum\limits_{k=0}^\infty c_k^{(a_i)} \cdot (x-a)^k$ und $s(x) = \sum\limits_{k = 0}^{\infty} c_k^{(s)} \cdot (x-a)^k$\\  
+Dann $\exists y(x) = \sum\limits_{0}^\infty c_k \cdot (x-a)^k$ eine Lsg der DGL. \\
+Die $c_k$ bestimmt man durch einsetzen von $y(x)$ + Koeff. Vergleich.
+
+
+\subsection{Homogene lineare DGL Systeme}
+$\ra$ Jede DGL lässt sich als DGL System darstellen
+
+Transformiere eine DGL 2. Ordnung in ein DGL System 1. Ordnung:
+\begin{itemize}
+	\item Substituiere $\dot x = y$
+	\item Schreibe DGL-System: \\
+	$\vect{\dot x \\  \dot y} = \mat{ 0 & 1 \\ a_1 & a_2} \vect{x \\ y}$ (Bestimme $a_1$ und $a_2$ aus DGL)
+\end{itemize}
+
+\paragraph{Löse das DGL-System} (Das System ist ohnehin an allem Schuld ;) )
+% TODO: Hier kann man noch viel Platz sparen
+
+%$\vec Z' = \vect{ z'_0 \\ z'_1 \\ \svdots \\ z'_n } = \mat{ 0 & 1 & 0 & ... & 0 \\ 0 & 0 & 1 & ... & 0 \\ \svdots & & & \ddots &  \\ 0 & 0 & 0 & ... & 1 \\ -a_0 & -a_1 & -a_2 & ... & -a_{n-1} } \vect{z_0 \\ z_1 \\ \svdots \\ z_{n-2} \\ z_{n-1} }$\\
+
+% Numerische Mathematik nur mit erster Ordnung 
+
+% Also das sollte man eignetlich mittlerweile wirklich wissen
+
+%\subsection{Exponentialfunktion für Matrizen}
+%$\ma A \in \R^{n \times n} \ra e^{\ma A} := \ma E_n + \ma A + \frac{1}{2} \ma A^2 %+ ... = \sum\limits_{k=0}^\infty \frac{\ma A^k}{k!}$\\
+%	$\exp(\mat{\lambda_1 & 0 \\ 0 & \lambda_2}) = \mat{e^{\lambda_1} & 0 \\ 0 & e^{\lambda_2}}$\\
+%$\ma S^{-1} \ma A \ma S$ \qquad $\exp(\ma A) = \exp(\ma S \ma D \ma S^{-1}) = \ma S e^{\ma D} \ma S^{-1} $\\
+
+\begin{enumerate}
+	\item Bestimme EW $\lambda_i$ und Basis aus EV $\vec b_i$ von $\ma A$
+	\item Setze $\ma S = (\vec b1, ..., \vec b_n)$ und bestimme $\ma S^{-1}$ und $\ma D = \ma S^{-1} \ma A \ma S$
+	\item Berechne $e^{\ma A} = \exp(\ma S \ma D \ma S^{-1}) = \ma S e^{\ma D} \ma S^{-1} $
+\end{enumerate}
+
+
+$\vec y' = \ma A \vec y$ \quad $\Ra$ \quad $\vec y = \vec c \cdot e^{(x-x_0)\ma A} = \sum\limits_{i = 0}^n c_i \cdot e^{\lambda_i x} \cdot b_i$\\
+
+Bei komplexen EW: Trennung in Real und Imaginärteil
+
+\subsection{Lösung für $\bs y' = \bs A \bs y$ falls $\bs A$ nicht diagbar}
+$\ra$	Es existiert eine Jordan-Normalform $\ma J$ mit $\ma S^{-1} \ma A \ma S$\\
+
+
+$e^{\ma J} = e^{\ma D + \ma N} = e^{D} e^{N} = e^D \cdot (\ma E_k + \ma N + \frac{1}{2} \ma N^2 + ... + \frac{1}{k!} \ma N^k)$
+
+$e^{x\ma N} =  \mat{1 & x & \frac{1}{2} x^2 & ... & \frac{1}{(k-1)!} x^{k-1} \\ & 1 & x & & \\ 0 & & 1 & }$
+
+$\ma S$ ist die Transformationsmatr. auf Jordan-Normalform: \\
+$\ma S = (\vec b_1, ..., \vec b_n)$ mit $\vec b_1 \ldots \vec b_n$ sind EV bzw. HV von $\ma A$
+\\
+
+% Ist das hier notwendig? -> vorerst auskommentiert
+% $\ma J$ hat so viele Kästchen wie es geometrische vielfachheiten = 1 gibt.\\
+
+Allgemeine Lösung: \\
+$\boxed{\vec y(x) = e^{x \ma A} \cdot \vec c = \ma S e^{x \ma J} \ma S^{-1} = \ma S e^{x(\ma D + \ma N)} \vec c}$
+
+\paragraph{Die Lösungsformel für $(1 \times 1)$, $(2 \times 2)$ und $(3 \times 3)$ Kästchen}
+
+$y_a (x) = c_1 e^{\lambda_1 x} v_1$ \\
+$+ c_2 e^{\lambda_2 x} v_2 + c_3 e^{\lambda_2 x}(xv_2 + v_3)$ \\
+$+ c_4 e^{\lambda_3 x} v_4 + c_5 e^{\lambda_3 x}(xv_4 + v_5) + c_6 e^{\lambda_3 x} (\frac{1}{2} x^2 v_4 + xv_5 + v_6)$ \\
+\\ \ra  $v_1, v_2, v_4$ EV, $v_3, v_5$ HV 2. Stufe und $v_6$ HV 3. Stufe
+
+\subsection{Lösen von allgemeinen DGL-Systemen}
+DGL-System: $\dot {\vec y}(t) = \ma A(t) \bdot \vec y(t) + \vec b(t)$
+\begin{enumerate}
+	\item Finde $n$ lin. unabhäng. Lösungsvektoren $\vec y_1,...,\vec y_n$mit der\\
+	Wronski Determinante $W(t) = \det(\vec y_1,...,\vec y_n) \stackrel{!}{\ne} 0$
+	\item Bestimme $\vec y_p = \ma Y(t) \vec c(t)$ durch Variation der Konstanten\\
+	$c(t) = \int \ma Y^{-1}(t) \vec b(t) \diff t$ bzw. $\ma Y \cdot \vec c'(t) = \vec b$
+	\item Bestimme $\vec y = \vec y_p + \sum c_i \vec y_i$ mit $c_i \in \R$
+\end{enumerate}
+Gleichgewichtspunkt: $A y_g + b = 0$ $\ra$ $(A | b) \ra (E | y_g)$ \\
+Stabilität:
+\begin{itemize}\itemsep-1pt
+	\item $Re(\lambda_i) < 0 \ra$ asymptotisch stabil 
+	\item $Re(\lambda_i) > 0 \ra$ instabil
+	\item $Re(\lambda_i) \le 0 \ra$ stabil
+\end{itemize}
+
+
+
+%\subsection{Partielle DGL erster Ordnung}
+%$u_x + u u_y = 0$, $u_{xx} + u_{yy} = f(x,y)$, $u_{xx} - u_t = 0$
+%Lösen der DGL 1. Ordnung mit konstanten Koeffizienten:
+
+%$a u_x + b u_y = f(x,y)$ für $a \not= 0 \not= 0$ \\
+%\\
+%\begin{itemize}
+%\item Variablentransformation: \\ $r = r(x,y) = bx + ay$ \\$s = s(x,y) = bx - ay$
+%\item Setze: \begin{itemize}
+%\item $F(r,s) = f(\frac{r+s}{2b}, \frac{r-s}{2a}) = f(x,y)$
+%\item $U(r,s) = u(\frac{r+s}{2b}, \frac{r-s}{2a}) = u(x,y)$
+%\end{itemize}
+%\item Einsetzen von $U$ und $F$ in die partielle DGL liefert eine gewöhnliche DGL: \\
+%$U_r = \frac{1}{2ab} F(r,s)$
+%\item Integration nach $r$: $U(r,s) = \frac{1}{2ab} \int F(r,s) dr + G(s)$
+%\item Rücktransformation liefert $u(x,y)$
+%\end{itemize}
+%
+%\subsection{Der Separationsansatz}
+%Man macht den ansatz $u(x,y) = f(x) \cdot g(y)$ und geht damit in die pDGL ein. \\
+%\begin{itemize}
+%	\item Setze $u(x,y) = f(x) \cdot g(y)$ und erhalte zwei gDGLen, eine für $f$ und eine für $g$
+%	\item Löse die gDGLen für $f$ und $g$ und erhalte $f = f(x)$ und $g= g(y)$
+%	\item Erhalte $u(x,y) = f(x) \cdot g(y)$
+%\end{itemize}	
+
+
+% Fürs Leben:
+%\subsection{Lineare partielle DGL 2. Ordnung}
+%Form: $a(x,y) u_{xx} 2b(x,y) u_{xy} + c(x,y) u_{yy} + d(x,y) u_x + e(x,y) u_y + %f(x,y) u = g(x,y)$	\\	%Anmerkung: Eigene Wissenschaft für die einzelnen Arten
+%Klassifikation:\\
+%\\
+%$\underset{\textstyle \text{hyperbolisch}}{\overset{\textstyle \text{elyptisch}}{\textstyle \text{parabolisch}}} \Big\}$ auf $D$, falls $a(x,y) c(x,y) - b(x,y)^2 \Big\{ \underset{\textstyle <}{\overset{\textstyle >}{\textstyle =}} \Big\} 0$ \\quad $\forall (x,y) \in D$ da $\det A = ac - b^2$
+
+%Die Laplacegl. $u_{xx} + u_{yy} = 0$\\
+%Die Wellengl. $u_{xx} - c^2 u_{yy} = 0$  \\
+%Wärmleitgl. $u_t = c^2 u_{xx}$\\
+%\\
+%Der Seperationsansatz:
+%\begin{enumerate} 
+%		\item Setze $u(x,y) = f(x) \cdot g(y)$ und erhalte zwei gDGLen eine für $f$ und eine für $g$
+%		\item Löse die gDGLs für $f$ und $g$ und erhalte $f = f(x)$ und $g = g(y)$
+%		\item Berechne $u(x,y) = f(x) \cdot g(y)$
+%	\end{enumerate}
+
+% f'(t) + f(t) = \delta(t)		f(t) = { 0, e^-t
+
+
+
+
+
+
+
+
+
+
 
 % Ende der Spalten
 \end{multicols}
 
+
+\includepdf[angle=-90]{./img/koordinaten.pdf}
 % Dokumentende
 % ======================================================================
 \end{document}

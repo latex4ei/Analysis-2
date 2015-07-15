@@ -26,6 +26,8 @@
 \usepackage{supertabular}		% Für lange Tabellen mit Umbruch
 \usepackage{pdfpages} 
 \usepackage{trfsigns}			% Laplace und Fourier
+\usepackage{array}
+
 
 % Seitenlayout und Ränder:
 \usepackage{geometry}
@@ -768,6 +770,16 @@ $\vec{x}:D \ra B$ mit $\vec{x} = \vec{x}(u_1,u_2,u_3) \quad \vec{u} \in D$\\
 $\Ra \iiint_B{f(\vec{x}) \diff V(\vec{x})} = \iiint_D{f(\vec{x}(\vec{u}))\abs{\det J_{\vec{x}}(\vec{u})} \diff V(\vec{u})}$\\
 $J_{\vec{x}} \neq 0$ bis auf Nullmengen
 
+\subsubsection{Oberflächen- und Volumenelemente}
+\textbf{Zylinderkoordinaten} \\
+$r\diff r\diff\varphi$, \quad $r\diff\varphi\diff z$, \quad $\diff z\diff r$ \\
+$\diff V = r\diff r\diff\varphi \diff z$ \\ \\
+\textbf{Kugelkoordinaten} \\
+$r\diff r\diff\theta$, \quad $r^2 \sin(\theta)\diff\theta\diff\varphi$, \quad $r \sin(\theta)\diff \varphi\diff r$ \\
+$\diff V = r^2 \sin(\theta)\diff r\diff\varphi \diff \theta$ 
+
+
+
 \subsubsection{Koordinatenwechsel}
 $\vec{x}:\vec{u} \in D \ra \vec{x}(\vec{u}) \in B$ orthogonale Transformation\\
 $D, B \subseteq \R^3$\\
@@ -827,11 +839,13 @@ $\phi = \frac{x^2}{a^2} + \frac{y^2}{b^2} \le 1$ \qquad $\partial \phi = \vect{ 
 %		Sonst: $\int\limits_x \int\limits_y f(\vec x) \diff x \diff y \ra \int\limits_\varphi \int\limits_r f(\vec x(r, \varphi)) \det \ma J_{\vec x}(r,\varphi) \diff r \diff \varphi$\\		
 
 \subsubsection{Skalares Oberflächenintegral}
-Fläche $\vec \phi: B \subseteq \R^2 \ra \R^3, (u,w) \mapsto \vec \phi(u,w)$ und SF $f$\\
+Fläche $\vec \phi: B \subseteq \R^2 \ra \R^3, (u,w) \mapsto \vec \phi(u,w)$ und \\
+SF $f:D\subseteq \R^3 \ra \R, \vec x \mapsto f(x,y,z)$ \\
 \boxed{ \iint_{\vec \phi} f \diff O := \iint_B f\bigl(\vec \phi(u,w)\bigr) \cdot \norm{ \vec \phi_u \times \vec \phi_w } \diff u \diff w }
 
 \subsubsection{Vektorielles Oberflächenintegral (Fluss)}
-VF $\vec v:D\subseteq \R^3 \ra \R^3, \vec x \mapsto \vec v(x,y,z)$ und Fläche $\vec \phi(u,w)$ \\
+Fläche $\vec \phi: B \subseteq \R^2 \ra \R^3, (u,w) \mapsto \vec \phi(u,w)$ und \\
+VF $\vec v:D\subseteq \R^3 \ra \R^3, \vec x \mapsto \vec v(x,y,z)$ \\
 \boxed{ \iint_{\vec \phi} \vec v \bdot \diff \vec O := \iint_B \vec v\Bigl(\vec \phi(u,w)\Bigr)^\top \bdot \Bigl( \vec \phi_u \times \vec \phi_w \Bigr) \diff u \diff w }
 % Falls eine Stammfunktion zu $\vec v$ existiert, dann ist der Fluss wegunabhängig
 
@@ -862,7 +876,8 @@ $\omega(t) = \partial B$\\
 
 \subsubsection{Satz von Green}
 \boxed{ \iint_B \frac{\partial v_2}{\partial x} - \frac{\partial v_1}{\partial y} \diff x \diff y = \oint_{\partial B} \vec v \bdot \diff \vec s = \sum\limits_{i=1}^k \int_{\vec \gamma_i} \vec v \bdot \diff s }\\  
-\\
+Fläche muss \textbf{gegen den Uhrzeigersinn} durchlaufen werden. \\
+Falls ein Teil der Parametrisierung im Uhrzeigersinn verläuft, muss dieses Integral \textbf{subtrahiert} statt addiert werden.
 %Fläche von $B$: $F(B) = \frac12 \oint_{\partial B} \vect{ 0 \\ \gamma_1 } \norm{\dot{\vec \gamma}(t)} \diff t$ \quad $\partial B = \sum \vec \gamma_i$
 
 \subsubsection{Satz von Stokes für ebene Felder}
@@ -885,6 +900,16 @@ Dann
 	\item $\vec{v}$ konservativ auf $D$ $\Ra$ auch auf jeder Teilmenge von $D$
 	\item \emph{Stammfunktion:} Es gilt $\partial_i \Phi = v_i \ra \Phi = \int{v_i \diff x_i} + c(\vec{x_k}) \quad k \neq i$
 \end{itemize}
+
+\textbf{Potential aus Gradientenfeld}
+\begin{enumerate} \itemsep0pt
+	\item $\Phi(x) = \int {v_1(\vec x) \diff x_1} = \dots + C(x_2, x_3)$
+	\item $\partial_2 \Phi(\vec x)\overset{!}{=}v_2 \Rightarrow \partial_2 C(x_2,x_3)= \dots$
+	\item $C(x_2,x_3)=\int {\partial_2 C(x_2,x_3) \diff x_2}=\dots + C(x_3)$
+	\item $\partial_3 \Phi(\vec x)\overset{!}{=}v_3 \Rightarrow \partial_3 C(x_3)= 0$
+	\item $C(x_3)=\int {0 \diff x_3}$
+	\item $\Rightarrow \Phi(\vec x)$
+\end{enumerate}
 
 
 
@@ -1162,20 +1187,68 @@ Stabilität:
 % f'(t) + f(t) = \delta(t)		f(t) = { 0, e^-t
 
 
-
-
-
-
-
-
-
-
-
 % Ende der Spalten
 \end{multicols}
 
+\newpage
+
+\setlength\extrarowheight{5pt}
+	\section{Anhang: Krummlinige Koordinaten}
+	\begin{center}
+		\begin{tabular}{|c|c|c|c|}
+			\hline
+			& \multicolumn{3}{c|}{\textbf{Skalarfelder $f:\mathbb{R}^3\rightarrow\mathbb{R}$}} \\
+			\hline
+			\textbf{Koordinatentyp} & karthesische Koordinaten im Punkt $(x,y,z)^T$ & Zylinderkoordinaten im Punkt $(r,\varphi,z)^T$ & Kugelkoordinaten um Punkt $(r,\varphi,\theta)^T$ \\
+			\hline
+			& $f$ & $\tilde{f}$ & $\tilde{f}$ \\ 
+			\hline
+			\textbf{Laplace-Operator} & $\Delta f=\frac{\partial^2f}{\partial x^2}+\frac{\partial^2f}{\partial y^2}+\frac{\partial^2f}{\partial z^2}$ & $\widetilde{\Delta f}=\frac{\partial^2\tilde{f}}{\partial r^2}+\frac{1}{r}\frac{\partial\tilde{f}}{\partial r}+\frac{1}{r^2}\frac{\partial^2\tilde{f}}{\partial\varphi^2}+\frac{\partial^2\tilde{f}}{\partial z^2}$ & $\widetilde{\Delta f}=\frac{\partial^2\tilde{f}}{\partial r^2}+\frac{2}{r}\frac{\partial\tilde{f}}{\partial r}+\frac{1}{r^2sin^2\theta}\frac{\partial^2\tilde{f}}{\partial\varphi^2}+\frac{cos\theta}{r^2sin\theta}\frac{\partial\tilde{f}}{\partial\theta}+\frac{1}{r^2}\frac{\partial^2\tilde{f}}{\partial\theta^2}$ \\
+			\hline
+			\textbf{Gradient} & $\nabla f=\begin{pmatrix} \frac{\partial f}{\partial x} \\ \frac{\partial f}{\partial y} \\ \frac{\partial f}{\partial z} \end{pmatrix}$ & $\widehat{\nabla f}=\begin{pmatrix} \frac{\partial\tilde{f}}{\partial r} \\ \frac{1}{r}\frac{\partial\tilde{f}}{\partial\varphi} \\ \frac{\partial\tilde{f}}{\partial z} \end{pmatrix}$ & $\widehat{\nabla f}=\begin{pmatrix} \frac{\partial\tilde{f}}{\partial r} \\ \frac{1}{r\cdot sin\theta}\frac{\partial\tilde{f}}{\partial\varphi} \\ \frac{1}{r}\frac{\partial\tilde{f}}{\partial\theta} \end{pmatrix}$ \\
+			\hline
+			\textbf{Basis} & $\{e_x,e_y,e_z\}$ & $\{e_r,e_\varphi,e_z\}$ & $\{e_r,e_\varphi,e_\theta\}$ \\
+			\hline
+%%		\end{tabular}
+%%		\begin{tabular}{|c|c|c|c|}
+%%			\hline
+			& \multicolumn{3}{c|}{\textbf{Vektorfelder $g:\mathbb{R}^3\rightarrow\mathbb{R}^3$}} \\
+			\hline
+			\textbf{Koordinatentyp} & karthesische Koordinaten im Punkt $(x,y,z)^T$ & Zylinderkoordinaten im Punkt $(r,\varphi,z)^T$ & Kugelkoordinaten um Punkt $(r,\varphi,\theta)^T$ \\
+			\hline
+			& $g=\begin{pmatrix} g_1 \\ g_2 \\ g_3 \end{pmatrix}$ & $\hat{g}=\begin{pmatrix} \hat{g}_1 \\ \hat{g}_2 \\ \hat{g}_3 \end{pmatrix}$ & $\hat{g}=\begin{pmatrix} \hat{g}_1 \\ \hat{g}_2 \\ \hat{g}_3 \end{pmatrix}$ \\
+			\hline
+			\textbf{Divergenz} & $\text{div}g=\frac{\partial g_1}{\partial x}+\frac{\partial g_2}{\partial y}+\frac{\partial g_3}{\partial z}$ & $\widetilde{\text{div}g}=\frac{1}{r}\frac{\partial(r\hat{g}_1)}{\partial r}+\frac{1}{r}\frac{\partial\hat{g}_2}{\partial\varphi}+\frac{\partial\hat{g}_3}{\partial z}$ & $\widetilde{\text{div}g}=\frac{1}{r2}\frac{\partial(r^2\hat{g}_1)}{\partial r}+\frac{1}{r\cdot sin\theta}\frac{\partial\hat{g}_2}{\partial\varphi}+\frac{1}{r\cdot sin\theta}\frac{\partial(\hat{g}_3sin\theta)}{\partial\theta}$ \\
+			\hline
+			\textbf{Rotation} & $\text{rot}g=\begin{pmatrix} \frac{\partial g_3}{\partial y}-\frac{\partial g_2}{\partial z} \\ \frac{\partial g_1}{\partial z}-\frac{\partial g_3}{\partial x} \\ \frac{\partial g_2}{\partial x}-\frac{\partial g_1}{\partial y} \end{pmatrix}$ & $\widehat{\text{rot}g}=\begin{pmatrix} \frac{1}{r}\frac{\partial\hat{g}_3}{\partial\varphi}-\frac{\partial\hat{g}_2}{\partial z} \\ \frac{\partial\hat{g}_1}{\partial z}-\frac{\partial\hat{g}_3}{\partial r} \\ \frac{1}{r}\frac{\partial(r\hat{g}_2)}{\partial r}-\frac{1}{r}\frac{\partial\hat{g}_1}{\partial\varphi} \end{pmatrix}$ & $\widehat{\text{rot}g}=\begin{pmatrix} \frac{1}{r\cdot sin\theta}\frac{\partial(\hat{g}_2sin\theta)}{\partial\theta}-\frac{1}{r\cdot sin\theta}\frac{\partial\hat{g}_3}{\partial\varphi} \\ \frac{1}{r}\frac{\partial(r\hat{g}_3)}{\partial r}-\frac{1}{r}\frac{\partial\hat{g}_1}{\partial\theta} \\ \frac{1}{r\cdot sin\theta}\frac{\partial\hat{g}_1}{\partial\varphi}-\frac{1}{r}\frac{\partial(r\hat{g}_2)}{\partial r} \end{pmatrix}$ \\
+			\hline
+			\textbf{Basis} & $\{e_x,e_y,e_z\}$ & $\{e_r,e_\varphi,e_z\}$ & $\{e_r,e_\varphi,e_\theta\}$ \\
+			\hline
+		\end{tabular}
+	\end{center}
+	\textbf{Umrechnung zwischen den Koordinatensystemen:}
+	\begin{center}
+		\begin{tabular}{|ccc|c|c|c|}
+			\hline
+			Zylinderkoordinaten & $\Rightarrow$ & kartesische Koordinanten & $x=r\cdot cos\varphi$ & $y=r\cdot sin\varphi$ & $z=z$ \\
+			\hline
+			kartesische Koordinaten & $\Rightarrow$ & Zylinderkoordinaten & $r=\sqrt{x^2+y^2}$ & $\varphi=arccos\frac{x}{\sqrt{x^2+y^2}}=arctan\frac{y}{x}$ & $z=z$ \\
+			\hline
+			Kugelkoordinaten & $\Rightarrow$ & kartesische Koordinaten & $x=r\cdot sin\theta\cdot cos\varphi$ & $y=r\cdot sin\theta\cdot sin\varphi$ & $z=r\cdot cos\theta$ \\
+			\hline
+			kartesische Koordinaten & $\Rightarrow$ & Kugelkoordinaten & $r=\sqrt{x^2+y^2+z^2}$ & $cos\varphi=\frac{x}{\sqrt{x^2+y^2}};sin\varphi=\frac{y}{\sqrt{x^2+y^2}};tan\varphi=\frac{y}{x}$ & $cos\theta=\frac{z}{r}=\frac{z}{\sqrt{x^2+y^2+z^2}}$ \\
+			\hline
+			Kugelkoordinaten & $\Rightarrow$ & Zylinderkoordinaten & $r_z=r_k\cdot sin\theta$ & $\varphi_z=\varphi_k$ & $z_z=r_k\cdot sin\theta$ \\
+			\hline
+			Zylinderkoordinaten & $\Rightarrow$ & Kugelkoordinaten & $r_k=\sqrt{r_z^2+z_z^2}$ & $\varphi_k=\varphi_z$ & $\theta=arctan\frac{r_z}{z_z}$ \\
+			\hline
+		\end{tabular} \\
+		Quelle: http://www.calc3d.com/help/gcoord.html
+	\end{center}
 
 \includepdf[angle=-90]{./img/koordinaten.pdf}
+
+\includepdf[pages={1-2}, angle=-90]{./img/single-page-integral-table.pdf}
 % Dokumentende
 % ======================================================================
 \end{document}

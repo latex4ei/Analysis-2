@@ -45,7 +45,7 @@
 \usepackage{fancyhdr}
 \pagestyle{fancy}
 \fancyhf{}
-   \fancyfoot[C]{\textbf{Analysis 1} von Lukas Kompatscher (lukas.kompatscher@tum.de) - \copyright 2015}
+   \fancyfoot[C]{\textbf{Analysis 1} von Lukas Kompatscher (lukas.kompatscher@tum.de)}
    \renewcommand{\headrulewidth}{0.0pt} %obere Linie ausblenden
    \renewcommand{\footrulewidth}{0.1pt} %obere Linie ausblenden
 
@@ -85,6 +85,7 @@
 \newcommand{\abs}[1]{\ensuremath{\left\vert#1\right\vert}} 										% Betrag
 \newcommand{\bdot}{\ensuremath{\boldsymbol \cdot}} 												% Dicker Punkt für Skalarprodukt
 \newcommand{\svdots}{\ensuremath{\olddot :}}													% small vertical dots
+\newcommand{\mustbe}{\stackrel{!}{=}}
 
 
 % Überschreibungen
@@ -121,7 +122,7 @@
 
 
 % Aufteilung in Spalten
-\begin{multicols}{4}
+\begin{multicols*}{4}
 	\parbox{2.3cm}{
 		\includegraphics[height=1.5cm]{./img/Logo.pdf}
 	}
@@ -583,7 +584,7 @@ Nur für $2\times 2$-Matrix: $\ma A = \begin{pmatrix}a & b \\ c & d\end{pmatrix}
 	\hline indefinit & pos. und neg. & $\det \ma A < 0$ & \\ 
 	\hline pos. semidef. & $\lambda \ge 0 $ & $\det \ma A = 0$  & $\mathrm{Sp} \ma A \ge 0$\\ 
 	\hline neg. semidef. & $\lambda \le 0 $ & $\det \ma A = 0$  & $\mathrm{Sp} \ma A \le 0$\\ 
-	\hline pos. definit & $\lambda > 0 $ & $\det \ma A > 0$  & $\mathrm{Sp} \ma A < 0$\\ 
+	\hline pos. definit & $\lambda > 0 $ & $\det \ma A > 0$  & $\mathrm{Sp} \ma A > 0$\\ 
 	\hline neg. definit & $\lambda < 0 $ & $\det \ma A > 0$  & $\mathrm{Sp} \ma A < 0$\\ 
 	\hline 
 \end{tabular} 
@@ -876,7 +877,7 @@ $\omega(t) = \partial B$\\
 
 \subsubsection{Satz von Green}
 \boxed{ \iint_B \frac{\partial v_2}{\partial x} - \frac{\partial v_1}{\partial y} \diff x \diff y = \oint_{\partial B} \vec v \bdot \diff \vec s = \sum\limits_{i=1}^k \int_{\vec \gamma_i} \vec v \bdot \diff s }\\  
-Fläche muss \textbf{gegen den Uhrzeigersinn} durchlaufen werden. \\
+Fläche muss \textbf{gegen den Uhrzeigersinn} umlaufen werden. \\
 Falls ein Teil der Parametrisierung im Uhrzeigersinn verläuft, muss dieses Integral \textbf{subtrahiert} statt addiert werden.
 %Fläche von $B$: $F(B) = \frac12 \oint_{\partial B} \vect{ 0 \\ \gamma_1 } \norm{\dot{\vec \gamma}(t)} \diff t$ \quad $\partial B = \sum \vec \gamma_i$
 
@@ -901,14 +902,34 @@ Dann
 	\item \emph{Stammfunktion:} Es gilt $\partial_i \Phi = v_i \ra \Phi = \int{v_i \diff x_i} + c(\vec{x_k}) \quad k \neq i$
 \end{itemize}
 
-\textbf{Potential aus Gradientenfeld}
-\begin{enumerate} \itemsep0pt
-	\item $\Phi(x) = \int {v_1(\vec x) \diff x_1} = \dots + C(x_2, x_3)$
-	\item $\partial_2 \Phi(\vec x)\overset{!}{=}v_2 \Rightarrow \partial_2 C(x_2,x_3)= \dots$
-	\item $C(x_2,x_3)=\int {\partial_2 C(x_2,x_3) \diff x_2}=\dots + C(x_3)$
-	\item $\partial_3 \Phi(\vec x)\overset{!}{=}v_3 \Rightarrow \partial_3 C(x_3)= 0$
-	\item $C(x_3)=\int {0 \diff x_3}$
-	\item $\Rightarrow \Phi(\vec x)$
+\textbf{Rezept: Stammfunktion eines Gradientenfeldes} \\
+
+Fall $n=2$: Ist $\vec v:D\subseteq \mathbb{R}^2\rightarrow\mathrm{R}^2$ ein Gradientenfeld, $\vec v=(v_1,v_2)^\top$, so findet man eine Stammfunktion $f$ von $\vec v$ wie folgt:
+\begin{enumerate}
+	\item Integration von $v_1$ nach $x$:\\
+	$f(x,y)=\int {v_1(x,y)\diff x} + g(y)$
+	\item Ableiten von $f$ aus (1) nach $y$ und Gleichsetzen mit $v_2$ liefert eine Gleichung für $g_y(y)$:\\
+	$f_y(x,y)=v_2(x,y) \Rightarrow g_y(y)$
+	\item Integration von $g_y(y)$ nach $y$ mit der Konstanten $c=0$ liefert $g(y)$: \\
+	$g(y)=\int{g_y(y)\diff y}$
+	\item Setze $g(y)$ aus (3) in $f$ aus (1) ein und erhalte eine Stammfunktion $f$
+\end{enumerate}
+
+
+Fall $n=3$: Ist $\vec v:D\subseteq \mathbb{R}^3\rightarrow\mathrm{R}^3$ ein Gradientenfeld, $\vec v=(v_1,v_2,v_3)^\top$, so findet man eine Stammfunktion $f$ von $\vec v$ wie folgt:
+\begin{enumerate}
+	\item Integration von $v_1$ nach $x$:\\
+	$f(x,y,z)=\int {v_1(x,y,z)\diff x} + g(y,z)$
+	\item Ableiten von $f$ aus (1) nach $y$ und Gleichsetzen mit $v_2$ liefert eine Gleichung für $g_y(y,z)$:\\
+	$f_y(x,y,z)=v_2(x,y,z) \Rightarrow g_y(y,z)$
+	\item Integration von $g_y(y,z)$ nach $y$ liefert:\\
+	$g(y,z) = \int{g_y(y,z)\diff y} + h(z)$
+	\item $g(y,z)$ in $f$ aus (1) einsetzen
+	\item Ableiten von $f$ aus (4) nach $z$ und Gleichsetzen mit $v_3$ liefert eine Gleichung für $h_z(z)$:\\
+	$f_z(x,y,z)=v_3(x,y,z) \Rightarrow h_z(z)$
+	\item Integration von $h_z(z)$ nach $z$ mit der Konstanten $c=0$ liefert $h(z)$: \\
+	$h(z)=\int{h_z(z)\diff z}$
+	\item Setze $h(z)$ aus (6) in $f$ aus (4) ein und erhalte eine Stammfunktion $f$
 \end{enumerate}
 
 
@@ -922,33 +943,7 @@ Dann
 
 
 
-Anfangswertproblem AWP = DGL + Anfangsbedingung:\\
-%Lineare DGL 2. Ordnung.
-$a f''(t) + b f'(t) + c f(t) = s(t)$ \quad $f(0) = d, f'(0) = e$ \\
-$\ra$ falls DGL höherer Ordnung $\ra$ Vogel-Strauß-Algorithmus
-
-\subsection{DGL LaPlace-Transformierbar}
-Falls gilt $f(t) \laplace F(s)$ und $s(t) \laplace S(s)$: \\
-Laplacetrafo: $a\bigl(s^2 F(s) - sf(0) - f'(0)\bigr) + b\bigl( s F(s) - f(0) \bigr) + c F(s) = S(s)$\\
-$F(s) = \frac{a(sd + e) + bd}{as^2 + bs +c} + S(s) \frac{1}{as^2 + bs +c}$ \\
-Rücktransformation von $F(s)$ liefert die Lösung $f(t)$
-
-
-\subsection{DGL-Systeme + Anfangsbedingung}
-$\dot{ \vec f } = \ma A \vec f + \vec s(t)$\\ 
-1. Ordnung + 2 Gleichungen und $x(0) = x_0$;$y(0) = y_0$ \\
-$\dot x(t) = a x(t) + b y(t) + s_1(t)$\\
-$\dot y(t) = c x(t) + d y(t) + s_2(t)$\\
-Falls alle Funktionen LaPlace transformierbar\\
-$\mat{ s-a & -b \\ -c & s-d} \cdot \vect{X(s) \\ Y(s)} = \vect{S_1(s) \\ S_2(s)} + \vect{x(0) \\ y(0)}$
-
-
-\subsection{Integralgleichungen vom Volterra-Typ}
-$a \cdot f(t) + \int_0^t k(t-x) f(x) \diff x = s(t)$\\
-Falls alle Fkt. Ltrafobar: $a F(s) + K(s) \cdot F(s) = S(s)$
-
-
-\subsection{seperierbare DGL}
+\subsection{Seperierbare DGL}
 Form: $y' = f(x) \cdot g(y)$; Lösung: $\int \frac{1}{g(y)} \diff y = \int f(x) \diff x$
 
 
@@ -1011,54 +1006,6 @@ Gradientenfeld $v(x,y) = \vect{f(x,y) \\ g(x,y)}$ hat Stammfkt. $F(x,y(x)) = C$
 	\item Löse $F(x,y) = c$ nach $y = y(x)$ auf, falls möglich
 	\item Die von $c$ abhängige Lsg. ist die allg. Lsg. der DGL
 \end{itemize}
-\subsection{Integrierende Faktoren -- der Eulen-Multiplikator}
-Multipliziere nicht exakte DGL mit integrierenden Faktor $\mu(x,y)$ und erhalte eine exakte DGL mit gleichen Lösungen.\\
-$\partial_y (\mu f) = \partial_x (\mu g) \quad \Ra \quad$ \boxed{ \mu_y f + \mu f_y = y_x g + \mu g_x }\\
-Ist $\frac{\partial_y f - \partial_x g}{g} = u(x)$ so ist $\mu = \exp(\int u(x) \diff x)$\\
-Ist $\frac{\partial_x g - \partial_y f}{f} = u(y)$ so ist $\mu = \exp(\int u(y) \diff y)$\\
-% Bemerkung: eine Umwandlung der DGL in Polarkoordinaten kann hilfreich sein.
-% Die partiellen Ableitungen können auch getauscht werden: (fx - gy)/g = u(x)
-
-\subsection{Die euler-homogene DGL}
-Form $y' = \phi \left( \frac{y}{x} \right)$ \qquad $\Ra$ Substitution: $z = \frac{y}{x}$\\
-\boxed{y' = z + xz' = \phi(z)} \quad Löse $z' = (\phi(z) - z) \cdot \frac{1}{x}$ \quad $\Ra$ \quad $y = xz$
-
-
-\subsection{eulersche DGL}
-DGL in der Form  $\sum\limits_{i=0}^n a_i x^i \cdot y^{(i)}(x) = s(x)$\\
-Lösungsmenge $\underset{\text{alg. Lös.}}{L_a} = \underset{\text{part. Lös.}}{y_p} + \underset{\text{hom. Lös.}}{L_n}$ durch V.d.K.\\
-Löse char. Pol.: $a_n \alpha (\alpha - 1)...(\alpha - (n-1)) + ... + a_1 \alpha_1 + a_0 = 0$\\ \\
-Wähle Basisvektoren des Lösungsraumes:
-\begin{itemize}
-	\itemsep-5pt
-	\item 	$m$-fache Nullstelle $\in \mathbb R$:  \\
-	$x^{\alpha} , \ldots , 	x^{\alpha} (\ln x)^{m-1}$ \\
-	\item $m$-fache Nullstelle $\in \mathbb C$ (streiche $\overline{\alpha_i})$:   \\ 
-	$x^a \sin(b \ln x), \ldots , x^a \sin(b \ln x) (\ln x)^{m-1}$ \\ 
-	$x^a \cos(b \ln x), \ldots , x^a \sin(b \ln x) (\ln x)^{m-1}$
-\end{itemize}
-Lösung: (z.B. für 2 Nullstellen $\in \mathbb R$): $ y(x) = C_1 x^{\alpha} + C_2 x^{\alpha} \ln (x)$	
-
-
-% Allgemeines Geschafel klingt nicht nur unnötig -> es ist es auch. (so schlimm ist es auch nicht ;)
-
-%	\subsection{Allgemeines Geschwafel}
-%	6 Typen: seperierbare, lin 1. Ordnung, lin. mit konst. koef., exakte DGL, euler-hom. DGL, eulersche DGL\\ 
-%	Linienelement des Richtungsfelds: "kurzer" Strich an der Stelle $(x,y)$\\
-%	Eulersche Polygonzugverfahren: Durch das Richtungsfeld hangeln.\\
-%	Existenz und Eindeutigkeitssatz: \\
-%	explizite DGL mit AW: $y^{(n)} = f(x,y,...y^{(n-1)})$, $y(x_0) = y_0, y^{(n-1)}(x_0) = y_{n-1}$\\ 
-%	$\exists$ eine Umgebung $G \subseteq \R^{n+1}$ von $(x_0,y_0,...,y_{n-1})^\top$ mit\\
-%	$f$ ist stetig auf $G$ \qquad $f$ ist nach jeder Komponente stetig partiell diffbar\\
-%	$\Ra \exists_1$ Lsg in $\R$\\
-
-
-\subsection{Potenzreihenansatz}
-Geg. DGL $y^{(n)} + a_{n-1}(x)y^{(n-1)} + ... + a_1(x)y' + a_0(x)y = s(x)$\\
-Falls $a_i(x) \approx \sum\limits_{k=0}^\infty c_k^{(a_i)} \cdot (x-a)^k$ und $s(x) = \sum\limits_{k = 0}^{\infty} c_k^{(s)} \cdot (x-a)^k$\\  
-Dann $\exists y(x) = \sum\limits_{0}^\infty c_k \cdot (x-a)^k$ eine Lsg der DGL. \\
-Die $c_k$ bestimmt man durch einsetzen von $y(x)$ + Koeff. Vergleich.
-
 
 \subsection{Homogene lineare DGL Systeme}
 $\ra$ Jede DGL lässt sich als DGL System darstellen
@@ -1070,7 +1017,7 @@ Transformiere eine DGL 2. Ordnung in ein DGL System 1. Ordnung:
 	$\vect{\dot x \\  \dot y} = \mat{ 0 & 1 \\ a_1 & a_2} \vect{x \\ y}$ (Bestimme $a_1$ und $a_2$ aus DGL)
 \end{itemize}
 
-\paragraph{Löse das DGL-System} (Das System ist ohnehin an allem Schuld ;) )
+\paragraph{Löse das DGL-System}
 % TODO: Hier kann man noch viel Platz sparen
 
 %$\vec Z' = \vect{ z'_0 \\ z'_1 \\ \svdots \\ z'_n } = \mat{ 0 & 1 & 0 & ... & 0 \\ 0 & 0 & 1 & ... & 0 \\ \svdots & & & \ddots &  \\ 0 & 0 & 0 & ... & 1 \\ -a_0 & -a_1 & -a_2 & ... & -a_{n-1} } \vect{z_0 \\ z_1 \\ \svdots \\ z_{n-2} \\ z_{n-1} }$\\
@@ -1137,6 +1084,46 @@ Stabilität:
 	\item $Re(\lambda_i) \le 0 \ra$ stabil
 \end{itemize}
 
+\section{Lösen von linearen DGL-Systemen 1. Ordnung (ST)}
+$\dot {\underline{x}}(t)=\textbf{A}\underline{x}(t)$ \quad mit \quad
+$\textbf{A} = \begin{pmatrix}
+a_{11} & a_{12} \\
+a_{21} & a_{22} 
+\end{pmatrix}$
+\subsection*{1. Eigenwerte berechnen}
+$det(\textbf{A}-\lambda \textbf{1})\mustbe \textbf{0}$\\
+$\Rightarrow$ Eigenwerte $\lambda_{1,2}=\frac{T}{2}\pm \sqrt{\frac{T^2}{4}-\Delta}$\\
+$T=a_{11}+a_{22}=Spur(\textbf{A});\;\;\;\;\Delta =det(\textbf{A})=a_{11}a_{22}-a_{12}a_{21}$\\\\
+Indizes so wählen, dass gilt: $|\lambda_1|<|\lambda_2|$\\
+$\Rightarrow \lambda_1$ ist langsamer und $\lambda_2$ ist schneller Eigenwert!\\\\
+Falls EW konjugiert komplex: $\lambda_1=\alpha +j\beta$\\
+Falls $\frac{T^2}{4}\ge \Delta \Rightarrow$ reelle Lösungen\\
+Falls $\frac{T^2}{4}\le \Delta \Rightarrow$ konjugiert komplexe Lösungen\\
+Ein System ist stabil, wenn für alle $\lambda_i$ gilt: $Re(\lambda_i)<0$
+\subsection*{2. Eigenvektoren berechnen}
+$(\textbf{A}-\lambda \textbf{1})\cdot \underline{q}\mustbe \underline{0}$\\
+$a_{12}\ne 0:\;\;\Rightarrow \underline{q}_1=\left.\begin{matrix}-a_{12} \\ a_{11}-\lambda_1\end{matrix}\right];\;\; \underline{q}_2=\left.\begin{matrix}-a_{12} \\ a_{11}-\lambda_2\end{matrix}\right]$\\\\
+$a_{21}\ne 0:\;\;\Rightarrow \underline{q}_1=\left.\begin{matrix}a_{22}-\lambda_1 \\ -a_{21}\end{matrix}\right];\;\; \underline{q}_2=\left.\begin{matrix}a_{22}-\lambda_2 \\ -a_{21}\end{matrix}\right]$\\\\
+$a_{12}=a_{21}= 0:\;\;\Rightarrow \underline{q}_1=\left.\begin{matrix}1 \\ 0\end{matrix}\right];\;\; \underline{q}_2=\left.\begin{matrix}0 \\ 1\end{matrix}\right]$\\\\
+Falls Eigenvektoren konjugiert komplex:\\
+$\underline{q}_r=Re(\underline{q}_1);\;\;\;\;\;q_i=Im(\underline{q}_1)$
+\subsection*{3. Lösung}
+\subsubsection*{Homogene Zustandsgleichung (ohne Erregung)}
+$\dot {\underline{x}}(t)=\textbf{A}\underline{x}(t)$\\\\
+\underline{1. Fall:} $\lambda_1 \ne \lambda_2;\;\;\;\lambda_1,\lambda_2\in \mathbb{R}$\\
+$\underline{x}_0=c_1\underline{q}_1+c_2\underline{q}_2$\\
+$\underline{x}(t)=c_1e^{\lambda_1t}\underline{q}_1+c_2e^{\lambda_2t}\underline{q}_2$\\\\
+\underline{2. Fall:} $\lambda_1 = \lambda_2=\lambda;\;\;\;\lambda_1,\lambda_2\in \mathbb{R}$\\
+$c_1=x_{01};\;\;\;\;\;\;c_2=x_{02}$\\
+$\underline{x}(t)=e^{\lambda t}[\textbf{1}+(\textbf{A}-\lambda \textbf{1})t]\cdot\left.\begin{matrix}c_1 \\ c_2\end{matrix}\right]$\\\\
+\underline{3. Fall:} $\lambda_1=\overline{\lambda_2}=\lambda =\alpha \pm j\beta;\;\lambda_{1,2}\in \mathbb{C}$\\
+$\underline{x}_0=c_1\underline{q}_r+c_2\underline{q}_i$\\
+$\underline{x}(t)=c_1\cdot Re(e^{\lambda t}\underline{q})+c_2\cdot Im(e^{\lambda t}\underline{q})$
+\begin{tabbing}
+	$\underline{x}(t)=$ \= $c_1e^{\alpha t}[cos(\beta t)\underline{q}_r-sin(\beta t)\underline{q}_i]+$\\\\
+	\> $c_2e^{\alpha t}[sin(\beta t)\underline{q}_r+cos(\beta t)\underline{q}_i]$
+\end{tabbing}
+
 
 
 %\subsection{Partielle DGL erster Ordnung}
@@ -1188,7 +1175,7 @@ Stabilität:
 
 
 % Ende der Spalten
-\end{multicols}
+\end{multicols*}
 
 \newpage
 

@@ -87,6 +87,8 @@
 \newcommand{\svdots}{\ensuremath{\olddot :}}													% small vertical dots
 \newcommand{\mustbe}{\stackrel{!}{=}}
 
+\newcommand{\inn}{\operatorname{int}}
+
 
 % Überschreibungen
 \renewcommand{\vec}[1]{\ensuremath{\boldsymbol {#1}}}											% Vektor fett und unterstrichen
@@ -136,6 +138,7 @@
 %=======================================================================
 
 \section{Nützliches Wissen $e^{\i x} = \cos (x) + \i \cdot \sin(x)$}
+\if{0}
 \subsection{Trigonometrische Funktionen}
 \subsubsection{sinh, cosh \quad $\cosh^2(x)  \bs - \sinh^2(x) = 1$}
 $\sinh x = \frac{1}{2}(e^x -e^{-x}) \qquad \quad \operatorname{arsinh}\ x:= \ln\left(x+\sqrt{x^2+1}\right) \\
@@ -186,6 +189,7 @@ Quotientenregel $\enbrace{\frac{f}{g}}' = \frac{f'g - fg'}{g^2}$\\
 Kettenregel: $\left( f(g(x)) \right)' = f'(g(x)) g'(x)$\\
 Potenzreihe: $f: ] \underbrace{-R+a, a+R}_{\subseteq D}	 [ \rightarrow \mathbb R, f(x) = \sum_{n=0}^{\infty} a_n (x -a)^n$ \quad $\Rightarrow$ \quad $f'(x) = \sum_{n=0}^{\infty} n a_{n} (x-a)^{n-1}$\\
 \textbf{Tangentengleichung:} $y=f(x_0)+f'(x_0)(x-x_0)$
+\fi
 
 \subsection{Integrale:}
 \begin{itemize}\itemsep-1pt
@@ -219,16 +223,16 @@ $\int\lambda f(x)+\mu g(x) \, \mathrm dx=\lambda\int f(x) \, \mathrm dx + \mu\in
 \end{math}
 \everymath{\textstyle}
 
-
+\if{0}
 \subsection{Reihen}
 
 $\underset{\text{Harmonische Reihe}}{\sum\limits_{n=1}^\infty \frac{1}{n} \ra \infty} \qquad   \underset{\text{Geometrische Reihe}}{\sum\limits_{n=0}^\infty q^n \stackrel{|q|<1}= \frac{1}{1-q}}  \qquad \underset{\text{Exponentialreihe}}{\sum\limits_{n = 0}^{\infty} \frac{z^n}{n!} = e^z}$
+\fi
 
 
 
 
-
-
+\if{0}
 \section{Kurven}
 %===========================================================================================================================================================
 Eine Kurve ist ein eindimensionales Objekt.\\
@@ -273,22 +277,22 @@ Krümmung von $\gamma$: $\kappa(t)= \norm{\frac{\mathrm d^2 \gamma}{\mathrm d s^
 
 
 
-
+\fi
 
 
 \section{Skalarfelder}
 %===========================================================================================================================================================
 Ein Skalarfeld ordnet jedem Vektor eines Vektorraums einen Wert zu.\\
-$ f:D\subseteq \mathbb R^n \rightarrow \mathbb R, (x_1,\ldots ,x_n) \mapsto f(x_1,\ldots ,x_n) $
+$ f:D\subseteq \mathbb R^n \rightarrow \mathbb R, (x_1,\ldots ,x_n)^T \mapsto f(x_1,\ldots ,x_n) $
 \parbox{5.5cm}{
 Teilmengen von $\mathbb R^n$: $D = [a_1,b_1] \times ... \times [a_n,b_n]$\\
 Offene Kugelmenge vom Radius $r$: $B_r(x_0)$\\
 \emph{Topologische Begriffe} für $D \subseteq \mathbb R^n$ } \parbox{1.0cm}{ \includegraphics[height=0.8cm]{img/topologie.pdf} }
 \begin{itemize}\itemsep-1pt
 	\item Das Komplement $D^C$ von $D$: $D^C := \R^n \setminus D$
-	\item innerer Punkt $x_0 \in \mathbb R^n$ des Inneren $\overset{\circ}{D}$ von $D$, falls \\
+	\item innerer Punkt $x_0 \in \mathbb R^n$ des Inneren $\inn(D)$, falls \\
 		$\exists \varepsilon > 0: B_\varepsilon (x_0) = \iset{x\in \mathbb R^n}{\norm{x-x_0} < \varepsilon} \subseteq D$
-	\item Die Menge $D$ heißt offen, falls $D=\overset{\circ}{D}$
+	\item Die Menge $D$ heißt offen, falls $D=\inn(D)$
 	\item Randpunkt $x_0 \in \mathbb R^n$ des Rands $\partial D$ von $D$, falls $\forall \varepsilon > 0:$ \\ 
 		$B_\varepsilon(x_0) \cap D \ne \emptyset \ \land \ B_\varepsilon(x_0) \cap D^C \ne \emptyset \ \Rightarrow \ \partial D = \partial D^C$
 	\item Abschluß $\ol D$ von $D$: $\overline{D}=D \cup \partial D$
@@ -305,11 +309,11 @@ $\mathbb R$ und $\emptyset$ sind offen und abgeschlossen.
 \subsection{Folgen, Grenzwerte, Stetigkeit im $\mathbb R^n$}
 %-----------------------------------------------------------------------
 Eine Folge $\bigl( X^{(k)} \bigr)$ ist eine Abbildung $\bigl(X^{(k)}\bigr):\mathbb N_0 \rightarrow \mathbb R^n, k\mapsto x^{(k)}$\\
-Die Folge konvergiert, falls $\lim\limits_{k \rightarrow \infty} \norm{x-x^{(k)}} = 0$\\
-Folge konvergiert, falls sie komponentenweise konvergiert!\\
-\\
+%Die Folge konvergiert, falls $\lim\limits_{k \rightarrow \infty} \norm{x-x^{(k)}} = 0$\\
+%Folge konvergiert, falls sie komponentenweise konvergiert!\\
+%\\
 Für $f:D \subseteq \mathbb R^n \rightarrow \mathbb R$ bedeutet \\
-Grenzwert: \quad  $\lim\limits_{x \rightarrow x_0} f(x) =c \Leftrightarrow f \bigl(X^{(k)} \rightarrow x_0 \bigr) \rightarrow c$\\
+Grenzwert: \quad  $\lim\limits_{x \rightarrow x_0} f(x) =c \Leftrightarrow f \bigl(X^{(k)} \rightarrow x_0 \bigr) \rightarrow c\quad \forall X^{(k)}$\\
 Stetigkeit: \quad \ $\forall x \in \mathbb R^n:\lim\limits_{x \rightarrow x_0} f(x) = f(x_0)$\\
 Satz von Max. und Min.: Ist $f(\vec x)$ stetig und $D$ kompakt, so\\
 % Ist $f:D \subseteq \mathbb R^n \rightarrow \mathbb R$ stetig und D kompakt, so\\
@@ -335,17 +339,17 @@ Kettenregel\textbf{n:}\\
 \begin{tabular}{l|l}
 	$f:\mathbb R^n \rightarrow \mathbb R \land g:\mathbb R \rightarrow \mathbb R$ & $f:\mathbb R^n \rightarrow \mathbb R \land g:\mathbb R \rightarrow \mathbb R^n$\\ \midrule
 	$h:= g \circ f: \mathbb R^n \rightarrow \mathbb R$	& $h:= f \circ g: \mathbb R \rightarrow \mathbb R$\\
-	$\boxed{ \nabla h(x) = g'\big( f(x) \big) \cdot \nabla f(x)}$  &  $\boxed{h'(x)=\nabla f\big( g(x) \big)^T \cdot \dot g(t)}$
+	$\boxed{ \nabla h(x) = g'\big( f(x) \big) \cdot \nabla f(x)}$  &  $\boxed{h'(x)=\nabla f\big( g(x) \big)^T \cdot g'(t)}$
 \end{tabular}
 
 
 \subsection{Differentialoperatoren \qquad $\div(\rot(f)) = 0$}
 \begin{tabular}{l|l}
 	Operator & Definition \\ \midrule
-	\pbox{2.0cm}{ Gradient: $\mathrm{grad}\; f$ \\ S-Feld $\rightarrow$ V-Feld } & $\nabla f = \vect{\frac{\partial f}{\partial x_1} \\ \svdots \\ \frac{\partial f}{\partial x_n} }$ \\ \midrule
-	\pbox{2.0cm}{ Divergenz: $\mathrm{div}\; f$ \\ V-Feld $\rightarrow$ S-Feld } & ${\displaystyle \nabla^\top \bdot f = \sum\limits_{i=0}^n \frac{\partial f_i}{\partial x_i}}$\\ \midrule % \vect{\frac{\partial}{\partial x_1} \\ \svdots \\ \frac{\partial}{\partial x_n} }^\top \bdot \vect{ f_1 \\ \svdots \\ f_n }$ \\ \midrule
-	\pbox{2.0cm}{ Rotation: $\mathrm{rot}\; f$ \\ V-Feld $\rightarrow$ V-Feld } & $\nabla \times f = \vect{\frac{\partial f_3}{\partial y}(x) - \frac{\partial f_2}{\partial z}(x) \\[2pt] \frac{\partial f_1}{\partial z}(x) -\frac{\partial f_3}{\partial x}(x) \\[2pt] \frac{\partial f_2}{\partial x}(x) -\frac{\partial f_1}{\partial y}(x) }$ \\ \midrule
-	\pbox{2.0cm}{ Laplace: $\Delta\; f$ \\ S-Feld $\rightarrow$ S-Feld } & ${\displaystyle\underset{\nabla^\top \cdot (\nabla f)}{\nabla^2} = \sum \frac{\partial f}{\partial x_i x_i} }$ % \vect{\frac{\partial}{\partial x_1} \\ \svdots \\ \frac{\partial}{\partial x_n} }^\top \cdot \vect{\frac{\partial f}{\partial x_1} \\ \svdots \\ \frac{\partial f}{\partial x_n} }$ \\
+	\pbox{2.0cm}{ Gradient: $\mathrm{grad}\; f$ \\ S-Feld $\rightarrow$ V-Feld } & $\nabla f = \vect{\partial_1 f \\ \svdots \\ \partial_n f}$ \\ \midrule
+	\pbox{2.0cm}{ Divergenz: $\mathrm{div}\; f$ \\ V-Feld $\rightarrow$ S-Feld } & ${\displaystyle \nabla^\top \bdot f = \sum\limits_{i=0}^n \partial_i f_i}$\\ \midrule % \vect{\frac{\partial}{\partial x_1} \\ \svdots \\ \frac{\partial}{\partial x_n} }^\top \bdot \vect{ f_1 \\ \svdots \\ f_n }$ \\ \midrule
+	\pbox{2.0cm}{ Rotation: $\mathrm{rot}\; f$ \\ V-Feld $\rightarrow$ V-Feld } & $\nabla \times f = \vect{\partial_2 f_3(x) - \partial_3 f_2(x) \\[2pt] \partial_3 f_1(x) -\partial_1 f_3(x) \\[2pt] \partial_1 f_2(x) -\partial_2 f_1(x) }$ \\ \midrule
+	\pbox{2.0cm}{ Laplace: $\Delta\; f$ \\ S-Feld $\rightarrow$ S-Feld } & ${\displaystyle\underset{\nabla^\top \cdot (\nabla f)}{\nabla^2} = \sum \partial_i^2 f}$ % \vect{\frac{\partial}{\partial x_1} \\ \svdots \\ \frac{\partial}{\partial x_n} }^\top \cdot \vect{\frac{\partial f}{\partial x_1} \\ \svdots \\ \frac{\partial f}{\partial x_n} }$ \\
 \end{tabular}
 
 
@@ -377,9 +381,9 @@ $f,g: D \subseteq \mathbb R^n \rightarrow \mathbb R^m$ part. diffbar:\\
 Linearität: $\ma J_{\alpha f + \beta g} = \alpha J_f + \beta J_g$\\
 Produkt: $\ma J_{f^\top g} = g^\top J_f + f^\top J_g$ \quad $(\nabla f^\top g = J_f^\top g + J_g^\top f)$\\
 Komposition: $\ma J_{g \circ f}(x) = \ma J_g\Bigl(f(x)\Bigr) \cdot \ma J_f(x)$\\
-Umkehrfunktion: $\ma J_{f^-1} (f(x)) = \ma J_f (x)^{-1}$
+Umkehrfunktion: $\ma J_{f^{-1}} (f(x)) = \ma J_f (x)^{-1}$
 
-
+\if{0}
 \subsection{Lineare Abbildungen}
 %-----------------------------------------------------------------------
 $f:V \rightarrow W$ heißt linear, falls
@@ -394,7 +398,7 @@ Bild von $f$: $\mathrm{Bild}(f) = \iset{f(v)}{v \in V}$ ist UVR von $W$\\
 \emph{Dualraum} $V^* = \iset{f:\mathbb R^n \rightarrow \mathbb R}{f=lin.}$\\
 \emph{Injektiv} (aus $f(x) = f(y) \ra x = y)$), falls $\ker(f) = \eset{0}$ \\
 \emph{Surjektiv} Alle Werte im Zielraum werden angenommen.
-
+\fi
 
 
 
@@ -437,13 +441,14 @@ Es gibt eine Zwischenstelle $\xi \in (0,1)$ mit: \\
 %===========================================================================================================================================================
 Transformationsvektoren. (Um einen Vektor in anderen Koordinaten darzustellen)\\ \\
 \begin{tabular}{c | c  l} 
-&$\vect{ x & y & z}^\top$ &  \\ \midrule
+&$(x, y, z)^\top$ &  \\ \midrule
 Zylinder & $\begin{pmatrix} r \cdot \cos (\varphi) \\ r \cdot \sin (\varphi) \\ z \end{pmatrix}$ & $0 \le \varphi < 2 \pi$ \\ 
 Kugel & $\begin{pmatrix} r \cdot \cos(\varphi) \sin(\theta) \\ r \cdot \sin(\varphi) \sin(\theta) \\ r \cdot \cos(\theta) \end{pmatrix}$ &$\begin{matrix}0 \le \varphi < 2 \pi \\ 0 \le \theta \le \pi \end{matrix}$
 \end{tabular} \\ \\
  \\ 
  
 % evtl. nochmal anschauen
+\if{0}
 Transformationsmatrix $\ma S_z$ \\
 $\mat{ \vec e_r & \vec e_\varphi & \vec e_z} = \mat{ \cos(\varphi) &  -\sin(\varphi) & 0\\ \sin(\varphi) & \cos(\varphi) & 0 \\ 0 & 0 & 1 }$
 \begin{center}
@@ -469,6 +474,7 @@ $\tilde{f}(r,\varphi,z)$ bzw.  $\tilde{f}(r,\theta,\varphi)$ erhält man durch e
 $\tilde{\vec f}(r,\varphi,z)$ bzw. $\tilde{\vec f}(r,\theta,\varphi)$ durch ersetzen von $x$, $y$ und $z$ durch die entsprechenden Einträge des Transformationsvektors. \\ \\
 Zylinder: $ \hat{\vec f}(r,\varphi,z)$ bzgl. $\{e_r,e_\varphi,e_z\}$: $\hat{\vec f} = \ma S_z^{-1} \cdot \tilde{\vec f}$ \\ \\
 Kugel: $\hat{\vec f}(r,\theta,\varphi)$ bzgl. $\{e_r,e_\theta,e_\varphi\}$: $\hat{\vec f} = \ma S_k^{-1} \cdot \tilde{\vec f}$
+\fi
 
 \subsection{Operatoren in anderen Koordinaten}
 (Detailliert in der Formelsammlung im Anhang) \\ \\
@@ -476,7 +482,7 @@ Kugel: $\hat{\vec f}(r,\theta,\varphi)$ bzgl. $\{e_r,e_\theta,e_\varphi\}$: $\ha
  & Zylinderkoordinaten \\ \midrule
  $\nabla$ & $(\partial_r,\ \frac{1}{r}\partial_\varphi,\ \partial_z)^\top$ \\ \midrule
  $\div$ & $\frac{1}{r} \partial_r(r\cdot \vec f_r) + \frac{1}{r} \partial_\varphi(\vec f_\varphi) + \partial_z(\vec f_z)$ \\ \midrule
-$ \Delta$ & $\frac{1}{r} \partial_{rr}(r\cdot f) + \frac{1}{r^2} \partial_{\varphi\varphi}f + \partial_{zz}f$
+$ \Delta$ & $\frac{1}{r} \partial^2_{r}(r\cdot f) + \frac{1}{r^2} \partial^2_{\varphi}f + \partial^2_{z}f$
 \end{tabular}
 \\ \\ \\
 \begin{tabular}{c|l} 
@@ -484,7 +490,7 @@ $ \Delta$ & $\frac{1}{r} \partial_{rr}(r\cdot f) + \frac{1}{r^2} \partial_{\varp
 
 $\nabla$ & $(\partial_r,\ \frac{1}{r}\partial_\varphi,\ \frac{1}{r\sin\theta}\partial_\theta)^\top$\\ \midrule
 $\div$ & $  \frac{1}{r^{2}}  \partial_r(r^2 \vec f_r) + \frac{1}{r \sin \theta} \partial_\varphi(\vec f_\varphi) + \frac{1}{r \sin \theta} \partial_\theta(\sin \theta \vec f_\theta)$\\ \midrule
-$\Delta $ & $ \frac{1}{r^{2}} \partial_{rr}(r^2 f) + \frac{1}{r^2\sin^2\theta} \partial_{\varphi\varphi} (\sin\theta f) + \frac{1}{r^2\sin\theta} \partial_{\theta\theta} f$
+$\Delta $ & $ \frac{1}{r^{2}} \partial^2_{r}(r^2 f) + \frac{1}{r^2\sin^2\theta} \partial^2_{\varphi} (\sin\theta f) + \frac{1}{r^2\sin\theta} \partial^2_{\theta} f$
 \end{tabular}
 
 \section{Implizite Funktionen $g$}
@@ -529,7 +535,7 @@ $J(f|_U)^{-1} (f(x)) = (J_f (x))^{-1} \forall x \in U$
 
 \section{Matrizen}
 
-
+\if{0}
 \subsection{Determinante von $A\in \mathbb K^{n\times n}$: $\det(A)=|A|$}
 
 $\det\begin{pmatrix}A&0\\C&D\end{pmatrix}=\det\begin{pmatrix}A&B\\0&D\end{pmatrix}=\det(A)\cdot\det(D)$ \\
@@ -564,42 +570,33 @@ $\ra \dim(\mathrm{Eig}_A (\lambda_i)) = \mathrm{geo}(\lambda_i)$ \quad $\forall 
 $\ma D = \begin{pmatrix} \lambda_1 & 0 & 0 \\ 0 & \lambda_2 & 0 \\ 0 & 0 & \lambda_3 \end{pmatrix}$ \qquad $\begin{array}{l} \ma D = \ma B^{-1} \ma A \ma B \\[0.5em] \ma B = \mat{\vec{EV}_1, \vec{EV}_2, ...} \end{array}$\\
 $_B M(f)_B = _B M (id)_{E3} \cdot _{E3} M(f)_{E3} \cdot _{E3} M(id)_B$ \\
 $B = ( _{E3} b_1 , _{E3} b_2 ,_{E3} b_3 ) = (v_1, v_2, v_3)$
-
+\fi
 \subsection{Definitheit}
 Eine sym. Matrix $A = A^\top \in \mathbb R^{n\times n}$ heißt\\[0.3em]
-$_{\text{\normalsize neg.}}^{\text{\normalsize pos.}}$ definit 
-$ \Leftrightarrow$
-$\forall v \in \mathbb R^n \setminus \eset{0} : \vec v^\top \ma A \vec v \gtrless 0$
-$ \Leftrightarrow  $  Alle EW $\lambda \gtrless 0$\\
-$_{\text{\normalsize neg.}}^{\text{\normalsize pos.}}$ semi definit $\ \Leftrightarrow\ $ $\forall v \in \mathbb R^n : \vec v^\top \ma A \vec v \gtreqless 0$ $\ \Leftrightarrow \ $  Alle EW $\lambda \gtreqless 0$\\
-indefinit $\Leftrightarrow$
-$\exists v,w \in \mathbb R^n: \vec v^\top
-\ma A \vec v < 0 \ \land \ \vec w^\top \ma A \vec w > 0$ 
-$\ \Leftrightarrow \ $  $\exists \lambda_1 > 0 \land \lambda_2 < 0$\\
+$_{\text{\normalsize neg.}}^{\text{\normalsize pos.}}$ definit falls alle EW $\lambda \gtrless 0$\\
+$_{\text{\normalsize neg.}}^{\text{\normalsize pos.}}$ semi definit falls alle EW $\lambda \gtreqless 0$\\
+indefinit falls zwei EW $\lambda$ unterschiedliche VZ haben\\
 Alle EW von $\ma A = \ma A^\top$ sind reel. $\lambda \in \mathbb R$ selbst wenn EV $v \in \mathbb C$!\\
 Überprüfung mit $\det \ma A = \prod \lambda_i$ \qquad $\mathrm{Sp} \ma A = \sum \lambda_i$\\ \\
 
-Nur für $2\times 2$-Matrix: $\ma A = \begin{pmatrix}a & b \\ c & d\end{pmatrix}$ \\
-\setlength{\tabcolsep}{0.5em} % for the horizontal padding
-\begin{tabular}{|l|l|l|l|} 
-	\hline \textbf{Definitheit} & \textbf{Eigenwerte} & $\det \ma A = ad - bc$ & $\mathrm{Sp} \ma A = a+d$ \\ 
-	\hline indefinit & pos. und neg. & $\det \ma A < 0$ & \\ 
-	\hline pos. semidef. & $\lambda \ge 0 $ & $\det \ma A = 0$  & $\mathrm{Sp} \ma A \ge 0$\\ 
-	\hline neg. semidef. & $\lambda \le 0 $ & $\det \ma A = 0$  & $\mathrm{Sp} \ma A \le 0$\\ 
-	\hline pos. definit & $\lambda > 0 $ & $\det \ma A > 0$  & $\mathrm{Sp} \ma A > 0$\\ 
-	\hline neg. definit & $\lambda < 0 $ & $\det \ma A > 0$  & $\mathrm{Sp} \ma A < 0$\\ 
-	\hline 
-\end{tabular} 
+\subsubsection{Hauptminorenkriterium}
 
-\setlength{\tabcolsep}{1em} % for the horizontal padding
-
+\begin{minipage}[t]{0.48\linewidth}
+Postiv definit, falls Determinanten der Quadratischen Teilmatrizen positiv:\\
+$\mat{\underline{+}|&\phantom{+}|&\\\underline{\phantom{+}}&\underline{+}|&\\&&+}$
+\end{minipage}
+\hspace{.04\linewidth}
+\begin{minipage}[t]{0.48\linewidth}
+Negativ definit, falls Determinanten der Quadratischen Teilmatrizen abwechselnd positiv und negativ:\\
+$\mat{\underline{-}|&\phantom{+}|&\\\underline{\phantom{+}}&\underline{+}|&\\&&-}$
+\end{minipage}
 
 \section{Extremwerte von Skalarfeldern $f(\vec x)$}
 \subsection{Extremewerte ohne NB} % (fold)
 \begin{itemize} \itemsep0pt
 	\item Suche Kandidaten (stationäre Punkte): $\eset{\vec x_0}:{\nabla f(\vec x_0) = 0}$
 	\item Falls $H_f(\vec x_0) \begin{cases} \text{neg. definit} & \Rightarrow \vec x_0 = \text{lok. Max.} \\ \text{pos. definit} & \Rightarrow \vec x_0 = \text{lok. Min.} \\ \text{indefinit} & \Rightarrow \vec x_0 = \text{Sattelpunkt} \\ \text{semidefinit} & \Rightarrow \vec x_0 = \text{keine Aussage} \end{cases}$\\
-	\item globale Extreme $\ra $ prüfe Rand
+	\item globale Extreme $\ra $ prüfe zusätzlich Rand
 \end{itemize}
 
 \subsection{Extremwerte von $f(\vec x)$ mit Nebenbedingung}
@@ -612,7 +609,7 @@ Es seien $f,g:\Omega \subset \R^n \mapsto \R$
 	$\boxed{L(x, \lambda) = f(x) + \lambda g(x)}$
 	\begin{itemize} \itemsep0pt
 		\item Regularitätsbedingung: \\
-		$\nabla{g(x)} \neq 0 \quad \forall x \in \Omega$
+		$\nabla{g(x)} \neq 0 \quad \forall x \in \Omega$ $\Rightarrow$ zusätzlich als Kandidaten prüfen
 		\item Kandidaten: \\
 		$\nabla{L(x, \lambda)} = 0 \Ra \begin{cases}
 		\begin{array}{r}
@@ -630,8 +627,6 @@ Es seien $f,g:\Omega \subset \R^n \mapsto \R$
 		%\item Vergleich der Funktionswerte der Kandidaten $ \ra$ Entscheide über Max/ Min bzw. betrachte Rand
 	\end{itemize}
 \end{itemize}
-PS: Lagrange bestiehlt kleine Kinder!!!!
-
 
 
 % subsection subsection name (end)
@@ -648,8 +643,10 @@ $\ma A = \mat{
 	1 & t_m & t_m^2 & \cdots & t_m^n
 }, \vec b = \vect{b_1 \\ b_2 \\ \svdots \\ b_m}$ \\
 Man erhält Minimum durch Lösen der Normalengleichung \\
-$\boxed{\ma A^T \ma A \vec x = \ma A^T \vec b}$
+$\boxed{\ma A^T \ma A \vec x = \ma A^T \vec b}$\\
+PS: Geht auch mit einer Summe aus anderen Funktionen als einem Polynom.
 
+\if{0}
 \subsection{Lineare Ausgleichsrechnung (aus HM)}
 Gegeben: $n$ Stützstellen $(t_1,y_1),\dots,(t_n,t_y)$. \\
 Gesucht: Ausgleichsfunktion $f=f(x)=\lambda_1 f_1 +\cdots+\lambda_r f_r$ zu gegebenen $f_1,\dots,f_r$
@@ -662,7 +659,7 @@ Gesucht: Ausgleichsfunktion $f=f(x)=\lambda_1 f_1 +\cdots+\lambda_r f_r$ zu gege
 	\item Löse $A^\top Ax=A^\top b \qquad x=(\lambda_1,\dots,\lambda_r)^\top$
 	\item $f=f(x)=\lambda_1 f_1 +\cdots+\lambda_r f_r$
 \end{enumerate}
-
+\fi
 
 
 
@@ -689,9 +686,6 @@ $\int\limits_{\vec \gamma} \lambda f + \mu g \ \mathrm ds = \int\limits_{\vec \g
 Ist $\gamma = \sum \gamma_i$ so gilt: $\int\limits_{\vec \gamma} f \ \mathrm ds = \sum \int\limits_{\vec \gamma_i} f \ \mathrm ds$\\
 $\int\limits_{\vec \gamma} f \ \mathrm ds = \underset{\text{Bei VF}}{(-)} \ \int\limits_{- \vec \gamma} f \ \mathrm ds$\\
 
-
-$\ra g''(42) > 9000$ (over 9000)
-
 \subsection{Integrabilitätsbedingung (Gradientenfeld)} % (fold)
 $\Ra$ Kurve muss einfach zusammenhängend sein. \\
 (Man muss die Kurve auf einen Punkt zusammenziehen könnnen) \\ \\
@@ -712,11 +706,13 @@ $\Leftrightarrow \boxed{J_f(x) = J_f(x)^T}$ bzw. $\partial_{x_i}f_j(x) = \partia
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-
 % ==============================================================================================================
-\section{Integralarten (HM3)}
+\section{Integration über Normalbereiche}
+TODO
 % ==============================================================================================================
 %Satz von Fubini: Falls die Integralgrenzen von den Integranden unabhängig sind, gilt: $\int\limits^d_c \int\limits^b_a ... \diff x \diff y$ = $\int\limits^b_a \int\limits^d_c ... \diff y \diff x$\\
+
+\if{0}
 
 \subsubsection{Regulärer Bereich}
 $B \subseteq \R^n$ heißt \emph{regulärer Bereich}, wenn
@@ -854,7 +850,7 @@ VF $\vec v:D\subseteq \R^3 \ra \R^3, \vec x \mapsto \vec v(x,y,z)$ \\
 
 
 
-
+\fi
 % ==============================================================================================================		
 \section{Integralsätze}
 % ==============================================================================================================
@@ -903,7 +899,8 @@ Dann
 	\item $\vec{v}$ konservativ auf $D$ $\Ra$ auch auf jeder Teilmenge von $D$
 	\item \emph{Stammfunktion:} Es gilt $\partial_i \Phi = v_i \ra \Phi = \int{v_i \diff x_i} + c(\vec{x_k}) \quad k \neq i$
 \end{itemize}
-
+Stammfunktion aufstellen: Mischung aus anstarren, integrieren, ableiten und gleichsetzen.
+\if{0}
 \textbf{Rezept: Stammfunktion eines Gradientenfeldes} \\
 
 Fall $n=2$: Ist $\vec v:D\subseteq \mathbb{R}^2\rightarrow\mathrm{R}^2$ ein Gradientenfeld, $\vec v=(v_1,v_2)^\top$, so findet man eine Stammfunktion $f$ von $\vec v$ wie folgt:
@@ -934,10 +931,10 @@ Fall $n=3$: Ist $\vec v:D\subseteq \mathbb{R}^3\rightarrow\mathrm{R}^3$ ein Grad
 	\item Setze $h(z)$ aus (6) in $f$ aus (4) ein und erhalte eine Stammfunktion $f$
 \end{enumerate}
 
+\fi
 
-
-
-
+\section{Oberflächenintegrale}
+TODO
 
 % ==============================================================================================================	
 \section{Differentialgleichungen DGL}
@@ -1086,6 +1083,7 @@ Stabilität:
 	\item $Re(\lambda_i) \le 0 \ra$ stabil
 \end{itemize}
 
+\if{0}
 \section{Lösen von linearen DGL-Systemen 1. Ordnung (ST)}
 $\dot {\underline{x}}(t)=\textbf{A}\underline{x}(t)$ \quad mit \quad
 $\textbf{A} = \begin{pmatrix}
@@ -1125,7 +1123,7 @@ $\underline{x}(t)=c_1\cdot Re(e^{\lambda t}\underline{q})+c_2\cdot Im(e^{\lambda
 	$\underline{x}(t)=$ \= $c_1e^{\alpha t}[cos(\beta t)\underline{q}_r-sin(\beta t)\underline{q}_i]+$\\\\
 	\> $c_2e^{\alpha t}[sin(\beta t)\underline{q}_r+cos(\beta t)\underline{q}_i]$
 \end{tabbing}
-
+\fi
 
 
 %\subsection{Partielle DGL erster Ordnung}

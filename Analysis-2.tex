@@ -942,6 +942,8 @@ Fall $n=3$: Ist $\vec v:D\subseteq \mathbb{R}^3\rightarrow\mathrm{R}^3$ ein Grad
 \section{Differentialgleichungen (DGL)}
 % ==============================================================================================================	
 \subsection{Existenz von Lösungen von DGL erster Ordnung}
+\textbf{globale Lipschitz-Bedingung:} $\exists L \geq 0 | \forall (t, u_1) \in D \wedge (t, u_2) \in D \abs{f(t,u_1)-f(t,u_2)} \leq L\abs{u_1-u_2}$ \\
+\textbf{lokale Lipschitz-Bedingung:} Es existiert zu jedem Punkt in D eine Umgebung, in der die Lipschitz-Bedingung erfüllt ist.\\
 \textbf{Satz von Peano:} f ist stetiges Skalarfeld auf dem Rechteck $D = [t_0, t_0 + \alpha] \times [u_0-\beta , u_0+\beta]$ mit $\alpha, \beta > 0 \Rightarrow$ Lösung von $u(t)$ im Intervall $[t_0, t_0+\delta]$ mit $\delta > 0$\\
 Es können im Allgemeinen jedoch mehrere Lösungen existieren (keine eindeutige Lösung)!\\ \\
 \textbf{Satz von Picard-Lindelöf:} f ist Skalarfeld auf $[t_0, t_0 + \alpha] \times [u_0-\beta , u_0+\beta]$ und es erfüllt die lokale Lipschitz-Bedingung $\Rightarrow$ Lösung von $u(t)$ im Intervall $[t_0, t_0+\delta]$ mit $\delta = \text{min}(\alpha, \frac{\beta}{M}) > 0$ mit $M = \text{max}_{(t,x)\in D}\abs{f(t,x)}$\\
@@ -977,13 +979,12 @@ Gradientenfeld $v(x,y) = \vect{f(x,y) \\ g(x,y)}$ hat Stammfkt. $F(x,y(x)) = C$
 Jede DGL n-ter Ordnung lässt sich als DGL System mit n Gleichungen darstellen:\\
 $\boxed{f(t, u(t), u'(t),\hdots , u^{(n)}(t)) = 0}$\\
 \begin{enumerate}
-	\item Bestimme $\vec x = \mat{u(t) \\ u'(t) \\ \hdots \\ u^{(n-1)}(t)}, \vec x \in \R^n$ 
+	\item Bestimme $\vec x(t) = \mat{u(t) \\ u'(t) \\ \hdots \\ u^{(n-1)}(t)}, \vec x \in \R^n$ 
 	\item Erhalte folgende Gleichungen\\
-		\subitem 1) $f = 0$
+		\subitem 1) $f(t, \vec x(t), x_n'(t)) = 0$
 		\subitem 2) $x_1'(t) = x_2(t)$
 		\subitem $\hdots$
 		\subitem n) $x_{n-1}'(t) = x_n(t)$
-	\item Stelle das DGL-System $x' = Ax$ auf
 \end{enumerate}
 
 \subsection{Homogene lineare DGL Systeme}
@@ -1046,8 +1047,8 @@ $\boxed{u'(t) = f(t)u + g(t)}$
 
 \begin{enumerate}
 	\itemsep0pt \leftmargin8pt
-	\item Bestimme $F(t)$
-	\item Löse homogene DGL mit $g(t) = 0$ (siehe \ref{sec:sep-dgl}) $\Rightarrow u_{hom}(t)$
+	\item Bestimme Stammfunktion $F(t)$
+	\item Löse homogene DGL für $g(t) = 0$ (siehe \ref{sec:sep-dgl}) $\Rightarrow u_{hom}(t)$
 	\item Partikuläre Lösung $u_p(t)$ durch \emph{Variation der Konstanten}
 	\begin{itemize}\itemsep0pt \leftmargin8pt
 		\item $u(t) = c(t) \e^{F(t)}$
@@ -1067,9 +1068,9 @@ $\boxed{a_nu^{(n)}(t) + \hdots + a_1u'(t)+a_0u = 0}$\\
 	\item Gib $n$ linear unabhängige Lösungen der DGL an:
 	\begin{itemize}\itemsep0pt \leftmargin0pt
 		\item 	Ist $ \lambda$ eine $k$-fache reelle NST:\\
-$u_1 = e^{\tilde \lambda x}, \hdots, u_i = t^i e^{ \lambda t}$\\
+$u_1 = e^{\tilde \lambda t}, \hdots, u_i = t^i e^{ \lambda t}$\\
 		\item Ist $ \lambda$ eine $k$-fache konjugiert komplexe NST $\lambda = a + \i b$:\\
-$u_1 = e^{at} \cos (bt),\; u_2 = e^{at} \sin (bx)$ \\
+$u_1 = e^{at} \cos (bt),\; u_2 = e^{at} \sin (bt)$ \\
 bzw. $u_i = t^i e^{at} \sin (bt)$ und $u_{i+1} =  t^i e^{at} \cos (bt)$
 		%$Reelle Polynome haben immer konjugiert komplexe NST: $\Re$ und $\Im$ sind zwei lin. unabhängie Lösungen der DGL%
 	\end{itemize}
@@ -1079,15 +1080,15 @@ bzw. $u_i = t^i e^{at} \sin (bt)$ und $u_{i+1} =  t^i e^{at} \cos (bt)$
 
 \subsection{Lösen von allgemeinen DGL-Systemen}
 $\boxed{\dot {\vec u}(t) = \ma A(t) \bdot \vec u(t) + \vec f(t)}$ mit $u(t_0) = u_0$\\
-Lösung: $u(t) = \e^{t-t_0)\ma A}(u_0 + \int_{t_0}^t e^{-(s-t_0)\ma A}f(s)ds)$\\
+Lösung: $u(t) = \e^{(t-t_0)\ma A}(u_0 + \int_{t_0}^t e^{-(t'-t_0)\ma A}f(s)dt')$\\
 \subsection{Stabilität}
 \textbf{Autonom}, falls DGL nicht explizit von der freien Variable $t$ abhängt: $u'=f(u)$\\
 \textbf{Gleichgewichtspunkt} einer autonomen DGL, falls: $f(v) = 0$\\
 \textbf{Stabilität:}
 \begin{itemize}\itemsep-1pt
-	\item $Re(\lambda_i) < 0 \ra$ asymptotisch stabil 
 	\item $Re(\lambda_i) > 0 \ra$ instabil
 	\item $Re(\lambda_i) \le 0 \ra$ stabil
+	\item $Re(\lambda_i) < 0 \ra$ asymptotisch stabil 
 \end{itemize}
 
 \if{0}

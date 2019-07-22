@@ -439,7 +439,7 @@ Es gibt eine Zwischenstelle $\xi \in (0,1)$ mit: \\
 
 \section{Koordinatensysteme}
 %===========================================================================================================================================================
-Transformationsvektoren. (Um einen Vektor in anderen Koordinaten darzustellen)\\ \\
+Transformationsvektoren (Um einen Vektor in anderen Koordinaten darzustellen):\\ \\
 \begin{tabular}{c | c  l} 
 &$(x, y, z)^\top$ &  \\ \midrule
 Zylinder & $\begin{pmatrix} r \cdot \cos (\varphi) \\ r \cdot \sin (\varphi) \\ z \end{pmatrix}$ & $0 \le \varphi < 2 \pi$ \\ 
@@ -498,7 +498,7 @@ $\Delta $ & $ \frac{1}{r^{2}} \partial^2_{r}(r^2 f) + \frac{1}{r^2\sin^2\theta} 
 ... werden als Nullstellenmenge einer expl. Funktion $f$ angegeben.\\
 $\iset{(x,y) \in \mathbb R^2 }{f(x,y) = 0}$ mit $y=g(x) \in \mathbb R$
 
-\subsection{Satz über implizite Funktionen:}
+\subsection{Satz über implizite Funktionen}
 Es gelte: $f: D \in \mathbb R^2 \ra \mathbb R$ \quad
 $\ra $ implizite Gleichung $f(x,y) = 0$ \\
 Bedinungen für die Existenz von $y = g(x)$:
@@ -572,10 +572,12 @@ $_B M(f)_B = _B M (id)_{E3} \cdot _{E3} M(f)_{E3} \cdot _{E3} M(id)_B$ \\
 $B = ( _{E3} b_1 , _{E3} b_2 ,_{E3} b_3 ) = (v_1, v_2, v_3)$
 \fi
 \subsection{Definitheit}
-Eine sym. Matrix $A = A^\top \in \mathbb R^{n\times n}$ heißt\\[0.3em]
-$_{\text{\normalsize neg.}}^{\text{\normalsize pos.}}$ definit falls alle EW $\lambda \gtrless 0$\\
-$_{\text{\normalsize neg.}}^{\text{\normalsize pos.}}$ semi definit falls alle EW $\lambda \gtreqless 0$\\
-indefinit falls zwei EW $\lambda$ unterschiedliche VZ haben\\
+Eine sym. Matrix $A = A^\top \in \mathbb R^{n\times n}$ heißt\\%[0.3em]
+\[\begin{cases}
+_{\text{\normalsize neg.}}^{\text{\normalsize pos.}} \text{definit falls alle EW} \lambda \gtrless 0\\
+_{\text{\normalsize neg.}}^{\text{\normalsize pos.}} \text{semi definit falls alle EW} \lambda \gtreqless 0\\
+\text{indefinit falls zwei EW} \lambda \text{unterschiedliche VZ haben}
+\end{cases}\]\\
 Alle EW von $\ma A = \ma A^\top$ sind reel. $\lambda \in \mathbb R$ selbst wenn EV $v \in \mathbb C$!\\
 Überprüfung mit $\det \ma A = \prod \lambda_i$ \qquad $\mathrm{Sp} \ma A = \sum \lambda_i$\\ \\
 
@@ -591,15 +593,15 @@ Negativ definit, falls Determinanten der Quadratischen Teilmatrizen abwechselnd 
 $\mat{\underline{-}|&\phantom{+}|&\\\underline{\phantom{+}}&\underline{+}|&\\&&-}$
 \end{minipage}
 
-\section{Extremwerte von Skalarfeldern $f(\vec x)$}
-\subsection{Extremewerte ohne NB} % (fold)
+\section{Extremwerte von Skalarfeldern}
+\subsection{Extremewerte ohne Nebenbedingungen} % (fold)
 \begin{itemize} \itemsep0pt
 	\item Suche Kandidaten (stationäre Punkte): $\eset{\vec x_0}:{\nabla f(\vec x_0) = 0}$
 	\item Falls $H_f(\vec x_0) \begin{cases} \text{neg. definit} & \Rightarrow \vec x_0 = \text{lok. Max.} \\ \text{pos. definit} & \Rightarrow \vec x_0 = \text{lok. Min.} \\ \text{indefinit} & \Rightarrow \vec x_0 = \text{Sattelpunkt} \\ \text{semidefinit} & \Rightarrow \vec x_0 = \text{keine Aussage} \end{cases}$\\
 	\item globale Extreme $\ra $ prüfe zusätzlich Rand
 \end{itemize}
 
-\subsection{Extremwerte von $f(\vec x)$ mit Nebenbedingung}
+\subsection{Extremwerte mit Nebenbedingung}
 Es seien $f,g:\Omega \subset \R^n \mapsto \R$
 \begin{itemize} \itemsep0pt
 	\item NB $g(x) = 0$ ist nach einer Variable auflösbar. \\
@@ -611,7 +613,7 @@ Es seien $f,g:\Omega \subset \R^n \mapsto \R$
 		\item Regularitätsbedingung: \\
 		$\nabla{g(x)} \neq 0 \quad \forall x \in \Omega$ $\Rightarrow$ zusätzlich als Kandidaten prüfen
 		\item Kandidaten: \\
-		$\nabla{L(x, \lambda)} = 0 \Ra \begin{cases}
+		$\nabla{L(x, \lambda)} \stackrel{!}{=} 0 \Ra \begin{cases}
 		\begin{array}{r}
 		\nabla{f(x)} + \lambda\nabla{g(x)} = 0 \\
 		g(x) = 0
@@ -685,19 +687,6 @@ $\forall \lambda,\mu \in \mathbb R, \forall f,g$\\
 $\int\limits_{\vec \gamma} \lambda f + \mu g \ \mathrm ds = \int\limits_{\vec \gamma} \lambda f \ \mathrm ds + \int\limits_{\vec \gamma} \mu g \ \mathrm ds$\\
 Ist $\gamma = \sum \gamma_i$ so gilt: $\int\limits_{\vec \gamma} f \ \mathrm ds = \sum \int\limits_{\vec \gamma_i} f \ \mathrm ds$\\
 $\int\limits_{\vec \gamma} f \ \mathrm ds = \underset{\text{Bei VF}}{(-)} \ \int\limits_{- \vec \gamma} f \ \mathrm ds$\\
-
-\subsection{Integrabilitätsbedingung (Gradientenfeld)} % (fold)
-$\Ra$ Kurve muss einfach zusammenhängend sein. \\
-(Man muss die Kurve auf einen Punkt zusammenziehen könnnen) \\ \\
-$f:D \subset \R^n \mapsto \R^n$ ist ein Gradientenfeld, wenn $f(x) = \nabla{F(x)}$ \\
-$\Leftrightarrow \boxed{J_f(x) = J_f(x)^T}$ bzw. $\partial_{x_i}f_j(x) = \partial_{x_j}f_i(x)$ \\ \\
-\underline{Sonderfälle:}
-\begin{itemize} \itemsep0pt
-	\item $n = 2$: $\frac{\partial v_1}{\partial y} = \frac{\partial v_2}{\partial x}$
-	\item $n = 3$: $\rot v = 0 \Ra $ Integrabilitätsbedinung ist erfüllt.
-\end{itemize}
-
-\textbf{Potential}
 
 
 
@@ -885,21 +874,29 @@ $\vec{v}:B \subseteq \R^2 \ra \R^2$ und $\vec{e_3} = \vect{0 \\ 0 \\ 1 \\}$\\
 Sind $f,g$ zwei SF, so: $\iiint_B f \Delta g + \nabla f \nabla g \diff V = \iint_{\partial B} f \nabla g \diff \vec O$\\
 für $f=1$: $\iiint_B \Delta g \diff V = \iint_{\partial B} \nabla g \diff \vec O$\\
 
-\subsection{Gradientenfeld}
-$D \subset \R^n$ offen und \emph{einfach zusammenhängend} und $\vec{v}(\vec{x})$ mit $\vec{v}:D \ra \R^n$ $C^1$-Vektorfeld. Wenn
-\begin{itemize}
-	\item $\rot \vec{v} = 0$ \emph{oder}
-	\item $J_{\vec{v}}(\vec{x}) = J_{\vec{v}}^T(\vec{x}) \quad \forall \vec{x} \in D$
+\subsection{Gradientenfeld} % (fold)
+$\Ra$ Kurve muss einfach zusammenhängend sein. \\
+(Man muss die Kurve auf einen Punkt zusammenziehen könnnen) \\ \\
+$f:D \subset \R^n \mapsto \R^n$ ist ein Gradientenfeld, wenn $f(x) = \nabla{\Phi(x)}$ \\
+$\Leftrightarrow \boxed{J_f(x) = J_f(x)^T}$ bzw. $\partial_{x_i}f_j(x) = \partial_{x_j}f_i(x)$ \\ \\
+\underline{Sonderfälle:}
+\begin{itemize} \itemsep0pt
+	\item $n = 2$: $\frac{\partial v_1}{\partial y} = \frac{\partial v_2}{\partial x}$
+	\item $n = 3$: $\rot v = 0 \Ra $ Integrabilitätsbedinung ist erfüllt.
 \end{itemize}
+
+\textbf{Potential}
+$D \subset \R^n$ offen und \emph{einfach zusammenhängend} und $\vec{f}(\vec{x})$ mit $\vec{f}:D \ra \R^n$ $C^1$-Vektorfeld.
 Dann
 \begin{itemize}
-	\item $\vec{v}$ ist Gradientenfeld mit $\vec{v} = \grad{\phi}$
-	\item $\int_{\omega}{\vec{v} \cdot \diff \vec{s}} = \int_a^b \vec v(\vec \gamma(t)) \dot{\vec \gamma} \diff t = \Phi\left(\vec{\gamma}(b)\right) - \Phi\left(\vec{\gamma}(a)\right)$ (wegunabhängig)
-	\item $\oint_{\omega}{\vec{v} \cdot \diff \vec{s}} = 0 \quad \forall C^1$-Kurven in $D$
-	\item $\vec{v}$ konservativ auf $D$ $\Ra$ auch auf jeder Teilmenge von $D$
-	\item \emph{Stammfunktion:} Es gilt $\partial_i \Phi = v_i \ra \Phi = \int{v_i \diff x_i} + c(\vec{x_k}) \quad k \neq i$
+	\item $\vec{f}$ ist Gradientenfeld mit $\vec{f} = \grad{\phi}$
+	\item $\int_{\omega}{\vec{f} \cdot \diff \vec{s}} = \int_a^b \vec f(\vec \gamma(t)) \dot{\vec \gamma} \diff t = \Phi\left(\vec{\gamma}(b)\right) - \Phi\left(\vec{\gamma}(a)\right)$ (wegunabhängig)
+	\item $\oint_{\omega}{\vec{f} \cdot \diff \vec{s}} = 0 \quad \forall C^1$-Kurven in $D$
+	\item $\vec{f}$ konservativ auf $D$ $\Ra$ auch auf jeder Teilmenge von $D$
+	\item \emph{Stammfunktion:} Es gilt $\partial_i \Phi = v_i \ra \Phi = \int{v_i \diff x_i} + c(\vec{x_k}) \quad k \neq i$ (Aufstellen durch geschicktes Integrieren, Ableiten und Gleichsetzen)
 \end{itemize}
-Stammfunktion aufstellen: Mischung aus anstarren, integrieren, ableiten und gleichsetzen.
+
+
 \if{0}
 \textbf{Rezept: Stammfunktion eines Gradientenfeldes} \\
 
@@ -937,7 +934,7 @@ Fall $n=3$: Ist $\vec v:D\subseteq \mathbb{R}^3\rightarrow\mathrm{R}^3$ ein Grad
 TODO
 
 % ==============================================================================================================	
-\section{Differentialgleichungen DGL}
+\section{Differentialgleichungen (DGL)}
 % ==============================================================================================================	
 
 
@@ -947,9 +944,9 @@ Form: $y' = f(x) \cdot g(y)$; Lösung: $\int \frac{1}{g(y)} \diff y = \int f(x) 
 
 
 
-\subsection{lineare DGL mit konstanten Koeffizienten}
+\subsection{Lineare DGL mit konstanten Koeffizienten}
 
-\subsubsection{homogene DGL mit konstanten Koeffizienten}
+\subsubsection{Homogene DGL mit konstanten Koeffizienten}
 $a_n y^{(n)} + a_{n-1} y^{n-1} + \ldots + a_0 y = 0$
 \begin{itemize}\itemsep0pt \leftmargin8pt
 	\item Stelle die charakteristische Gleichung $p(\lambda) = \sum^n_{k=0} a_k \lambda^k = 0$ auf

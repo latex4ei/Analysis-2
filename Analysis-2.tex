@@ -45,7 +45,7 @@
 \usepackage{fancyhdr}
 \pagestyle{fancy}
 \fancyhf{}
-   \fancyfoot[C]{\textbf{Analysis 1} von Lukas Kompatscher (lukas.kompatscher@tum.de)}
+   \fancyfoot[C]{\textbf{Analysis 2} von Latex4ei (info@latex4ei.de)}
    \renewcommand{\headrulewidth}{0.0pt} %obere Linie ausblenden
    \renewcommand{\footrulewidth}{0.1pt} %obere Linie ausblenden
 
@@ -228,12 +228,7 @@ $\int\lambda f(x)+\mu g(x) \, \mathrm dx=\lambda\int f(x) \, \mathrm dx + \mu\in
 \subsection{Reihen}
 
 $\underset{\text{Harmonische Reihe}}{\sum\limits_{n=1}^\infty \frac{1}{n} \ra \infty} \qquad   \underset{\text{Geometrische Reihe}}{\sum\limits_{n=0}^\infty q^n \stackrel{|q|<1}= \frac{1}{1-q}}  \qquad \underset{\text{Exponentialreihe}}{\sum\limits_{n = 0}^{\infty} \frac{z^n}{n!} = e^z}$
-\fi
 
-
-
-
-\if{0}
 \section{Kurven}
 %===========================================================================================================================================================
 Eine Kurve ist ein eindimensionales Objekt.\\
@@ -269,17 +264,11 @@ Krümmung von $\gamma$: $\kappa(t)= \norm{\frac{\mathrm d^2 \gamma}{\mathrm d s^
 \everymath{\displaystyle}	% Formeln ab hier groß Schreiben
 \boxed{ L(\gamma) = \int_a^b \sqrt{\dot x^2 + \dot y^2}\; \mathrm dt$ \qquad $\tilde{\kappa}(t)=\frac{\dot x \ddot y - \ddot x \dot y}{(\dot x^2 + \dot y^2)^{\frac{3}{2}}} } \\
 \everymath{\textstyle}
-
-
 	% \subsection{Funktionen als Kurve}
 	% Funktion $f$ als Kurve: $\gamma:[a,b] \rightarrow \mathbb R^2, t \mapsto \begin{pmatrix} t \\ f(t) \end{pmatrix}$\\
 	% Länge von $f$: $L(\gamma) = \int_a^b \sqrt{1+f'(t)^2}\; \mathrm dt$ \qquad Krümmung von $f$: $\varkappa(t)=\frac{f''(t)}{\sqrt{(1+f'(t)^2)^3}}$\\
 
-
-
-
 \fi
-
 
 \section{Skalarfelder}
 %===========================================================================================================================================================
@@ -304,9 +293,6 @@ Offene Kugelmenge vom Radius $r$: $B_r(x_0)$\\
 Es gilt: Ist $D \subseteq \mathbb R^n$ offen, so ist $D^C$ abgeschlossen. \\
 $\mathbb R$ und $\emptyset$ sind offen und abgeschlossen.
 
-
-
-
 \subsection{Folgen, Grenzwerte, Stetigkeit im $\mathbb R^n$}
 %-----------------------------------------------------------------------
 Eine Folge $\bigl( X^{(k)} \bigr)$ ist eine Abbildung $\bigl(X^{(k)}\bigr):\mathbb N_0 \rightarrow \mathbb R^n, k\mapsto x^{(k)}$\\
@@ -319,10 +305,6 @@ Stetigkeit: \quad \ $\forall x \in \mathbb R^n:\lim\limits_{x \rightarrow x_0} f
 Satz von Max. und Min.: Ist $f(\vec x)$ stetig und $D$ kompakt, so\\
 % Ist $f:D \subseteq \mathbb R^n \rightarrow \mathbb R$ stetig und D kompakt, so\\
 $\exists x_{max},x_{min} \in D \forall x\in D:f(x_{min}) \le f(x) \le f(x_{max})$
-
-
-
-
 
 \subsection{Differentiation von Skalarfeldern - Gradient}
 %-----------------------------------------------------------------------
@@ -400,11 +382,6 @@ Bild von $f$: $\mathrm{Bild}(f) = \iset{f(v)}{v \in V}$ ist UVR von $W$\\
 \emph{Injektiv} (aus $f(x) = f(y) \ra x = y)$), falls $\ker(f) = \eset{0}$ \\
 \emph{Surjektiv} Alle Werte im Zielraum werden angenommen.
 \fi
-
-
-
-
-
 
 \section{Taylorpolynom für Skalarfelder}
 %===========================================================================================================================================================
@@ -630,9 +607,6 @@ Es seien $f,g:\Omega \subset \R^n \mapsto \R$
 	\end{itemize}
 \end{itemize}
 
-
-% subsection subsection name (end)
-
 \subsection{Lineare Ausgleichsrechnung (Polynom)}
 Man betrachtet eine Funktion $b = f(t) = x_0 + x_1t + \ldots + x_nt^n$ mit unbekannten Koeffizienten $x_0, x_1, \ldots x_n$. Es sind m Paare $(b_i, t_i)$ gegeben und sucht
 den Vektor $\vec x = (x_0, x_1, \ldots, x_n)^T$, für den $r_i(x) = b_i - x_0 - x_1t - \ldots - x_nt^n$ minimal sind. \\ \\
@@ -663,11 +637,7 @@ Gesucht: Ausgleichsfunktion $f=f(x)=\lambda_1 f_1 +\cdots+\lambda_r f_r$ zu gege
 \end{enumerate}
 \fi
 
-
-
 \section{Kurvenintegral}
-
-
 
 \subsection{Skalares Kurvenintegral}
 von Skalarfeld $f(\vec x)$ entlang einer Kurve $\vec \gamma(t)$ mit $\vec x, \vec \gamma \in \mathbb R^n$\\
@@ -774,8 +744,6 @@ $\diff V = r\diff r\diff\varphi \diff z$ \\ \\
 $r\diff r\diff\theta$, \quad $r^2 \sin(\theta)\diff\theta\diff\varphi$, \quad $r \sin(\theta)\diff \varphi\diff r$ \\
 $\diff V = r^2 \sin(\theta)\diff r\diff\varphi \diff \theta$ 
 
-
-
 \subsubsection{Koordinatenwechsel}
 $\vec{x}:\vec{u} \in D \ra \vec{x}(\vec{u}) \in B$ orthogonale Transformation\\
 $D, B \subseteq \R^3$\\
@@ -844,9 +812,6 @@ Fläche $\vec \phi: B \subseteq \R^2 \ra \R^3, (u,w) \mapsto \vec \phi(u,w)$ und
 VF $\vec v:D\subseteq \R^3 \ra \R^3, \vec x \mapsto \vec v(x,y,z)$ \\
 \boxed{ \iint_{\vec \phi} \vec v \bdot \diff \vec O := \iint_B \vec v\Bigl(\vec \phi(u,w)\Bigr)^\top \bdot \Bigl( \vec \phi_u \times \vec \phi_w \Bigr) \diff u \diff w }
 % Falls eine Stammfunktion zu $\vec v$ existiert, dann ist der Fluss wegunabhängig
-
-
-
 \fi
 % ==============================================================================================================		
 \section{Integralsätze}
@@ -905,9 +870,9 @@ Dann
 \end{itemize}
 
 
-\if{0}
 \textbf{Rezept: Stammfunktion eines Gradientenfeldes} \\
 
+\iffalse
 Fall $n=2$: Ist $\vec v:D\subseteq \mathbb{R}^2\rightarrow\mathrm{R}^2$ ein Gradientenfeld, $\vec v=(v_1,v_2)^\top$, so findet man eine Stammfunktion $f$ von $\vec v$ wie folgt:
 \begin{enumerate}
 	\item Integration von $v_1$ nach $x$:\\
@@ -918,7 +883,7 @@ Fall $n=2$: Ist $\vec v:D\subseteq \mathbb{R}^2\rightarrow\mathrm{R}^2$ ein Grad
 	$g(y)=\int{g_y(y)\diff y}$
 	\item Setze $g(y)$ aus (3) in $f$ aus (1) ein und erhalte eine Stammfunktion $f$
 \end{enumerate}
-
+\fi
 
 Fall $n=3$: Ist $\vec v:D\subseteq \mathbb{R}^3\rightarrow\mathrm{R}^3$ ein Gradientenfeld, $\vec v=(v_1,v_2,v_3)^\top$, so findet man eine Stammfunktion $f$ von $\vec v$ wie folgt:
 \begin{enumerate}
@@ -935,8 +900,6 @@ Fall $n=3$: Ist $\vec v:D\subseteq \mathbb{R}^3\rightarrow\mathrm{R}^3$ ein Grad
 	$h(z)=\int{h_z(z)\diff z}$
 	\item Setze $h(z)$ aus (6) in $f$ aus (4) ein und erhalte eine Stammfunktion $f$
 \end{enumerate}
-
-\fi
 
 % ==============================================================================================================	
 \section{Differentialgleichungen (DGL)}
@@ -1014,8 +977,9 @@ $\sum_{i=1}^n c_{\text{re,i}} \e^{t\lambda_{\text{re,i}}}[\cos{(t\lambda_{\text{
 \paragraph{Alternative}
 TODO %TODO mit Diagonalmatrix
 \begin{enumerate}
-	\item Bestimme n EW $\lambda_i$ und deren EV $\vec v_i$ von $\ma A$
-	\item $S = \mat{\vec v_1 & \hdots & \vec v_n}$
+	\item Bestimme EW $\lambda_i$ und EV $\vec v_i$ von $\ma A$
+	\item Setze $\ma S = (\vec v_1, ..., \vec v_n)$ und bestimme $\ma S^{-1}$ und $\ma D = \ma S^{-1} \ma A \ma S$
+	\item Berechne $e^{\ma A} = \exp(\ma S \ma D \ma S^{-1}) = \ma S e^{\ma D} \ma S^{-1} $
 \end{enumerate}
 
 \subsubsection{Matrix nicht diagonalisierbar}

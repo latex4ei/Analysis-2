@@ -53,8 +53,9 @@
    \fancyfoot[L]{Homepage: www.latex4ei.de -  Fehler bitte \emph{sofort} melden.}
 % ----------------------------------------------------------------------
 
-
-
+% Ausgegraut zum Abschreiben:
+%\definecolor{grey}{rgb}{0.6,0.6,0.6}
+%\color{grey}
 
 % Eigene Befehle und Befehlsüberschreibungen
 % ======================================================================
@@ -696,11 +697,19 @@ $\int\limits_{\vec \gamma} f \ \mathrm ds = \underset{\text{Bei VF}}{(-)} \ \int
 
 
 % ==============================================================================================================
-\section{Integration über Normalbereiche}
-TODO
-% ==============================================================================================================
-%Satz von Fubini: Falls die Integralgrenzen von den Integranden unabhängig sind, gilt: $\int\limits^d_c \int\limits^b_a ... \diff x \diff y$ = $\int\limits^b_a \int\limits^d_c ... \diff y \diff x$\\
+\section{Bereichsintegrale}
+Satz von Fubini: Falls die Integralgrenzen von den Integranden unabhängig sind, gilt: $\int\limits^d_c \int\limits^b_a ... \diff x \diff y$ = $\int\limits^b_a \int\limits^d_c ... \diff y \diff x$\\
+\textbf{Krummlinige Koordinaten:}\\ $\int_{[a,b] \times [c,d]}f(\Phi(x))d(x_1,x_2) = \int_a^b \int_c^d f(\Phi(x)) \det(J_\Phi) dx_1dx_2$
+\textbf{Normalbereiche:}
+\begin{itemize}
+  \item Typ I: $\int_a^b \int_{g(x)}^{h(x)} f(x,y)dydx$
+  \item Typ II: $\int_c^d \int_{g(y)}^{h(y)} f(x,y)dxdy$
+  \item Ineinander umwandeln mit Hilfe von Skizze
+\end{itemize}
 
+\subsection{Oberflächenintegrale}
+$\iint_\Phi f dO = \int_a^b\int_c^d f(\Phi(u,v)) ||\partial_u \Phi(u,v) \times \partial_v \Phi(u,v)||du dv$\\
+Falls $f$ Vektorfeld Skalarprodukt des Oberflächenelements statt Norm. Zur Flächenbestimmung: $f(x) = 1$
 \if{0}
 
 \subsubsection{Regulärer Bereich}
@@ -869,12 +878,12 @@ Falls ein Teil der Parametrisierung im Uhrzeigersinn verläuft, muss dieses Inte
 %Fläche von $B$: $F(B) = \frac12 \oint_{\partial B} \vect{ 0 \\ \gamma_1 } \norm{\dot{\vec \gamma}(t)} \diff t$ \quad $\partial B = \sum \vec \gamma_i$
 
 \subsubsection{Satz von Stokes für ebene Felder}
-$\vec{v}:B \subseteq \R^2 \ra \R^2$ und $\vec{e_3} = \vect{0 \\ 0 \\ 1 \\}$\\
+$\vec{v}:B \subseteq \R^2 \ra \R^2$\\
 \boxed{\iint_B{\rot{\vect{\vec{v} \\ 0 \\}} \vec{e_3} \diff F} = \oint_{\partial B}{\vec{v} \diff \vec{x}}}\\\\
 Sind $f,g$ zwei SF, so: $\iiint_B f \Delta g + \nabla f \nabla g \diff V = \iint_{\partial B} f \nabla g \diff \vec O$\\
 für $f=1$: $\iiint_B \Delta g \diff V = \iint_{\partial B} \nabla g \diff \vec O$\\
 
-\subsection{Gradientenfeld} % (fold)
+\subsection{Gradientenfeld und Potential} % (fold)
 $\Ra$ Kurve muss einfach zusammenhängend sein. \\
 (Man muss die Kurve auf einen Punkt zusammenziehen könnnen) \\ \\
 $f:D \subset \R^n \mapsto \R^n$ ist ein Gradientenfeld, wenn $f(x) = \nabla{\Phi(x)}$ \\
@@ -929,9 +938,6 @@ Fall $n=3$: Ist $\vec v:D\subseteq \mathbb{R}^3\rightarrow\mathrm{R}^3$ ein Grad
 \end{enumerate}
 
 \fi
-
-\section{Oberflächenintegrale}
-TODO
 
 % ==============================================================================================================	
 \section{Differentialgleichungen (DGL)}

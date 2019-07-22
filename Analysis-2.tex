@@ -437,7 +437,7 @@ Es gibt eine Zwischenstelle $\xi \in (0,1)$ mit: \\
 
 
 
-
+% evtl. nochmal anschauen
 \section{Koordinatensysteme}
 %===========================================================================================================================================================
 Transformationsvektoren (Um einen Vektor in anderen Koordinaten darzustellen):\\ \\
@@ -448,8 +448,6 @@ Kugel & $\begin{pmatrix} r \cdot \cos(\varphi) \sin(\theta) \\ r \cdot \sin(\var
 \end{tabular} \\ \\
  \\ 
  
-% evtl. nochmal anschauen
-\if{0}
 Transformationsmatrix $\ma S_z$ \\
 $\mat{ \vec e_r & \vec e_\varphi & \vec e_z} = \mat{ \cos(\varphi) &  -\sin(\varphi) & 0\\ \sin(\varphi) & \cos(\varphi) & 0 \\ 0 & 0 & 1 }$
 \begin{center}
@@ -466,7 +464,7 @@ $\mat{ \vec e_r & \vec e_\theta & \vec e_\varphi} =
 	\boxed{f_{\text{kart}} = \ma S_k \cdot f_{\text{kug}} \qquad \qquad f_{\text{kug}} = \ma S_k^{-1} \cdot f_{\text{kart}}} \\
 \end{center}
 Die Spalten entsprechen den orthonormalen Basisvektoren im jeweiligen Koordinatensystem. \\ $\Ra$ Trafo-Matrizen orthogonal: $\ma S^{-1} = \ma S^\top$
-
+\if{0}
 \subsection{Transformation eines Skalarfeldes $f(x,y,z)$}
 $\tilde{f}(r,\varphi,z)$ bzw.  $\tilde{f}(r,\theta,\varphi)$ erhält man durch ersetzen von $x$, $y$ und $z$ durch die entsprechenden Einträge des Transformationsvektors.
 
@@ -475,7 +473,6 @@ $\tilde{f}(r,\varphi,z)$ bzw.  $\tilde{f}(r,\theta,\varphi)$ erhält man durch e
 $\tilde{\vec f}(r,\varphi,z)$ bzw. $\tilde{\vec f}(r,\theta,\varphi)$ durch ersetzen von $x$, $y$ und $z$ durch die entsprechenden Einträge des Transformationsvektors. \\ \\
 Zylinder: $ \hat{\vec f}(r,\varphi,z)$ bzgl. $\{e_r,e_\varphi,e_z\}$: $\hat{\vec f} = \ma S_z^{-1} \cdot \tilde{\vec f}$ \\ \\
 Kugel: $\hat{\vec f}(r,\theta,\varphi)$ bzgl. $\{e_r,e_\theta,e_\varphi\}$: $\hat{\vec f} = \ma S_k^{-1} \cdot \tilde{\vec f}$
-\fi
 
 \subsection{Operatoren in anderen Koordinaten}
 (Detailliert in der Formelsammlung im Anhang) \\ \\
@@ -493,6 +490,7 @@ $\nabla$ & $(\partial_r,\ \frac{1}{r}\partial_\varphi,\ \frac{1}{r\sin\theta}\pa
 $\div$ & $  \frac{1}{r^{2}}  \partial_r(r^2 \vec f_r) + \frac{1}{r \sin \theta} \partial_\varphi(\vec f_\varphi) + \frac{1}{r \sin \theta} \partial_\theta(\sin \theta \vec f_\theta)$\\ \midrule
 $\Delta $ & $ \frac{1}{r^{2}} \partial^2_{r}(r^2 f) + \frac{1}{r^2\sin^2\theta} \partial^2_{\varphi} (\sin\theta f) + \frac{1}{r^2\sin\theta} \partial^2_{\theta} f$
 \end{tabular}
+\fi
 
 \section{Implizite Funktionen $g$}
 %===========================================================================================================================================================
@@ -572,6 +570,7 @@ $\ma D = \begin{pmatrix} \lambda_1 & 0 & 0 \\ 0 & \lambda_2 & 0 \\ 0 & 0 & \lamb
 $_B M(f)_B = _B M (id)_{E3} \cdot _{E3} M(f)_{E3} \cdot _{E3} M(id)_B$ \\
 $B = ( _{E3} b_1 , _{E3} b_2 ,_{E3} b_3 ) = (v_1, v_2, v_3)$
 \fi
+Matrix $A \in \R^{nxn}$ heißt nilpotent, falls $\exists A^r = 0$, mit $r \in \R$\\ 
 \subsection{Definitheit}
 Eine sym. Matrix $A = A^\top \in \mathbb R^{n\times n}$ heißt\\%[0.3em]
 \[\begin{cases}
@@ -942,56 +941,21 @@ Fall $n=3$: Ist $\vec v:D\subseteq \mathbb{R}^3\rightarrow\mathrm{R}^3$ ein Grad
 % ==============================================================================================================	
 \section{Differentialgleichungen (DGL)}
 % ==============================================================================================================	
+\subsection{Existenz von Lösungen von DGL erster Ordnung}
+\textbf{Satz von Peano:} f ist stetiges Skalarfeld auf dem Rechteck $D = [t_0, t_0 + \alpha] \times [u_0-\beta , u_0+\beta]$ mit $\alpha, \beta > 0 \Rightarrow$ Lösung von $u(t)$ im Intervall $[t_0, t_0+\delta]$ mit $\delta > 0$\\
+Es können im Allgemeinen jedoch mehrere Lösungen existieren (keine eindeutige Lösung)!\\ \\
+\textbf{Satz von Picard-Lindelöf:} f ist Skalarfeld auf $[t_0, t_0 + \alpha] \times [u_0-\beta , u_0+\beta]$ und es erfüllt die lokale Lipschitz-Bedingung $\Rightarrow$ Lösung von $u(t)$ im Intervall $[t_0, t_0+\delta]$ mit $\delta = \text{min}(\alpha, \frac{\beta}{M}) > 0$ mit $M = \text{max}_{(t,x)\in D}\abs{f(t,x)}$\\
+Diese Lösung ist eindeutig.
 
+\subsection{Separierbare DGL}\label{sec:sep-dgl}
+$\boxed{u'(t) = f(u) \cdot g(t)}$ mit $u(t_0) = u_0$\\
+\begin{enumerate}
+	\item $\int \frac{1}{f(u)} \diff u = \int g(t) \diff t$
+	\item Nach u(t) auflösen
+	\item Anfangswert einsetzen und $C$ bestimmen
+\end{enumerate}
 
-
-\subsection{Seperierbare DGL}
-Form: $y' = f(x) \cdot g(y)$; Lösung: $\int \frac{1}{g(y)} \diff y = \int f(x) \diff x$
-
-
-
-\subsection{Lineare DGL mit konstanten Koeffizienten}
-
-\subsubsection{Homogene DGL mit konstanten Koeffizienten}
-$a_n y^{(n)} + a_{n-1} y^{n-1} + \ldots + a_0 y = 0$
-\begin{itemize}\itemsep0pt \leftmargin8pt
-	\item Stelle die charakteristische Gleichung $p(\lambda) = \sum^n_{k=0} a_k \lambda^k = 0$ auf
-	\item Bestimme alle Lösungen von $p(\lambda)$
-	\item Gib $n$ linear unabhängige Lösungen der DGL an:
-	\begin{itemize}\itemsep0pt \leftmargin0pt
-		\item 	Ist $ \lambda$ eine $m$-fache reelle NST, dann wähle $y_1 = e^{\tilde \lambda x}$, \quad $y_i = x^i e^{ \lambda x}$\\
-		\item Ist $ \lambda$ eine $m$-fache konjugiert komplexe NST $\lambda = a + \i b$, dann streiche $\overline \lambda_i$ und wähle $y_1 = e^{ax} \cos (bx),\; y_2 = e^{ax} \sin (bx)$ bzw. $y_i = x^i e^{ax} \sin (bx)$ und $y_{i+1} =  x^i e^{ax} \cos (bx)$
-		%$Reele Polynome haben immer konjugiert komplexe NST: $\Re$ und $\Im$ sind zwei lin. unabhängie Lösungen der DGL%
-	\end{itemize}
-	\item $y(x) = c_1 y_1 (x) + \ldots + c_n y_n (x)$ mit $c_1, \ldots c_n \in \R$ ist Lösung der DGL
-\end{itemize}
-
-\subsubsection{inhomogene DGL mit konstanten Koeffizienten}
-$a_n y^{(n)} + a_{n-1} y^{n-1} + \ldots + a_0 y = s(t)$
-
-\begin{itemize}\itemsep0pt \leftmargin8pt
-	\item Löse homogene DGL $(s = 0)$, liefert $y_h$
-	\item Partikuläre Lösung $y_p$ durch \emph{Variation der Konstanten}
-	\begin{itemize}\itemsep0pt \leftmargin8pt
-		\item Stelle ein $y_p (x)$ mit variablen Konstanten $c(x)$ auf
-		\item Löse das System: \\
-		$c_1' y_1 + c_2' y_2 = 0$ \\
-		$c_1' y_1' + c_2' y_2' = \frac{1}{a_n} s(x)$ \\
-		Beachte dabei auch die Ableitung nach der Produktregel
-		\item Erhalte $c(x)$ durch unbestimmte Integration aus $c'(x)$
-		\item $y_p = c_1 (x) y_1 + c_2 (x) y_2$ ist die partikuläre Lösung
-	\end{itemize}
-	\item Partikuläre Lsg. $y_p$ durch Ansatz vom komischen Typ auf der rechten Seite
-	\begin{itemize}\itemsep0pt \leftmargin8pt
-		\item Idee: $y_p$ hat die Form von $s(x)$\\
-		Falls $s(x) = (b_0 + b_1 x + \ldots + b_m x^m) e^{ax}  \Big\{ {}^{\textstyle \cos(bx)} _{\textstyle \sin(bx)}$, dann\\
-		$y_p = x^r \cdot \big[ (A_0 + A_1 x + \ldots + A_m x^m) \cos(bx) + (B_0 + B_1 x + \ldots + B_m x^m) \sin(bx) \big] e^{ax}$ \\
-		mit $a+b\i$ ist $r$-fache Nullstelle(Resonanz) vom char. Poly. von $y_h$ \\
-		Tipp: Bei Summen im Störglied entkoppelt, d.h. $y_p$ getrennt berechnen und addieren.
-	\end{itemize}
-	\item Die Lösung der DGL ist $y = y_p + y_h$
-\end{itemize}	
-
+\iffalse
 \subsection{Die exakte DGL}
 DGL der Form: $\boxed{f(x,y) + g(x,y) \cdot y' = 0}$ \\   
 bzw. $f(x,y) \diff x + g(x,y) \diff y = 0$\\ \\
@@ -1008,18 +972,21 @@ Gradientenfeld $v(x,y) = \vect{f(x,y) \\ g(x,y)}$ hat Stammfkt. $F(x,y(x)) = C$
 	\item Löse $F(x,y) = c$ nach $y = y(x)$ auf, falls möglich
 	\item Die von $c$ abhängige Lsg. ist die allg. Lsg. der DGL
 \end{itemize}
+\fi
+\subsection{Transformation von DGL in lineares DGL System}
+Jede DGL n-ter Ordnung lässt sich als DGL System mit n Gleichungen darstellen:\\
+$\boxed{f(t, u(t), u'(t),\hdots , u^{(n)}(t)) = 0}$\\
+\begin{enumerate}
+	\item Bestimme $\vec x = \mat{u(t) \\ u'(t) \\ \hdots \\ u^{(n-1)}(t)}, \vec x \in \R^n$ 
+	\item Erhalte folgende Gleichungen\\
+		\subitem 1) $f = 0$
+		\subitem 2) $x_1'(t) = x_2(t)$
+		\subitem $\hdots$
+		\subitem n) $x_{n-1}'(t) = x_n(t)$
+	\item Stelle das DGL-System $x' = Ax$ auf
+\end{enumerate}
 
 \subsection{Homogene lineare DGL Systeme}
-$\ra$ Jede DGL lässt sich als DGL System darstellen
-
-Transformiere eine DGL 2. Ordnung in ein DGL System 1. Ordnung:
-\begin{itemize}
-	\item Substituiere $\dot x = y$
-	\item Schreibe DGL-System: \\
-	$\vect{\dot x \\  \dot y} = \mat{ 0 & 1 \\ a_1 & a_2} \vect{x \\ y}$ (Bestimme $a_1$ und $a_2$ aus DGL)
-\end{itemize}
-
-\paragraph{Löse das DGL-System}
 % TODO: Hier kann man noch viel Platz sparen
 
 %$\vec Z' = \vect{ z'_0 \\ z'_1 \\ \svdots \\ z'_n } = \mat{ 0 & 1 & 0 & ... & 0 \\ 0 & 0 & 1 & ... & 0 \\ \svdots & & & \ddots &  \\ 0 & 0 & 0 & ... & 1 \\ -a_0 & -a_1 & -a_2 & ... & -a_{n-1} } \vect{z_0 \\ z_1 \\ \svdots \\ z_{n-2} \\ z_{n-1} }$\\
@@ -1032,19 +999,25 @@ Transformiere eine DGL 2. Ordnung in ein DGL System 1. Ordnung:
 %$\ma A \in \R^{n \times n} \ra e^{\ma A} := \ma E_n + \ma A + \frac{1}{2} \ma A^2 %+ ... = \sum\limits_{k=0}^\infty \frac{\ma A^k}{k!}$\\
 %	$\exp(\mat{\lambda_1 & 0 \\ 0 & \lambda_2}) = \mat{e^{\lambda_1} & 0 \\ 0 & e^{\lambda_2}}$\\
 %$\ma S^{-1} \ma A \ma S$ \qquad $\exp(\ma A) = \exp(\ma S \ma D \ma S^{-1}) = \ma S e^{\ma D} \ma S^{-1} $\\
-
+$\boxed{\vec x'= \ma A\vec x}$
+\subsubsection{Matrix diagonalisierbar}
 \begin{enumerate}
-	\item Bestimme EW $\lambda_i$ und Basis aus EV $\vec b_i$ von $\ma A$
-	\item Setze $\ma S = (\vec b1, ..., \vec b_n)$ und bestimme $\ma S^{-1}$ und $\ma D = \ma S^{-1} \ma A \ma S$
-	\item Berechne $e^{\ma A} = \exp(\ma S \ma D \ma S^{-1}) = \ma S e^{\ma D} \ma S^{-1} $
+	\item Bestimme $n$ EW $\lambda_i$ und deren EV $\vec v_i$ von $\ma A$
+	\item $\vec x = \sum_{i=1}^n c_i\e^{\lambda_it}\vec v_i$
+	\item Bestimme $c_i$ durch Anfangsbedingungen
 \end{enumerate}
 
+Bei komplexen EW $\lambda = \lambda_{\text{re}}+ \i \lambda_{im}$ und $\vec v = \vec v_{\text{re}} + \i \vec v_{\text{im}}$: \\
+$\sum_{i=1}^n c_{\text{re,i}} \e^{t\lambda_{\text{re,i}}}[\cos{(t\lambda_{\text{im, i}})}\vec v_{\text{re,i}} - \sin{(t\lambda_{\text{im,i}})}\vec v_{\text{im,i}}]+c_{\text{im,i}}\e^{t\lambda_{\text{re,i}}}[\cos{(t\lambda_{\text{im,i}})}\vec v_{\text{im,i}}+\sin{(t\lambda_{\text{im,i}})}\vec v_{\text{re,i}}]$
 
-$\vec y' = \ma A \vec y$ \quad $\Ra$ \quad $\vec y = \vec c \cdot e^{(x-x_0)\ma A} = \sum\limits_{i = 0}^n c_i \cdot e^{\lambda_i x} \cdot b_i$\\
+\paragraph{Alternative}
+TODO %TODO mit Diagonalmatrix
+\begin{enumerate}
+	\item Bestimme n EW $\lambda_i$ und deren EV $\vec v_i$ von $\ma A$
+	\item $S = \mat{\vec v_1 & \hdots & \vec v_n}$
+\end{enumerate}
 
-Bei komplexen EW: Trennung in Real und Imaginärteil
-
-\subsection{Lösung für $\bs y' = \bs A \bs y$ falls $\bs A$ nicht diagbar}
+\subsubsection{Matrix nicht diagonalisierbar}
 $\ra$	Es existiert eine Jordan-Normalform $\ma J$ mit $\ma S^{-1} \ma A \ma S$\\
 
 
@@ -1053,7 +1026,7 @@ $e^{\ma J} = e^{\ma D + \ma N} = e^{D} e^{N} = e^D \cdot (\ma E_k + \ma N + \fra
 $e^{x\ma N} =  \mat{1 & x & \frac{1}{2} x^2 & ... & \frac{1}{(k-1)!} x^{k-1} \\ & 1 & x & & \\ 0 & & 1 & }$
 
 $\ma S$ ist die Transformationsmatr. auf Jordan-Normalform: \\
-$\ma S = (\vec b_1, ..., \vec b_n)$ mit $\vec b_1 \ldots \vec b_n$ sind EV bzw. HV von $\ma A$
+$\ma S = (\vec v_1, ..., \vec v_n)$ mit $\vec v_1 \ldots \vec v_n$ sind EV bzw. HV von $\ma A$
 \\
 
 % Ist das hier notwendig? -> vorerst auskommentiert
@@ -1064,22 +1037,53 @@ $\boxed{\vec y(x) = e^{x \ma A} \cdot \vec c = \ma S e^{x \ma J} \ma S^{-1} = \m
 
 \paragraph{Die Lösungsformel für $(1 \times 1)$, $(2 \times 2)$ und $(3 \times 3)$ Kästchen}
 
-$y_a (x) = c_1 e^{\lambda_1 x} v_1$ \\
-$+ c_2 e^{\lambda_2 x} v_2 + c_3 e^{\lambda_2 x}(xv_2 + v_3)$ \\
-$+ c_4 e^{\lambda_3 x} v_4 + c_5 e^{\lambda_3 x}(xv_4 + v_5) + c_6 e^{\lambda_3 x} (\frac{1}{2} x^2 v_4 + xv_5 + v_6)$ \\
+$u (t) = c_1 e^{\lambda_1 t} v_1$ \\
+$+ c_2 e^{\lambda_2 t} v_2 + c_3 e^{\lambda_2 t}(tv_2 + v_3)$ \\
+$+ c_4 e^{\lambda_3 t} v_4 + c_5 e^{\lambda_3 t}(tv_4 + v_5) + c_6 e^{\lambda_3 t} (\frac{1}{2} t^2 v_4 + tv_5 + v_6)$ \\
 \\ \ra  $v_1, v_2, v_4$ EV, $v_3, v_5$ HV 2. Stufe und $v_6$ HV 3. Stufe
+\subsubsection{Inhomogene DGL}
+$\boxed{u'(t) = f(t)u + g(t)}$
+
+\begin{enumerate}
+	\itemsep0pt \leftmargin8pt
+	\item Bestimme $F(t)$
+	\item Löse homogene DGL mit $g(t) = 0$ (siehe \ref{sec:sep-dgl}) $\Rightarrow u_{hom}(t)$
+	\item Partikuläre Lösung $u_p(t)$ durch \emph{Variation der Konstanten}
+	\begin{itemize}\itemsep0pt \leftmargin8pt
+		\item $u(t) = c(t) \e^{F(t)}$
+		\item Ableiten: $u'(t) = c'(t)\e^{F(t)}+u\cdot f(t)$
+		\item Gleichsetzen: $g(t) = c'(t)\e^{F(t)}$
+		\item Bestimme $c(t)$ als Stammfunktion von $c'(t) = g(t)\e^{-F(t)}$
+		\item $u_p(t) = c(t)\e^{F(t)}$
+	\end{itemize}
+	\item Die Lösung der DGL ist $u(t) = u_p(t) + u_{hom}(t)$
+\end{enumerate}
+
+\subsection{Lineare DGL höherer Ordnung}
+$\boxed{a_nu^{(n)}(t) + \hdots + a_1u'(t)+a_0u = 0}$\\
+\begin{enumerate}\itemsep0pt \leftmargin8pt
+	\item Stelle die charakteristische Gleichung $p(\lambda) = \sum^n_{k=0} a_k \lambda^k = 0$ auf
+	\item Bestimme alle Lösungen von $p(\lambda)$
+	\item Gib $n$ linear unabhängige Lösungen der DGL an:
+	\begin{itemize}\itemsep0pt \leftmargin0pt
+		\item 	Ist $ \lambda$ eine $k$-fache reelle NST:\\
+$u_1 = e^{\tilde \lambda x}, \hdots, u_i = t^i e^{ \lambda t}$\\
+		\item Ist $ \lambda$ eine $k$-fache konjugiert komplexe NST $\lambda = a + \i b$:\\
+$u_1 = e^{at} \cos (bt),\; u_2 = e^{at} \sin (bx)$ \\
+bzw. $u_i = t^i e^{at} \sin (bt)$ und $u_{i+1} =  t^i e^{at} \cos (bt)$
+		%$Reelle Polynome haben immer konjugiert komplexe NST: $\Re$ und $\Im$ sind zwei lin. unabhängie Lösungen der DGL%
+	\end{itemize}
+	\item $u(t) = c_1 u_1 (x) + \ldots + c_n u_n (t)$ mit $c_1, \ldots c_n \in \R$ ist Lösung der DGL
+	\item Bestimme $c_i$ durch Anfangsbedingungen
+\end{enumerate}
 
 \subsection{Lösen von allgemeinen DGL-Systemen}
-DGL-System: $\dot {\vec y}(t) = \ma A(t) \bdot \vec y(t) + \vec b(t)$
-\begin{enumerate}
-	\item Finde $n$ lin. unabhäng. Lösungsvektoren $\vec y_1,...,\vec y_n$mit der\\
-	Wronski Determinante $W(t) = \det(\vec y_1,...,\vec y_n) \stackrel{!}{\ne} 0$
-	\item Bestimme $\vec y_p = \ma Y(t) \vec c(t)$ durch Variation der Konstanten\\
-	$c(t) = \int \ma Y^{-1}(t) \vec b(t) \diff t$ bzw. $\ma Y \cdot \vec c'(t) = \vec b$
-	\item Bestimme $\vec y = \vec y_p + \sum c_i \vec y_i$ mit $c_i \in \R$
-\end{enumerate}
-Gleichgewichtspunkt: $A y_g + b = 0$ $\ra$ $(A | b) \ra (E | y_g)$ \\
-Stabilität:
+$\boxed{\dot {\vec u}(t) = \ma A(t) \bdot \vec u(t) + \vec f(t)}$ mit $u(t_0) = u_0$\\
+Lösung: $u(t) = \e^{t-t_0)\ma A}(u_0 + \int_{t_0}^t e^{-(s-t_0)\ma A}f(s)ds)$\\
+\subsection{Stabilität}
+\textbf{Autonom}, falls DGL nicht explizit von der freien Variable $t$ abhängt: $u'=f(u)$\\
+\textbf{Gleichgewichtspunkt} einer autonomen DGL, falls: $f(v) = 0$\\
+\textbf{Stabilität:}
 \begin{itemize}\itemsep-1pt
 	\item $Re(\lambda_i) < 0 \ra$ asymptotisch stabil 
 	\item $Re(\lambda_i) > 0 \ra$ instabil

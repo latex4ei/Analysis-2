@@ -943,11 +943,12 @@ Jede DGL n-ter Ordnung lässt sich als DGL System mit n Gleichungen darstellen:\
 $\boxed{f(t, u(t), u'(t),\hdots , u^{(n)}(t)) = 0}$\\
 \begin{enumerate}
 	\item Bestimme $\vec x(t) = \mat{u(t) \\ u'(t) \\ \hdots \\ u^{(n-1)}(t)}, \vec x \in \R^n$ 
-	\item Erhalte folgende Gleichungen\\
+	\item Erhalte folgende Gleichungen
 		\subitem 1) $f(t, \vec x(t), x_n'(t)) = 0$
 		\subitem 2) $x_1'(t) = x_2(t)$
 		\subitem $\hdots$
 		\subitem n) $x_{n-1}'(t) = x_n(t)$
+	\item Löse das System und lese die erste Zeile ab
 \end{enumerate}
 
 \subsection{Homogene lineare DGL Systeme}
@@ -964,24 +965,25 @@ $\boxed{f(t, u(t), u'(t),\hdots , u^{(n)}(t)) = 0}$\\
 %	$\exp(\mat{\lambda_1 & 0 \\ 0 & \lambda_2}) = \mat{e^{\lambda_1} & 0 \\ 0 & e^{\lambda_2}}$\\
 %$\ma S^{-1} \ma A \ma S$ \qquad $\exp(\ma A) = \exp(\ma S \ma D \ma S^{-1}) = \ma S e^{\ma D} \ma S^{-1} $\\
 $\boxed{\vec x'= \ma A\vec x}$
-\subsubsection{Matrix diagonalisierbar}
 \begin{enumerate}
 	\item Bestimme $n$ EW $\lambda_i$ und deren EV $\vec v_i$ von $\ma A$
 	\item $\vec x = \sum_{i=1}^n c_i\e^{\lambda_it}\vec v_i$
 	\item Bestimme $c_i$ durch Anfangsbedingungen
+	
 \end{enumerate}
-
-Bei komplexen EW $\lambda = \lambda_{\text{re}}+ \i \lambda_{im}$ und $\vec v = \vec v_{\text{re}} + \i \vec v_{\text{im}}$: \\
-$\sum_{i=1}^n c_{\text{re,i}} \e^{t\lambda_{\text{re,i}}}[\cos{(t\lambda_{\text{im, i}})}\vec v_{\text{re,i}} - \sin{(t\lambda_{\text{im,i}})}\vec v_{\text{im,i}}]+c_{\text{im,i}}\e^{t\lambda_{\text{re,i}}}[\cos{(t\lambda_{\text{im,i}})}\vec v_{\text{im,i}}+\sin{(t\lambda_{\text{im,i}})}\vec v_{\text{re,i}}]$
+Zu jedem komplexen EW $\lambda$ einer reellen Matrix gibt es einen konjugiert komplexen EW $\ol \lambda$.\\
+Umrechnung komplexer EW $\lambda = \lambda_{\text{re}}+ \i \lambda_{im}$ und $\vec v = \vec v_{\text{re}} + \i \vec v_{\text{im}}$ in reelle Darstellung: \\
+$c_1 \e^{t\lambda_{\text{re}}}[\cos{(t\lambda_{\text{im}})}\vec v_{\text{re}} - \sin{(t\lambda_{\text{im}})}\vec v_{\text{im}}]+c_2\e^{t\lambda_{\text{re}}}[\cos{(t\lambda_{\text{im}})}\vec v_{\text{im}}+\sin{(t\lambda_{\text{im}})}\vec v_{\text{re}}]$
 
 \paragraph{Alternative}
-TODO %TODO mit Diagonalmatrix
 \begin{enumerate}
 	\item Bestimme EW $\lambda_i$ und EV $\vec v_i$ von $\ma A$
 	\item Setze $\ma S = (\vec v_1, ..., \vec v_n)$ und bestimme $\ma S^{-1}$ und $\ma D = \ma S^{-1} \ma A \ma S$
 	\item Berechne $e^{\ma A} = \exp(\ma S \ma D \ma S^{-1}) = \ma S e^{\ma D} \ma S^{-1} $
 \end{enumerate}
+$\vec y' = \ma A \vec y$ \quad $\Ra$ \quad $\vec y = \vec c \cdot e^{(x-x_0)\ma A} = \sum\limits_{i = 0}^n c_i \cdot e^{\lambda_i x} \cdot b_i$\\
 
+\iffalse
 \subsubsection{Matrix nicht diagonalisierbar}
 $\ra$	Es existiert eine Jordan-Normalform $\ma J$ mit $\ma S^{-1} \ma A \ma S$\\
 
@@ -1006,6 +1008,7 @@ $u (t) = c_1 e^{\lambda_1 t} v_1$ \\
 $+ c_2 e^{\lambda_2 t} v_2 + c_3 e^{\lambda_2 t}(tv_2 + v_3)$ \\
 $+ c_4 e^{\lambda_3 t} v_4 + c_5 e^{\lambda_3 t}(tv_4 + v_5) + c_6 e^{\lambda_3 t} (\frac{1}{2} t^2 v_4 + tv_5 + v_6)$ \\
 \\ \ra  $v_1, v_2, v_4$ EV, $v_3, v_5$ HV 2. Stufe und $v_6$ HV 3. Stufe
+\fi
 \subsubsection{Inhomogene DGL}
 $\boxed{u'(t) = f(t)u + g(t)}$
 
@@ -1027,18 +1030,18 @@ $\boxed{u'(t) = f(t)u + g(t)}$
 \subsection{Lineare DGL höherer Ordnung}
 $\boxed{a_nu^{(n)}(t) + \hdots + a_1u'(t)+a_0u = 0}$\\
 \begin{enumerate}\itemsep0pt \leftmargin8pt
-	\item Stelle die charakteristische Gleichung $p(\lambda) = \sum^n_{k=0} a_k \lambda^k = 0$ auf
+	\item Stelle das charakteristische Polynom $p(\lambda) = \sum^n_{k=0} a_k \lambda^k = 0$ auf
 	\item Bestimme alle Lösungen von $p(\lambda)$
 	\item Gib $n$ linear unabhängige Lösungen der DGL an:
 	\begin{itemize}\itemsep0pt \leftmargin0pt
 		\item 	Ist $ \lambda$ eine $k$-fache reelle NST:\\
-$u_1 = e^{\tilde \lambda t}, \hdots, u_i = t^i e^{ \lambda t}$\\
+$u_1 = e^{\lambda t}, \hdots, u_i = t^i e^{ \lambda t}$\\
 		\item Ist $ \lambda$ eine $k$-fache konjugiert komplexe NST $\lambda = a + \i b$:\\
 $u_1 = e^{at} \cos (bt),\; u_2 = e^{at} \sin (bt)$ \\
 bzw. $u_i = t^i e^{at} \sin (bt)$ und $u_{i+1} =  t^i e^{at} \cos (bt)$
 		%$Reelle Polynome haben immer konjugiert komplexe NST: $\Re$ und $\Im$ sind zwei lin. unabhängie Lösungen der DGL%
 	\end{itemize}
-	\item $u(t) = c_1 u_1 (x) + \ldots + c_n u_n (t)$ mit $c_1, \ldots c_n \in \R$ ist Lösung der DGL
+	\item $u(t) = c_1 u_1 (t) + \ldots + c_n u_n (t)$ mit $c_1, \ldots c_n \in \R$ ist Lösung der DGL
 	\item Bestimme $c_i$ durch Anfangsbedingungen
 \end{enumerate}
 

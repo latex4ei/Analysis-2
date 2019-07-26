@@ -285,9 +285,9 @@ Offene Kugelmenge vom Radius $r$: $B_r(x_0)$\\
 	\item Die Menge $D$ heißt offen, falls $D=\inn(D)$
 	\item Randpunkt $x_0 \in \mathbb R^n$ des Rands $\partial D$ von $D$, falls $\forall \varepsilon > 0:$ \\ 
 		$B_\varepsilon(x_0) \cap D \ne \emptyset \ \land \ B_\varepsilon(x_0) \cap D^C \ne \emptyset \ \Rightarrow \ \partial D = \partial D^C$
-	\item Abschluß $\ol D$ von $D$: $\overline{D}=D \cup \partial D$
+	\item Abschluss $\ol D$ von $D$: $\overline{D}=D \cup \partial D$
 	\item Die Menge $D$ ist abgeschlossen, falls $\partial D \subseteq D$
-	\item beschränkt, falls $\exists \mu \in \mathbb R \forall x \in D: \norm{x} < \mu$
+	\item beschränkt, falls $\exists \mu \in \mathbb R \quad \forall x \in D: \norm{x} < \mu$
 	\item kompakt, falls D abgeschlossen und beschränkt ist. 
 \end{itemize}
 Es gilt: Ist $D \subseteq \mathbb R^n$ offen, so ist $D^C$ abgeschlossen. \\
@@ -295,16 +295,16 @@ $\mathbb R$ und $\emptyset$ sind offen und abgeschlossen.
 
 \subsection{Folgen, Grenzwerte, Stetigkeit im $\mathbb R^n$}
 %-----------------------------------------------------------------------
-Eine Folge $\bigl( X^{(k)} \bigr)$ ist eine Abbildung $\bigl(X^{(k)}\bigr):\mathbb N_0 \rightarrow \mathbb R^n, k\mapsto x^{(k)}$\\
+Eine Folge $(a_n)$ ist eine Abbildung $(a_n):\mathbb N_0 \rightarrow \mathbb R^n, k\mapsto a_n$\\
 %Die Folge konvergiert, falls $\lim\limits_{k \rightarrow \infty} \norm{x-x^{(k)}} = 0$\\
 %Folge konvergiert, falls sie komponentenweise konvergiert!\\
 %\\
 Für $f:D \subseteq \mathbb R^n \rightarrow \mathbb R$ bedeutet \\
-Grenzwert: \quad  $\lim\limits_{x \rightarrow x_0} f(x) =c \Leftrightarrow f \bigl(X^{(k)} \rightarrow x_0 \bigr) \rightarrow c\quad \forall X^{(k)}$\\
+Grenzwert: \quad  $\lim\limits_{x \rightarrow x_0} f(x) =c \Leftrightarrow f a_n \rightarrow x_0 \bigr) \rightarrow c\quad \forall a_n$\\
 Stetigkeit: \quad \ $\forall x \in \mathbb R^n:\lim\limits_{x \rightarrow x_0} f(x) = f(x_0)$\\
 Satz von Max. und Min.: Ist $f(\vec x)$ stetig und $D$ kompakt, so\\
 % Ist $f:D \subseteq \mathbb R^n \rightarrow \mathbb R$ stetig und D kompakt, so\\
-$\exists x_{max},x_{min} \in D \forall x\in D:f(x_{min}) \le f(x) \le f(x_{max})$
+$\exists x_{max},x_{min} \in D \quad \forall x\in D:f(x_{\text{min}}) \le f(x) \le f(x_{\text{max}})$
 
 \subsection{Differentiation von Skalarfeldern - Gradient}
 %-----------------------------------------------------------------------
@@ -575,7 +575,7 @@ $\mat{\underline{-}|&\phantom{+}|&\\\underline{\phantom{+}}&\underline{+}|&\\&&-
 \begin{itemize} \itemsep0pt
 	\item Suche Kandidaten (stationäre Punkte): $\eset{\vec x_0}:{\nabla f(\vec x_0) = 0}$
 	\item Falls $H_f(\vec x_0) \begin{cases} \text{neg. definit} & \Rightarrow \vec x_0 = \text{lok. Max.} \\ \text{pos. definit} & \Rightarrow \vec x_0 = \text{lok. Min.} \\ \text{indefinit} & \Rightarrow \vec x_0 = \text{Sattelpunkt} \\ \text{semidefinit} & \Rightarrow \vec x_0 = \text{keine Aussage} \end{cases}$\\
-	\item globale Extreme $\ra $ prüfe zusätzlich Rand
+	\item globale Extrema $\ra $ prüfe zusätzlich Rand
 \end{itemize}
 
 \subsection{Extremwerte mit Nebenbedingung}
@@ -648,7 +648,7 @@ Anmerkung: Ist $\varrho(x,y,z)$ die Masse- oder Ladungsdichte eines Drahtes so i
 $\int\limits_\gamma f \ \mathrm ds = \int\limits^b_a \varrho \bigl(\vec \gamma(t)\bigr) \cdot \norm{\vec{\dot \gamma}(t)} \mathrm dt$\\
 Der Schwerpunkt $\vec S = (S_1, S_2, S_3)$ ist:
 $S_i = \frac{1}{M(\vec \gamma)} \cdot \int\limits_\gamma x_i \varrho \ \mathrm ds$
-\subsection{vektorielles Kurvenintegral}
+\subsection{Vektorielles Kurvenintegral}
 von einem Vektorfeld $\vec v(\vec x)$ längs der Kurve $\vec \gamma$ mit $\vec x, \vec v, \vec \gamma \in \mathbb R^n$\\
 \boxed{ \int \vec v \bs \cdot \mathrm d\vec s := \int\limits^b_a \vec v \bigl(\vec \gamma(t)\bigr)^\top \bs \cdot \vec{\dot \gamma}(t) \ \mathrm dt }\\
 
@@ -820,7 +820,7 @@ VF $\vec v:D\subseteq \R^3 \ra \R^3, \vec x \mapsto \vec v(x,y,z)$ \\
 Ist $B \subseteq \R^2$ Gebiet mit geschlossenem Rand $\partial B = \sum \vec \gamma_i$ mit $\vec \gamma_i \in \mathcal C^1$ 
 und pos. param. (gegen Uhrzeigersinn), dann  gilt $\forall \mathcal C^1$ VF $\vec v$:
 
-\subsection{Divergenzsatz von Grauß für einfache $\partial V = \sum \phi_i$}
+\subsection{Divergenzsatz von Gauß für einfache $\partial V = \sum \phi_i$}
 \boxed{ \iiint_V \div \vec v \diff x \diff y \diff z = \oiint_{\partial V} \vec v \bdot \diff \vec O = \sum \iint_{\vec \phi_i} \vec v \bdot \diff \vec O}\\
 $\vec \phi_i$ muss pos. param. sein! ($\vec n = \phi_{iu} \times \phi_{iy}$ nach außen)\\
 \\
@@ -1014,7 +1014,6 @@ $\boxed{u'(t) = f(t)u + g(t)}$
 
 \begin{enumerate}
 	\itemsep0pt \leftmargin8pt
-	\item Bestimme Stammfunktion $F(t)$
 	\item Löse homogene DGL für $g(t) = 0$ (siehe \ref{sec:sep-dgl}) $\Rightarrow u_{hom}(t)$
 	\item Partikuläre Lösung $u_p(t)$ durch \emph{Variation der Konstanten}
 	\begin{itemize}\itemsep0pt \leftmargin8pt

@@ -964,7 +964,7 @@ $\boxed{f(t, u(t), u'(t),\hdots , u^{(n)}(t)) = 0}$\\
 %$\ma A \in \R^{n \times n} \ra e^{\ma A} := \ma E_n + \ma A + \frac{1}{2} \ma A^2 %+ ... = \sum\limits_{k=0}^\infty \frac{\ma A^k}{k!}$\\
 %	$\exp(\mat{\lambda_1 & 0 \\ 0 & \lambda_2}) = \mat{e^{\lambda_1} & 0 \\ 0 & e^{\lambda_2}}$\\
 %$\ma S^{-1} \ma A \ma S$ \qquad $\exp(\ma A) = \exp(\ma S \ma D \ma S^{-1}) = \ma S e^{\ma D} \ma S^{-1} $\\
-$\boxed{\vec x'= \ma A\vec x}$\qquad$\ma A \text{ diagbar}$
+$\boxed{\vec x'= \ma A\vec x}$
 \begin{enumerate}
 	\item Bestimme $n$ EW $\lambda_i$ und deren EV $\vec v_i$ von $\ma A$
 	\item $\vec x = \sum_{i=1}^n c_i\e^{\lambda_it}\vec v_i$
@@ -1050,7 +1050,7 @@ Lösung: $u(t) = \e^{(t-t_0)\ma A}(u_0 + \int_{t_0}^t e^{-(t'-t_0)\ma A}f(s)dt')
 \subsection{Stabilität}
 \textbf{Autonom}, falls DGL nicht explizit von der freien Variable $t$ abhängt: $u'=f(u)$\\
 \textbf{Gleichgewichtspunkt} einer autonomen DGL, falls: $f(v) = 0$\\
-\textbf{Stabilität:}
+\textbf{Stabilität:} EW der Jacobimatrix $\ma J_f$ berechnen
 \begin{itemize}\itemsep-1pt
 	\item $Re(\lambda_i) > 0 \ra$ instabil
 	\item $Re(\lambda_i) \le 0 \ra$ stabil

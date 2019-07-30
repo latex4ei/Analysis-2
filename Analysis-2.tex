@@ -863,8 +863,8 @@ $D \subset \R^n$ offen und \emph{einfach zusammenhängend} und $\vec{f}(\vec{x})
 Dann
 \begin{itemize}
 	\item $\vec{f}$ ist Gradientenfeld mit $\vec{f} = \grad{\phi}$
-	\item $\int_{\omega}{\vec{f} \cdot \diff \vec{s}} = \int_a^b \vec f(\vec \gamma(t)) \dot{\vec \gamma} \diff t = \Phi\left(\vec{\gamma}(b)\right) - \Phi\left(\vec{\gamma}(a)\right)$ (wegunabhängig)
-	\item $\oint_{\omega}{\vec{f} \cdot \diff \vec{s}} = 0 \quad \forall C^1$-Kurven in $D$
+	\item $\int_{\gamma}{\vec{f} \cdot \diff \vec{s}} = \int_a^b \vec f(\vec \gamma(t)) \dot{\vec \gamma} \diff t = \Phi\left(\vec{\gamma}(b)\right) - \Phi\left(\vec{\gamma}(a)\right)$ (wegunabhängig)
+	\item $\oint_{\gamma}{\vec{f} \cdot \diff \vec{s}} = 0 \quad \forall C^1$-Kurven in $D$
 	\item $\vec{f}$ konservativ auf $D$ $\Ra$ auch auf jeder Teilmenge von $D$
 	\item \emph{Stammfunktion:} Es gilt $\partial_i \Phi = v_i \ra \Phi = \int{v_i \diff x_i} + c(\vec{x_k}) \quad k \neq i$ (Aufstellen durch geschicktes Integrieren, Ableiten und Gleichsetzen)
 \end{itemize}
@@ -909,7 +909,7 @@ Fall $n=3$: Ist $\vec v:D\subseteq \mathbb{R}^3\rightarrow\mathrm{R}^3$ ein Grad
 \textbf{lokale Lipschitz-Bedingung:} Es existiert zu jedem Punkt in D eine Umgebung, in der die Lipschitz-Bedingung erfüllt ist.\\
 \textbf{Satz von Peano:} f ist stetiges Skalarfeld auf dem Rechteck $D = [t_0, t_0 + \alpha] \times [u_0-\beta , u_0+\beta]$ mit $\alpha, \beta > 0 \Rightarrow$ Lösung von $u(t)$ im Intervall $[t_0, t_0+\delta]$ mit $\delta > 0$\\
 Es können im Allgemeinen jedoch mehrere Lösungen existieren (keine eindeutige Lösung)!\\ \\
-\textbf{Satz von Picard-Lindelöf:} f ist Skalarfeld auf $[t_0, t_0 + \alpha] \times [u_0-\beta , u_0+\beta]$ und es erfüllt die lokale Lipschitz-Bedingung $\Rightarrow$ Lösung von $u(t)$ im Intervall $[t_0, t_0+\delta]$ mit $\delta = \text{min}(\alpha, \frac{\beta}{M}) > 0$ mit $M = \text{max}_{(t,x)\in D}\abs{f(t,x)}$\\
+\textbf{Satz von Picard-Lindelöf:} f ist stetiges Skalarfeld auf $[t_0, t_0 + \alpha] \times [u_0-\beta , u_0+\beta]$ und es erfüllt die lokale Lipschitz-Bedingung $\Rightarrow$ Lösung von $u(t)$ im Intervall $[t_0, t_0+\delta]$ mit $\delta = \text{min}(\alpha, \frac{\beta}{M}) > 0$ mit $M = \text{max}_{(t,x)\in D}\abs{f(t,x)}$\\
 Diese Lösung ist eindeutig.
 
 \subsection{Separierbare DGL}\label{sec:sep-dgl}

@@ -864,7 +864,7 @@ Dann
 \begin{itemize}
 	\item $\vec{f}$ ist Gradientenfeld mit $\vec{f} = \grad{\phi}$
 	\item $\int_{\gamma}{\vec{f} \cdot \diff \vec{s}} = \int_a^b \vec f(\vec \gamma(t)) \dot{\vec \gamma} \diff t = \Phi\left(\vec{\gamma}(b)\right) - \Phi\left(\vec{\gamma}(a)\right)$ (wegunabhängig)
-	\item $\oint_{\gamma}{\vec{f} \cdot \diff \vec{s}} = 0 \quad \forall C^1$-Kurven in $D$
+	\item $\oint_{\gamma}{\vec{f} \cdot \diff \vec{s}} = 0 \quad \forall C^1$-Kurven $\gamma$ in $D$
 	\item $\vec{f}$ konservativ auf $D$ $\Ra$ auch auf jeder Teilmenge von $D$
 	\item \emph{Stammfunktion:} Es gilt $\partial_i \Phi = v_i \ra \Phi = \int{v_i \diff x_i} + c(\vec{x_k}) \quad k \neq i$ (Aufstellen durch geschicktes Integrieren, Ableiten und Gleichsetzen)
 \end{itemize}
@@ -1034,7 +1034,7 @@ $\boxed{a_nu^{(n)}(t) + \hdots + a_1u'(t)+a_0u = 0}$\\
 	\item Gib $n$ linear unabhängige Lösungen der DGL an:
 	\begin{itemize}\itemsep0pt \leftmargin0pt
 		\item 	Ist $ \lambda$ eine $k$-fache reelle NST:\\
-$u_1 = e^{\lambda t}, \hdots, u_i = t^i e^{ \lambda t}$\\
+$u_1 = e^{\lambda t}, u_2 = te^{\lambda t}, \hdots, u_{k} = t^{k-1} e^{ \lambda t}$\\
 		\item Ist $ \lambda$ eine $k$-fache konjugiert komplexe NST $\lambda = a + \i b$:\\
 $u_1 = e^{at} \cos (bt),\; u_2 = e^{at} \sin (bt)$ \\
 bzw. $u_i = t^i e^{at} \sin (bt)$ und $u_{i+1} =  t^i e^{at} \cos (bt)$

@@ -347,12 +347,14 @@
 
     \subsection{Folgen, Grenzwerte, Stetigkeit im $\mathbb R^n$}
     %-----------------------------------------------------------------------
-    Eine Folge $(a_n)$ ist eine Abbildung $(a_n):\mathbb N_0 \rightarrow \mathbb R^n, k\mapsto a_n$\\
+    Eine Folge $(a_n)$ ist eine Abbildung $(a_n):\mathbb N_0 \rightarrow \mathbb R^n, k\mapsto a_k$\\
     %Die Folge konvergiert, falls $\lim\limits_{k \rightarrow \infty} \norm{x-x^{(k)}} = 0$\\
     %Folge konvergiert, falls sie komponentenweise konvergiert!\\
     %\\
     Für $f:D \subseteq \mathbb R^n \rightarrow \mathbb R$ bedeutet \\
-    Grenzwert: \quad  $\lim\limits_{x \rightarrow x_0} f(x) =c \Leftrightarrow f a_n \rightarrow x_0 \bigr) \rightarrow c\quad \forall a_n$\\
+Grenzwert: \quad  $\lim\limits_{x \rightarrow x_0} f(x) = c 
+\Leftrightarrow 
+f(a_n) \rightarrow c \quad \forall a_n \text{ mit } a_n \rightarrow x_0$\\
     Stetigkeit: \quad \ $\forall x \in \mathbb R^n:\lim\limits_{x \rightarrow x_0} f(x) = f(x_0)$\\
     Satz von Max. und Min.: Ist $f(\vec x)$ stetig und $D$ kompakt, so\\
     % Ist $f:D \subseteq \mathbb R^n \rightarrow \mathbb R$ stetig und D kompakt, so\\
@@ -368,7 +370,7 @@
     \textbf{Gradientenregeln:} $f,g:D \subseteq \mathbb R^n \rightarrow \mathbb R$ sind partiell diffbar:\\
     Linearität: $\nabla(\lambda f + \mu g) (x) = \lambda \nabla f(x) + \mu \nabla g(x)$\\
     Produkt: $\nabla (f \cdot g) (x) = g(x) \nabla f(x) + f(x) \nabla g(x)$\\
-    Quotient: $\nabla \Bigl( \frac{f}{g} \Bigr) = \frac{1}{g^2} \bigl( g(x)\nabla f(x) - f(x) \nabla g(x) \bigr)$\\
+    Quotient: $\nabla \Bigl( \frac{f}{g} \Bigr)(x) = \frac{1}{g(x)^2} \bigl( g(x)\nabla f(x) - f(x) \nabla g(x) \bigr)$\\
     \\
     Kettenregel\textbf{n:}\\
     \begin{tabular}{l|l}
@@ -398,16 +400,7 @@
     Es gilt $|f(y) - f(x)| \le c|y-x|$ mit $c= \mathrm{max} \norm{\nabla f(z)} \quad z \in \overline{x,y}$\\
     \\
     Hessematrix: $H_f (x) = \nabla^2 f(x) = \begin{bmatrix} \partial_{11} f(x)\ ...\ \partial_{1n} f(x) \\ \svdots \quad \qquad \qquad \svdots \\ \partial_{n1} f(x)\ ...\ \partial_{nn} f(x) \end{bmatrix}$\\
-    Die Hessematrix ist symmetrisch, falls $f \in \mathcal C^2(D)$\\
-    \\
-    \begin{tabular}{ll}
-        $T_{2,f, \vec x_0} (\vec x) =$ $f(\vec x_0) +$                                                  \\
-        \qquad $+ \nabla f(\vec x_0)^\top (\vec x-\vec x_0) +$                      & (Tangentialebene) \\
-        \qquad $+ \frac{1}{2}(\vec x-\vec x_0)^\top \ma H_f(x_0)(\vec x- \vec x_0)$ & (Schmiegequadrik) \\
-        %\qquad $+ \qquad \svdots$ & (räumliche Matrix)\\
-    \end{tabular}
-
-    $T_{3,f,\vec a}(\vec x) = f(\vec a) + \sum \partial_i f(\vec a)(x_i - a_i) + \frac{1}{2} \sum \partial_i \partial_j f(\vec a)(x_i - a_i)(x_j - a_j) + \frac{1}{6} \sum \partial_i \partial_j \partial_k f(\vec a)(x_i - a_i)(x_j - a_j)(x_k - a_k)$
+    Die Hessematrix ist symmetrisch, falls $f \in \mathcal C^2(D)$
 
     \subsection{Jacobimatrix = Fundamentalmatrix}
     $\ma J_f (x) = \begin{bmatrix} \frac{\partial f_1}{\partial x_1} & ... & \frac{\partial f_1}{\partial x_n} \\ \svdots & & \svdots \\ \frac{\partial f_m}{\partial x_1} & ... & \frac{\partial f_m}{\partial x_n} \end{bmatrix} = \begin{pmatrix} \nabla f_1^\top \\ \svdots \\ \nabla f_m^\top \end{pmatrix}  \quad \in \mathbb R^{m \times n}$\\ \\
@@ -450,6 +443,23 @@
         \item $g'''(0) = \sum_{i,j,k=1}^{n} \partial_{x_i}\partial_{x_j}\partial_{x_k}f(\vec a)h_i h_j h_k$
         \item \dots
     \end{itemize}
+    \textbf{Taylorpolynome 2. und 3. Ordnung}:
+    \begin{align*}
+T_{2,f,\vec x_0}(\vec x)
+= & f(\vec x_0)
++ \underbrace{\nabla f(\vec x_0)^\top (\vec x - \vec x_0)}_{\text{Tangentialebene}} \notag \\
+& + \underbrace{\frac{1}{2}(\vec x - \vec x_0)^\top H_f(\vec x_0)(\vec x - \vec x_0)}_{\text{Schmiegequadrik}}
+\end{align*}
+
+\begin{align*}
+T_{3,f,\vec a}(\vec x)
+= & f(\vec a)
++ \sum_i \partial_i f(\vec a)(x_i - a_i) \notag \\
+& + \frac{1}{2} \sum_{i,j} \partial_i \partial_j f(\vec a)
+(x_i - a_i)(x_j - a_j) \notag \\
+& + \frac{1}{6} \sum_{i,j,k} \partial_i \partial_j \partial_k f(\vec a)
+(x_i - a_i)(x_j - a_j)(x_k - a_k)
+\end{align*}
 
     \subsection{Das Restglied - die Taylorformel}
     \begin{equation*}

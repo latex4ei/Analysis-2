@@ -1,6 +1,6 @@
-cmake_minimum_required(VERSION 2.8)
+cmake_minimum_required(VERSION 3.12)
 
-project(Analysis-2 NONE)
+project(CheatsheetTemplate NONE)
 include(UseLATEX)
 
 add_custom_target(
@@ -9,9 +9,16 @@ add_custom_target(
     WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
 )
 
+set(IMAGE_DIRS
+    img
+    # Add subdirectories here
+    # img/logic
+    # img/rca
+)
+
 add_latex_document(
-    Analysis-2.tex
+    CheatsheetTemplate.tex
     FORCE_PDF
-    IMAGE_DIRS img
+    IMAGE_DIRS ${IMAGE_DIRS}
     DEPENDS writegitid
 )

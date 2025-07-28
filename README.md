@@ -1,6 +1,6 @@
-# Analysis 2
+# LaTeX4EI Cheatsheet Template
 
-[![Build Status](https://travis-ci.org/latex4ei/Analysis-2.svg?branch=master)](https://travis-ci.org/latex4ei/Analysis-2)
+[![Actions Status](https://github.com/latex4ei/CheatsheetTemplate/workflows/CI/badge.svg)](https://github.com/latex4ei/CheatsheetTemplate)
 [![Join the chat at https://gitter.im/LaTeX4Ei/Lobby](https://badges.gitter.im/LaTeX4Ei/Lobby.svg)](https://gitter.im/LaTeX4Ei/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 Write beautiful latex cheat sheets with minimal effort.
@@ -23,3 +23,7 @@ cd build
 cmake ..
 make
 ```
+## Disclaimer
+
+After changing the repository name or transfering ownership, run the "Update README and LaTeX Build" workflow from the Actions tab and merge the generated pull request.
+Make sure the `.tex` file has the same name as the repository in order for it to build correctly!
